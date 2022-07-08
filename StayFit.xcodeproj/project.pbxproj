@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		064C2E09DFB9AC538A1EE994 /* libPods-StayFit-StayFitUITests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C58CF4241D1D1703FB6BA444 /* libPods-StayFit-StayFitUITests.a */; };
 		21A530A72878ABE300F2E9A7 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 21A530A62878ABE300F2E9A7 /* AppDelegate.m */; };
 		21A530AA2878ABE300F2E9A7 /* SceneDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 21A530A92878ABE300F2E9A7 /* SceneDelegate.m */; };
 		21A530AD2878ABE300F2E9A7 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 21A530AC2878ABE300F2E9A7 /* ViewController.m */; };
@@ -17,6 +18,8 @@
 		21A530C22878ABE400F2E9A7 /* StayFitTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 21A530C12878ABE400F2E9A7 /* StayFitTests.m */; };
 		21A530CC2878ABE400F2E9A7 /* StayFitUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 21A530CB2878ABE400F2E9A7 /* StayFitUITests.m */; };
 		21A530CE2878ABE400F2E9A7 /* StayFitUITestsLaunchTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 21A530CD2878ABE400F2E9A7 /* StayFitUITestsLaunchTests.m */; };
+		28E1BB506377E109260B6946 /* libPods-StayFit.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 37E9515A5A750C633A0284A1 /* libPods-StayFit.a */; };
+		54A037C5257BE3C4E038F2F7 /* libPods-StayFitTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6DDD6F3D79CC28D1090D1260 /* libPods-StayFitTests.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -54,6 +57,15 @@
 		21A530C72878ABE400F2E9A7 /* StayFitUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = StayFitUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		21A530CB2878ABE400F2E9A7 /* StayFitUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = StayFitUITests.m; sourceTree = "<group>"; };
 		21A530CD2878ABE400F2E9A7 /* StayFitUITestsLaunchTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = StayFitUITestsLaunchTests.m; sourceTree = "<group>"; };
+		37E9515A5A750C633A0284A1 /* libPods-StayFit.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-StayFit.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		51BDAE4BFEF1D2771CA01CC5 /* Pods-StayFitTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-StayFitTests.release.xcconfig"; path = "Target Support Files/Pods-StayFitTests/Pods-StayFitTests.release.xcconfig"; sourceTree = "<group>"; };
+		5DD465C256208D52E5EA85F9 /* Pods-StayFit-StayFitUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-StayFit-StayFitUITests.debug.xcconfig"; path = "Target Support Files/Pods-StayFit-StayFitUITests/Pods-StayFit-StayFitUITests.debug.xcconfig"; sourceTree = "<group>"; };
+		6D3063F95DFA191A16EC7FAC /* Pods-StayFit.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-StayFit.debug.xcconfig"; path = "Target Support Files/Pods-StayFit/Pods-StayFit.debug.xcconfig"; sourceTree = "<group>"; };
+		6DDD6F3D79CC28D1090D1260 /* libPods-StayFitTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-StayFitTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		72571411EDDABAFC114FA127 /* Pods-StayFit-StayFitUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-StayFit-StayFitUITests.release.xcconfig"; path = "Target Support Files/Pods-StayFit-StayFitUITests/Pods-StayFit-StayFitUITests.release.xcconfig"; sourceTree = "<group>"; };
+		C58CF4241D1D1703FB6BA444 /* libPods-StayFit-StayFitUITests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-StayFit-StayFitUITests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		F103BD146D06AFEAD8A6701E /* Pods-StayFit.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-StayFit.release.xcconfig"; path = "Target Support Files/Pods-StayFit/Pods-StayFit.release.xcconfig"; sourceTree = "<group>"; };
+		F15D5EEF81FECC4368FF7B81 /* Pods-StayFitTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-StayFitTests.debug.xcconfig"; path = "Target Support Files/Pods-StayFitTests/Pods-StayFitTests.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -61,6 +73,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				28E1BB506377E109260B6946 /* libPods-StayFit.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -68,6 +81,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				54A037C5257BE3C4E038F2F7 /* libPods-StayFitTests.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -75,6 +89,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				064C2E09DFB9AC538A1EE994 /* libPods-StayFit-StayFitUITests.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -88,6 +103,8 @@
 				21A530C02878ABE400F2E9A7 /* StayFitTests */,
 				21A530CA2878ABE400F2E9A7 /* StayFitUITests */,
 				21A530A32878ABE300F2E9A7 /* Products */,
+				77479057DCCB66F8FC88BCD7 /* Pods */,
+				5BDDF623D6B91C9826F811B8 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -136,6 +153,30 @@
 			path = StayFitUITests;
 			sourceTree = "<group>";
 		};
+		5BDDF623D6B91C9826F811B8 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				37E9515A5A750C633A0284A1 /* libPods-StayFit.a */,
+				C58CF4241D1D1703FB6BA444 /* libPods-StayFit-StayFitUITests.a */,
+				6DDD6F3D79CC28D1090D1260 /* libPods-StayFitTests.a */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		77479057DCCB66F8FC88BCD7 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				6D3063F95DFA191A16EC7FAC /* Pods-StayFit.debug.xcconfig */,
+				F103BD146D06AFEAD8A6701E /* Pods-StayFit.release.xcconfig */,
+				5DD465C256208D52E5EA85F9 /* Pods-StayFit-StayFitUITests.debug.xcconfig */,
+				72571411EDDABAFC114FA127 /* Pods-StayFit-StayFitUITests.release.xcconfig */,
+				F15D5EEF81FECC4368FF7B81 /* Pods-StayFitTests.debug.xcconfig */,
+				51BDAE4BFEF1D2771CA01CC5 /* Pods-StayFitTests.release.xcconfig */,
+			);
+			name = Pods;
+			path = Pods;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -143,9 +184,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 21A530D12878ABE400F2E9A7 /* Build configuration list for PBXNativeTarget "StayFit" */;
 			buildPhases = (
+				F43E89FF631AA9C45F126AFD /* [CP] Check Pods Manifest.lock */,
 				21A5309E2878ABE300F2E9A7 /* Sources */,
 				21A5309F2878ABE300F2E9A7 /* Frameworks */,
 				21A530A02878ABE300F2E9A7 /* Resources */,
+				C29959BFDFB9D608D9CCFCAD /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -160,6 +203,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 21A530D42878ABE400F2E9A7 /* Build configuration list for PBXNativeTarget "StayFitTests" */;
 			buildPhases = (
+				BF367A7F8632B6D196364998 /* [CP] Check Pods Manifest.lock */,
 				21A530B92878ABE400F2E9A7 /* Sources */,
 				21A530BA2878ABE400F2E9A7 /* Frameworks */,
 				21A530BB2878ABE400F2E9A7 /* Resources */,
@@ -178,9 +222,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 21A530D72878ABE400F2E9A7 /* Build configuration list for PBXNativeTarget "StayFitUITests" */;
 			buildPhases = (
+				023B2507E3C9F01CAD1796F1 /* [CP] Check Pods Manifest.lock */,
 				21A530C32878ABE400F2E9A7 /* Sources */,
 				21A530C42878ABE400F2E9A7 /* Frameworks */,
 				21A530C52878ABE400F2E9A7 /* Resources */,
+				1CD27E496445851C37D18AE5 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -260,6 +306,109 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		023B2507E3C9F01CAD1796F1 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-StayFit-StayFitUITests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		1CD27E496445851C37D18AE5 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-StayFit-StayFitUITests/Pods-StayFit-StayFitUITests-resources-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-StayFit-StayFitUITests/Pods-StayFit-StayFitUITests-resources-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-StayFit-StayFitUITests/Pods-StayFit-StayFitUITests-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		BF367A7F8632B6D196364998 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-StayFitTests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		C29959BFDFB9D608D9CCFCAD /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-StayFit/Pods-StayFit-resources-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-StayFit/Pods-StayFit-resources-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-StayFit/Pods-StayFit-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		F43E89FF631AA9C45F126AFD /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-StayFit-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		21A5309E2878ABE300F2E9A7 /* Sources */ = {
@@ -437,6 +586,7 @@
 		};
 		21A530D22878ABE400F2E9A7 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 6D3063F95DFA191A16EC7FAC /* Pods-StayFit.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -463,6 +613,7 @@
 		};
 		21A530D32878ABE400F2E9A7 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = F103BD146D06AFEAD8A6701E /* Pods-StayFit.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -489,6 +640,7 @@
 		};
 		21A530D52878ABE400F2E9A7 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = F15D5EEF81FECC4368FF7B81 /* Pods-StayFitTests.debug.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
@@ -506,6 +658,7 @@
 		};
 		21A530D62878ABE400F2E9A7 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 51BDAE4BFEF1D2771CA01CC5 /* Pods-StayFitTests.release.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
@@ -523,6 +676,7 @@
 		};
 		21A530D82878ABE400F2E9A7 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 5DD465C256208D52E5EA85F9 /* Pods-StayFit-StayFitUITests.debug.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
@@ -538,6 +692,7 @@
 		};
 		21A530D92878ABE400F2E9A7 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 72571411EDDABAFC114FA127 /* Pods-StayFit-StayFitUITests.release.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
