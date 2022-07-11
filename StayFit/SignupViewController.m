@@ -70,7 +70,29 @@
 }
 
 - (void)registerUser {
+    //initializes a user object
+    PFUser *newUser = [PFUser user];
     
+    //sets user properties
+    newUser[@"firstName"] = self.firstName.text;
+    newUser[@"lastName"] = self.lastName.text;
+    newUser.email = self.email.text;
+    newUser.username = self.username.text;
+    newUser.password = self.password.text;
+    newUser[@"weight"] = self.weight.text;
+    newUser[@"height"] = self.height.text;
+    newUser[@"city"] = self.city.text;
+    newUser[@"state"] = self.state.text;
+    newUser[@"fitnessLevel"] = self.fitnessLevel.text;
+    
+    // call sign up function on the object
+    [newUser signUpInBackgroundWithBlock:^(BOOL succeeded, NSError * error) {
+        if (error != nil) {
+            NSLog(@"Error: %@", error.localizedDescription);
+        } else {
+            NSLog(@"User registered successfully");
+        }
+    }];
 }
 
 - (IBAction)didTapSignup:(id)sender {
@@ -85,14 +107,13 @@
                                                           handler:^(UIAlertAction * _Nonnull action) {
                                                                  // handle cancel response here. Doing nothing will dismiss the view.
                                                           }];
-        // add the cancel action to the alertController
+        //cancel action to the alertController
     [alert addAction:cancelAction];
 
-        // create an OK action
+        //OK action to the alertController
     UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"OK"
                                                            style:UIAlertActionStyleDefault
                                                          handler:^(UIAlertAction * _Nonnull action) {
-                                                                 // handle response here.
                                                          }];
         // add the OK action to the alert controller
     [alert addAction:okAction];
