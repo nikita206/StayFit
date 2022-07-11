@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		064C2E09DFB9AC538A1EE994 /* libPods-StayFit-StayFitUITests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C58CF4241D1D1703FB6BA444 /* libPods-StayFit-StayFitUITests.a */; };
 		2166A9A42878EC0300359DA4 /* SignupViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2166A9A32878EC0300359DA4 /* SignupViewController.m */; };
+		21A4D6A0287CB390001FC7E9 /* ProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 21A4D69F287CB390001FC7E9 /* ProfileViewController.m */; };
 		21A530A72878ABE300F2E9A7 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 21A530A62878ABE300F2E9A7 /* AppDelegate.m */; };
 		21A530AA2878ABE300F2E9A7 /* SceneDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 21A530A92878ABE300F2E9A7 /* SceneDelegate.m */; };
 		21A530AD2878ABE300F2E9A7 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 21A530AC2878ABE300F2E9A7 /* ViewController.m */; };
@@ -44,6 +45,8 @@
 /* Begin PBXFileReference section */
 		2166A9A22878EC0300359DA4 /* SignupViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SignupViewController.h; sourceTree = "<group>"; };
 		2166A9A32878EC0300359DA4 /* SignupViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SignupViewController.m; sourceTree = "<group>"; };
+		21A4D69E287CB390001FC7E9 /* ProfileViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ProfileViewController.h; sourceTree = "<group>"; };
+		21A4D69F287CB390001FC7E9 /* ProfileViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ProfileViewController.m; sourceTree = "<group>"; };
 		21A530A22878ABE300F2E9A7 /* StayFit.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = StayFit.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		21A530A52878ABE300F2E9A7 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		21A530A62878ABE300F2E9A7 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -138,6 +141,8 @@
 				21A530DE2878B30400F2E9A7 /* LoginViewController.m */,
 				2166A9A22878EC0300359DA4 /* SignupViewController.h */,
 				2166A9A32878EC0300359DA4 /* SignupViewController.m */,
+				21A4D69E287CB390001FC7E9 /* ProfileViewController.h */,
+				21A4D69F287CB390001FC7E9 /* ProfileViewController.m */,
 				21A530B12878ABE400F2E9A7 /* Assets.xcassets */,
 				21A530B32878ABE400F2E9A7 /* LaunchScreen.storyboard */,
 				21A530B62878ABE400F2E9A7 /* Info.plist */,
@@ -428,6 +433,7 @@
 				21A530AD2878ABE300F2E9A7 /* ViewController.m in Sources */,
 				21A530A72878ABE300F2E9A7 /* AppDelegate.m in Sources */,
 				21A530B82878ABE400F2E9A7 /* main.m in Sources */,
+				21A4D6A0287CB390001FC7E9 /* ProfileViewController.m in Sources */,
 				21A530AA2878ABE300F2E9A7 /* SceneDelegate.m in Sources */,
 				21A530DF2878B30400F2E9A7 /* LoginViewController.m in Sources */,
 			);
