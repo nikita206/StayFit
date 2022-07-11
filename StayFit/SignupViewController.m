@@ -70,10 +70,11 @@
 }
 
 - (void)registerUser {
+    
 }
 
 - (IBAction)didTapSignup:(id)sender {
-    if([self.username.text isEqual:@""] || [self.password.text isEqual:@""]){
+    if([self.firstName.text isEqual:@""] || [self.lastName.text isEqual:@""] || [self.email.text isEqual:@""] || [self.username.text isEqual:@""] || [self.password.text isEqual:@""] || [self.weight.text isEqual:@""] || [self.height.text isEqual:@""] || [self.city.text isEqual:@""] || [self.state.text isEqual:@""] || [self.fitnessLevel.text isEqual:@""]){
     
     UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Error"
                                                                                message:@"Please check all that all the fields are filled"
