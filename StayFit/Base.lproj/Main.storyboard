@@ -252,21 +252,48 @@
             </objects>
             <point key="canvasLocation" x="821.73913043478262" y="93.75"/>
         </scene>
-        <!--View Controller-->
+        <!--Community View Controller-->
         <scene sceneID="O3e-P5-KhY">
             <objects>
-                <viewController id="KbG-20-cIs" sceneMemberID="viewController">
+                <viewController id="KbG-20-cIs" customClass="CommunityViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="U6f-ia-iw2">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2eV-8J-rIv">
+                                <rect key="frame" x="76" y="167" width="68" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
                         <viewLayoutGuide key="safeArea" id="b1f-E3-b2h"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     </view>
-                    <navigationItem key="navigationItem" id="gg7-DP-5tX"/>
+                    <navigationItem key="navigationItem" id="gg7-DP-5tX">
+                        <nil key="title"/>
+                        <segmentedControl key="titleView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" id="lMR-oI-kOc">
+                            <rect key="frame" x="71" y="5.5" width="272" height="33"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <segments>
+                                <segment title="Fitness"/>
+                                <segment title="Recipes"/>
+                                <segment title="Gym Buddy"/>
+                            </segments>
+                            <connections>
+                                <action selector="segact:" destination="KbG-20-cIs" eventType="valueChanged" id="nyW-dT-12y"/>
+                            </connections>
+                        </segmentedControl>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="check" destination="2eV-8J-rIv" id="ZVi-hS-sjZ"/>
+                        <outlet property="segout" destination="lMR-oI-kOc" id="NoN-2t-eBf"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="H92-Sx-JRr" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2772" y="1619"/>
+            <point key="canvasLocation" x="2771.0144927536235" y="1618.5267857142856"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="qAW-rB-gKQ">
