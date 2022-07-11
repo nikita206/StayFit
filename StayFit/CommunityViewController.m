@@ -15,34 +15,40 @@
 @synthesize segout;
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [self firstCase];
-}
-
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
-
--(void) firstCase{
-    self.check.text = @"First";
+    [self fitnessCase];
 }
 
 - (IBAction)segact:(id)sender {
     switch (self.segout.selectedSegmentIndex){
         case 0:
-            [self firstCase];
+            [self fitnessCase];
             break;
         case 1:
-            self.check.text = @"Second";
+            [self recipesCase];
             break;
         case 2:
-            self.check.text = @"Third";
+            [self gymBuddy];
             break;
     }
+}
+
+-(void) fitnessCase{
+    self.recipesView.hidden = YES;
+    self.buddyView.hidden = YES;
+    self.fitnessView.hidden = NO;
+}
+
+-(void) recipesCase{
+    self.recipesView.hidden = NO;
+    self.buddyView.hidden = YES;
+    self.fitnessView.hidden = YES;
+
+}
+
+-(void) gymBuddy{
+    self.recipesView.hidden = YES;
+    self.buddyView.hidden = NO;
+    self.fitnessView.hidden = YES;
+
 }
 @end
