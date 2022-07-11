@@ -15,7 +15,9 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
+    UITapGestureRecognizer *signUpTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(didTapSignup)];
+    [self.signUp addGestureRecognizer:signUpTap];
+    [self.signUp setUserInteractionEnabled:YES];
 }
 
 /*
@@ -28,4 +30,13 @@
 }
 */
 
+- (IBAction)didTapLogin:(id)sender {
+}
+
+-(void) didTapSignup {
+    NSLog(@"taking you there!");
+    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+    UINavigationController *signup = [storyboard instantiateViewControllerWithIdentifier:@"signup"];
+    self.view.window.rootViewController = signup;
+}
 @end

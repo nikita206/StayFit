@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		064C2E09DFB9AC538A1EE994 /* libPods-StayFit-StayFitUITests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C58CF4241D1D1703FB6BA444 /* libPods-StayFit-StayFitUITests.a */; };
+		2166A9A42878EC0300359DA4 /* SignupViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2166A9A32878EC0300359DA4 /* SignupViewController.m */; };
 		21A530A72878ABE300F2E9A7 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 21A530A62878ABE300F2E9A7 /* AppDelegate.m */; };
 		21A530AA2878ABE300F2E9A7 /* SceneDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 21A530A92878ABE300F2E9A7 /* SceneDelegate.m */; };
 		21A530AD2878ABE300F2E9A7 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 21A530AC2878ABE300F2E9A7 /* ViewController.m */; };
@@ -18,6 +19,7 @@
 		21A530C22878ABE400F2E9A7 /* StayFitTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 21A530C12878ABE400F2E9A7 /* StayFitTests.m */; };
 		21A530CC2878ABE400F2E9A7 /* StayFitUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 21A530CB2878ABE400F2E9A7 /* StayFitUITests.m */; };
 		21A530CE2878ABE400F2E9A7 /* StayFitUITestsLaunchTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 21A530CD2878ABE400F2E9A7 /* StayFitUITestsLaunchTests.m */; };
+		21A530DF2878B30400F2E9A7 /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 21A530DE2878B30400F2E9A7 /* LoginViewController.m */; };
 		28E1BB506377E109260B6946 /* libPods-StayFit.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 37E9515A5A750C633A0284A1 /* libPods-StayFit.a */; };
 		54A037C5257BE3C4E038F2F7 /* libPods-StayFitTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6DDD6F3D79CC28D1090D1260 /* libPods-StayFitTests.a */; };
 /* End PBXBuildFile section */
@@ -40,6 +42,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		2166A9A22878EC0300359DA4 /* SignupViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SignupViewController.h; sourceTree = "<group>"; };
+		2166A9A32878EC0300359DA4 /* SignupViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SignupViewController.m; sourceTree = "<group>"; };
 		21A530A22878ABE300F2E9A7 /* StayFit.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = StayFit.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		21A530A52878ABE300F2E9A7 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		21A530A62878ABE300F2E9A7 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -57,6 +61,8 @@
 		21A530C72878ABE400F2E9A7 /* StayFitUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = StayFitUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		21A530CB2878ABE400F2E9A7 /* StayFitUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = StayFitUITests.m; sourceTree = "<group>"; };
 		21A530CD2878ABE400F2E9A7 /* StayFitUITestsLaunchTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = StayFitUITestsLaunchTests.m; sourceTree = "<group>"; };
+		21A530DD2878B30400F2E9A7 /* LoginViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LoginViewController.h; sourceTree = "<group>"; };
+		21A530DE2878B30400F2E9A7 /* LoginViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LoginViewController.m; sourceTree = "<group>"; };
 		37E9515A5A750C633A0284A1 /* libPods-StayFit.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-StayFit.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		51BDAE4BFEF1D2771CA01CC5 /* Pods-StayFitTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-StayFitTests.release.xcconfig"; path = "Target Support Files/Pods-StayFitTests/Pods-StayFitTests.release.xcconfig"; sourceTree = "<group>"; };
 		5DD465C256208D52E5EA85F9 /* Pods-StayFit-StayFitUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-StayFit-StayFitUITests.debug.xcconfig"; path = "Target Support Files/Pods-StayFit-StayFitUITests/Pods-StayFit-StayFitUITests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -128,6 +134,10 @@
 				21A530AB2878ABE300F2E9A7 /* ViewController.h */,
 				21A530AC2878ABE300F2E9A7 /* ViewController.m */,
 				21A530AE2878ABE300F2E9A7 /* Main.storyboard */,
+				21A530DD2878B30400F2E9A7 /* LoginViewController.h */,
+				21A530DE2878B30400F2E9A7 /* LoginViewController.m */,
+				2166A9A22878EC0300359DA4 /* SignupViewController.h */,
+				2166A9A32878EC0300359DA4 /* SignupViewController.m */,
 				21A530B12878ABE400F2E9A7 /* Assets.xcassets */,
 				21A530B32878ABE400F2E9A7 /* LaunchScreen.storyboard */,
 				21A530B62878ABE400F2E9A7 /* Info.plist */,
@@ -173,7 +183,6 @@
 				F15D5EEF81FECC4368FF7B81 /* Pods-StayFitTests.debug.xcconfig */,
 				51BDAE4BFEF1D2771CA01CC5 /* Pods-StayFitTests.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -415,10 +424,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2166A9A42878EC0300359DA4 /* SignupViewController.m in Sources */,
 				21A530AD2878ABE300F2E9A7 /* ViewController.m in Sources */,
 				21A530A72878ABE300F2E9A7 /* AppDelegate.m in Sources */,
 				21A530B82878ABE400F2E9A7 /* main.m in Sources */,
 				21A530AA2878ABE300F2E9A7 /* SceneDelegate.m in Sources */,
+				21A530DF2878B30400F2E9A7 /* LoginViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
