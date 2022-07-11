@@ -91,6 +91,9 @@
             NSLog(@"Error: %@", error.localizedDescription);
         } else {
             NSLog(@"User registered successfully");
+            UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+            UIViewController *login = [storyboard instantiateViewControllerWithIdentifier:@"login"];
+            self.view.window.rootViewController = login;
         }
     }];
 }
