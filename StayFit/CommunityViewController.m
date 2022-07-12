@@ -6,7 +6,7 @@
 //
 
 #import "CommunityViewController.h"
-
+#import "Parse/Parse.h"
 @interface CommunityViewController ()
 
 @end

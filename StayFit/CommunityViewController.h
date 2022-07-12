@@ -15,6 +15,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (weak, nonatomic) IBOutlet UIView *fitnessView;
 @property (weak, nonatomic) IBOutlet UIView *recipesView;
 @property (weak, nonatomic) IBOutlet UIView *buddyView;
+@property (weak, nonatomic) IBOutlet UITableView *tableViewFitness;
 
 @end
 

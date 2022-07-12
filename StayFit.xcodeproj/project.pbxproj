@@ -11,6 +11,7 @@
 		2166A9A42878EC0300359DA4 /* SignupViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2166A9A32878EC0300359DA4 /* SignupViewController.m */; };
 		21A4D6A0287CB390001FC7E9 /* ProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 21A4D69F287CB390001FC7E9 /* ProfileViewController.m */; };
 		21A4D6A3287CBE97001FC7E9 /* CommunityViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 21A4D6A2287CBE97001FC7E9 /* CommunityViewController.m */; };
+		21A4D6A9287DE1AD001FC7E9 /* NewPostViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 21A4D6A8287DE1AD001FC7E9 /* NewPostViewController.m */; };
 		21A530A72878ABE300F2E9A7 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 21A530A62878ABE300F2E9A7 /* AppDelegate.m */; };
 		21A530AA2878ABE300F2E9A7 /* SceneDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 21A530A92878ABE300F2E9A7 /* SceneDelegate.m */; };
 		21A530AD2878ABE300F2E9A7 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 21A530AC2878ABE300F2E9A7 /* ViewController.m */; };
@@ -50,6 +51,8 @@
 		21A4D69F287CB390001FC7E9 /* ProfileViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ProfileViewController.m; sourceTree = "<group>"; };
 		21A4D6A1287CBE97001FC7E9 /* CommunityViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CommunityViewController.h; sourceTree = "<group>"; };
 		21A4D6A2287CBE97001FC7E9 /* CommunityViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CommunityViewController.m; sourceTree = "<group>"; };
+		21A4D6A7287DE1AC001FC7E9 /* NewPostViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NewPostViewController.h; sourceTree = "<group>"; };
+		21A4D6A8287DE1AD001FC7E9 /* NewPostViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NewPostViewController.m; sourceTree = "<group>"; };
 		21A530A22878ABE300F2E9A7 /* StayFit.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = StayFit.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		21A530A52878ABE300F2E9A7 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		21A530A62878ABE300F2E9A7 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -146,6 +149,8 @@
 				2166A9A32878EC0300359DA4 /* SignupViewController.m */,
 				21A4D6A1287CBE97001FC7E9 /* CommunityViewController.h */,
 				21A4D6A2287CBE97001FC7E9 /* CommunityViewController.m */,
+				21A4D6A7287DE1AC001FC7E9 /* NewPostViewController.h */,
+				21A4D6A8287DE1AD001FC7E9 /* NewPostViewController.m */,
 				21A4D69E287CB390001FC7E9 /* ProfileViewController.h */,
 				21A4D69F287CB390001FC7E9 /* ProfileViewController.m */,
 				21A530B12878ABE400F2E9A7 /* Assets.xcassets */,
@@ -435,6 +440,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				21A4D6A3287CBE97001FC7E9 /* CommunityViewController.m in Sources */,
+				21A4D6A9287DE1AD001FC7E9 /* NewPostViewController.m in Sources */,
 				2166A9A42878EC0300359DA4 /* SignupViewController.m in Sources */,
 				21A530AD2878ABE300F2E9A7 /* ViewController.m in Sources */,
 				21A530A72878ABE300F2E9A7 /* AppDelegate.m in Sources */,
