@@ -7,16 +7,22 @@
 
 #import "CommunityViewController.h"
 #import "Parse/Parse.h"
-@interface CommunityViewController ()
-
+#import "FitnessFeedCell.h"
+@interface CommunityViewController ()<UITableViewDataSource, UITableViewDelegate>
+@property (strong, nonatomic) NSArray *arrayOfFitnessPosts;
+@property (strong, nonatomic) UIRefreshControl *refreshControl;
 @end
 
 @implementation CommunityViewController
 @synthesize segout;
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
     [self fitnessCase];
+    
 }
+
+
 
 - (IBAction)segact:(id)sender {
     switch (self.segout.selectedSegmentIndex){
@@ -36,6 +42,13 @@
     self.recipesView.hidden = YES;
     self.buddyView.hidden = YES;
     self.fitnessView.hidden = NO;
+    self.fitnessTableView.dataSource = self;
+    self.fitnessTableView.delegate = self;
+    self.arrayOfFitnessPosts = [[NSMutableArray alloc] init];
+    self.refreshControl = [[UIRefreshControl alloc] init];
+    [self.refreshControl addTarget:self action:@selector(fetchPosts) forControlEvents:UIControlEventValueChanged];
+    [self.fitnessTableView insertSubview:self.refreshControl atIndex:0];
+    [self fetchPosts];
 }
 
 -(void) recipesCase{
@@ -51,4 +64,40 @@
     self.fitnessView.hidden = YES;
 
 }
+
+-(void) fetchPosts{
+    PFQuery *postQuery = [PFQuery queryWithClassName:@"Post"];
+    [postQuery orderByDescending:@"createdAt"];
+    [postQuery includeKey:@"author"];
+    postQuery.limit = 20;
+
+    [postQuery findObjectsInBackgroundWithBlock:^(NSArray *posts, NSError *error) {
+        if (posts) {
+            self.arrayOfFitnessPosts = posts;
+            [self.fitnessTableView reloadData];
+        }
+        else {
+            NSLog(@"%@", error);
+        }
+        [self.refreshControl endRefreshing];
+    }];
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
+    FitnessFeedCell *cell = [self.fitnessTableView dequeueReusableCellWithIdentifier:@"postCell" forIndexPath:indexPath];
+    Post *post = self.arrayOfFitnessPosts[indexPath.row];
+    cell.post = post;
+    cell.author.text = post[@"author"][@"username"];
+    cell.username.text = post[@"author"][@"username"];
+    cell.caption.text = post[@"caption"];
+    cell.photoImageView.file = post[@"image"];
+    [cell.photoImageView loadInBackground];
+    return cell;
+    
+}
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
+    return self.arrayOfFitnessPosts.count;
+}
+
 @end

@@ -7,6 +7,8 @@ target 'StayFit' do
 
   # Pods for StayFit
 pod 'Parse'
+pod 'Parse/UI'
+
   target 'StayFitTests' do
     inherit! :search_paths
     # Pods for testing

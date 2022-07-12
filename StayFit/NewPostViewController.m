@@ -6,6 +6,7 @@
 //
 
 #import "NewPostViewController.h"
+#import "Post.h"
 
 @interface NewPostViewController ()
 
@@ -15,52 +16,28 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.caption.text = @"What are we upto today?";
-    self.caption.textColor = [UIColor lightGrayColor];
-    self.caption.delegate = self;
-
 }
-- (BOOL) textViewShouldBeginEditing:(UITextView *)textView {
-    self.caption.text = @"";
-    self.caption.textColor = [UIColor blackColor];
-    return YES;
-}
-
--(void) textViewDidChange:(UITextView *)textView {
-
-    if(self.caption.text.length == 0) {
-        self.caption.textColor = [UIColor lightGrayColor];
-        self.caption.text = @"What are we upto today?";
-        [self.caption resignFirstResponder];
-    }
-}
-
--(void) textViewShouldEndEditing:(UITextView *)textView {
-
-    if(self.caption.text.length == 0) {
-        self.caption.textColor = [UIColor lightGrayColor];
-        self.caption.text = @"What are we upto today?";
-        [self.caption resignFirstResponder];
-    }
-}
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 - (IBAction)shareButton:(id)sender {
+    if(self.image.image && ![self.caption.text isEqualToString:@""]){
+        [Post postUserImage:self.image.image withCaption:self.caption.text withCompletion:^(BOOL succeeded, NSError * _Nullable error) {
+            if (error) {
+                NSLog(@"%@", error);
+            }
+            else{
+                NSLog(@"Awesome");
+                UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+                UITabBarController *tabController = [storyboard instantiateViewControllerWithIdentifier:@"TabBarController"];
+                self.view.window.rootViewController = tabController;
+            }
+        }];
+    }
 }
 
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary<NSString *,id> *)info {
     
     // Get the image captured by the UIImagePickerController
     UIImage *originalImage = info[UIImagePickerControllerOriginalImage];
-    UIImage *editedImage = info[UIImagePickerControllerEditedImage];
 
     // Do something with the images (based on your use case)
     UIImage *resizedImage = [self resizeImage:originalImage withSize:CGSizeMake(500,500)];
