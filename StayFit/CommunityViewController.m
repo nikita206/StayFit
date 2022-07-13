@@ -17,7 +17,8 @@
 @synthesize segout;
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
+    self.fitnessTableView.dataSource = self;
+    self.fitnessTableView.delegate = self;
     [self fitnessCase];
     
 }
@@ -39,11 +40,6 @@
 }
 
 -(void) fitnessCase{
-    self.recipesView.hidden = YES;
-    self.buddyView.hidden = YES;
-    self.fitnessView.hidden = NO;
-    self.fitnessTableView.dataSource = self;
-    self.fitnessTableView.delegate = self;
     self.arrayOfFitnessPosts = [[NSMutableArray alloc] init];
     self.refreshControl = [[UIRefreshControl alloc] init];
     [self.refreshControl addTarget:self action:@selector(fetchPosts) forControlEvents:UIControlEventValueChanged];
@@ -52,16 +48,10 @@
 }
 
 -(void) recipesCase{
-    self.recipesView.hidden = NO;
-    self.buddyView.hidden = YES;
-    self.fitnessView.hidden = YES;
 
 }
 
--(void) gymBuddy{
-    self.recipesView.hidden = YES;
-    self.buddyView.hidden = NO;
-    self.fitnessView.hidden = YES;
+-(void) gymBuddy{;
 
 }
 
@@ -84,15 +74,23 @@
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
-    FitnessFeedCell *cell = [self.fitnessTableView dequeueReusableCellWithIdentifier:@"postCell" forIndexPath:indexPath];
-    Post *post = self.arrayOfFitnessPosts[indexPath.row];
-    cell.post = post;
-    cell.author.text = post[@"author"][@"username"];
-    cell.username.text = post[@"author"][@"username"];
-    cell.caption.text = post[@"caption"];
-    cell.photoImageView.file = post[@"image"];
-    [cell.photoImageView loadInBackground];
-    return cell;
+    if(self.segout.selectedSegmentIndex == 0) {
+        FitnessFeedCell *cell = [self.fitnessTableView dequeueReusableCellWithIdentifier:@"postCell" forIndexPath:indexPath];
+        Post *post = self.arrayOfFitnessPosts[indexPath.row];
+        cell.post = post;
+        cell.author.text = [NSString stringWithFormat:@"%@%@%@", post[@"author"][@"firstName"]  , @" ", post[@"author"][@"lastName"]];;
+        cell.username.text = post[@"author"][@"username"];
+        cell.caption.text = post[@"caption"];
+        cell.photoImageView.file = post[@"image"];
+        [cell.photoImageView loadInBackground];
+        return cell;
+    } else if (self.segout.selectedSegmentIndex == 1) {
+        
+    } else if (self.segout.selectedSegmentIndex == 2) {
+        
+    }
+    
+    return [UITableViewCell new];
     
 }
 

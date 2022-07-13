@@ -12,8 +12,6 @@ NS_ASSUME_NONNULL_BEGIN
 @interface CommunityViewController : UIViewController <UITableViewDataSource, UITableViewDelegate>
 @property (weak, nonatomic) IBOutlet UISegmentedControl *segout;
 - (IBAction)segact:(id)sender;;
-@property (weak, nonatomic) IBOutlet UIView *recipesView;
-@property (weak, nonatomic) IBOutlet UIView *buddyView;
 @property (weak, nonatomic) IBOutlet UIView *fitnessView;
 @property (weak, nonatomic) IBOutlet UITableView *fitnessTableView;
 @property (assign, nonatomic) BOOL isMoreDataLoading;
