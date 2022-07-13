@@ -7,6 +7,7 @@
 
 #import "NewPostViewController.h"
 #import "Post.h"
+#import "recipesPost.h"
 
 @interface NewPostViewController ()
 

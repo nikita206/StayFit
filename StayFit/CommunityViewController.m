@@ -8,6 +8,9 @@
 #import "CommunityViewController.h"
 #import "Parse/Parse.h"
 #import "FitnessFeedCell.h"
+#import "recipesPost.h"
+#import "NewPostViewController.h"
+#import "RecipesFeedCell.h"
 @interface CommunityViewController ()<UITableViewDataSource, UITableViewDelegate>
 @property (strong, nonatomic) NSArray *arrayOfFitnessPosts;
 @property (strong, nonatomic) NSArray *arrayofRecipesPosts;
@@ -75,18 +78,18 @@
 }
 
 -(void) fetchRecipesPosts{
-    PFQuery *postQuery = [PFQuery queryWithClassName:@"Post"];
+    PFQuery *postQuery = [PFQuery queryWithClassName:@"recipesPost"];
     [postQuery orderByDescending:@"createdAt"];
     [postQuery includeKey:@"author"];
     postQuery.limit = 20;
 
     [postQuery findObjectsInBackgroundWithBlock:^(NSArray *posts, NSError *error) {
-        if (posts) {
+        if (posts.count) {
             self.arrayofRecipesPosts = posts;
             [self.fitnessTableView reloadData];
         }
         else {
-            NSLog(@"%@", error);
+            NSLog(@"%@", @"no posts");
         }
         [self.refreshControl endRefreshing];
     }];
@@ -104,9 +107,10 @@
         [cell.photoImageView loadInBackground];
         return cell;
     }
+    
     else if (self.segout.selectedSegmentIndex == 1) {
-        FitnessFeedCell *cell = [self.fitnessTableView dequeueReusableCellWithIdentifier:@"postCellTwo" forIndexPath:indexPath];
-        Post *post = self.arrayofRecipesPosts[indexPath.row];
+        RecipesFeedCell *cell = [self.fitnessTableView dequeueReusableCellWithIdentifier:@"postCellTwo" forIndexPath:indexPath];
+        recipesPost *post = self.arrayofRecipesPosts[indexPath.row];
         cell.post = post;
         cell.author.text = [NSString stringWithFormat:@"%@%@%@", post[@"author"][@"firstName"]  , @" ", post[@"author"][@"lastName"]];;
         cell.username.text = post[@"author"][@"username"];
@@ -115,6 +119,7 @@
         [cell.photoImageView loadInBackground];
         return cell;
     }
+    
     else if (self.segout.selectedSegmentIndex == 2) {
         
     }
