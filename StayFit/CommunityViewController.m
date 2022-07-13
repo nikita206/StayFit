@@ -127,9 +127,29 @@
     return [UITableViewCell new];
     
 }
+-(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
+    if([[segue identifier] isEqualToString:@"makeNewPost"]){
+        
+        NewPostViewController *newPostViewController = [segue destinationViewController];
+       
+        newPostViewController.segoutValue = (int)self.segout.selectedSegmentIndex;
+    }
+}
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    return self.arrayOfFitnessPosts.count;
+    if(self.segout.selectedSegmentIndex == 0) {
+        return self.arrayOfFitnessPosts.count;
+    }
+    
+    else if (self.segout.selectedSegmentIndex == 1) {
+        return self.arrayofRecipesPosts.count;
+    }
+    
+    else if (self.segout.selectedSegmentIndex == 2) {
+        
+    }
+    
+    return 0;
 }
 
 @end

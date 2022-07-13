@@ -310,11 +310,11 @@
                                                     <outlet property="username" destination="jNf-BT-Jiv" id="f5s-uB-1vl"/>
                                                 </connections>
                                             </tableViewCell>
-                                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="postCellTwo" rowHeight="427" id="THG-Sp-GIk" customClass="RecipesFeedCell">
-                                                <rect key="frame" x="0.0" y="372.5" width="414" height="427"/>
+                                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="postCellTwo" rowHeight="328" id="THG-Sp-GIk" customClass="RecipesFeedCell">
+                                                <rect key="frame" x="0.0" y="372.5" width="414" height="328"/>
                                                 <autoresizingMask key="autoresizingMask"/>
                                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="THG-Sp-GIk" id="qbf-IE-1KU">
-                                                    <rect key="frame" x="0.0" y="0.0" width="414" height="427"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="414" height="328"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <subviews>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="author" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7Ls-8f-H7o">
@@ -332,11 +332,11 @@
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="fjP-Q8-Npc" customClass="PFImageView">
-                                                            <rect key="frame" x="0.0" y="234" width="414" height="182"/>
+                                                            <rect key="frame" x="0.0" y="133" width="414" height="182"/>
                                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                         </imageView>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ufn-b1-H3o">
-                                                            <rect key="frame" x="20" y="10" width="374" height="171"/>
+                                                            <rect key="frame" x="20" y="49" width="374" height="47"/>
                                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                             <nil key="textColor"/>
@@ -364,7 +364,7 @@
                                             <color key="baseForegroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </buttonConfiguration>
                                         <connections>
-                                            <segue destination="oQV-na-e30" kind="show" id="tWc-lZ-Q2n"/>
+                                            <segue destination="oQV-na-e30" kind="show" identifier="makeNewPost" id="tWc-lZ-Q2n"/>
                                         </connections>
                                     </button>
                                 </subviews>

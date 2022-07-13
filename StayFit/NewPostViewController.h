@@ -15,6 +15,7 @@ NS_ASSUME_NONNULL_BEGIN
 - (IBAction)takePicture:(id)sender;
 - (IBAction)cameraRoll:(id)sender;
 @property (weak, nonatomic) IBOutlet UIImageView *image;
+@property (nonatomic) int segoutValue;
 
 @end
 
