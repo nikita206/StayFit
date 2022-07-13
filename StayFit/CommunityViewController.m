@@ -10,6 +10,7 @@
 #import "FitnessFeedCell.h"
 @interface CommunityViewController ()<UITableViewDataSource, UITableViewDelegate>
 @property (strong, nonatomic) NSArray *arrayOfFitnessPosts;
+@property (strong, nonatomic) NSArray *arrayofRecipesPosts;
 @property (strong, nonatomic) UIRefreshControl *refreshControl;
 @end
 
@@ -17,13 +18,15 @@
 @synthesize segout;
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    self.refreshControl = [[UIRefreshControl alloc] init];
+    [self.refreshControl addTarget:self action:@selector(fetchPosts) forControlEvents:UIControlEventValueChanged];
+    [self.fitnessTableView insertSubview:self.refreshControl atIndex:0];
     self.fitnessTableView.dataSource = self;
     self.fitnessTableView.delegate = self;
     [self fitnessCase];
     
 }
-
-
 
 - (IBAction)segact:(id)sender {
     switch (self.segout.selectedSegmentIndex){
@@ -41,14 +44,12 @@
 
 -(void) fitnessCase{
     self.arrayOfFitnessPosts = [[NSMutableArray alloc] init];
-    self.refreshControl = [[UIRefreshControl alloc] init];
-    [self.refreshControl addTarget:self action:@selector(fetchPosts) forControlEvents:UIControlEventValueChanged];
-    [self.fitnessTableView insertSubview:self.refreshControl atIndex:0];
     [self fetchPosts];
 }
 
 -(void) recipesCase{
-
+    self.arrayofRecipesPosts = [[NSMutableArray alloc] init];
+    [self fetchRecipesPosts];
 }
 
 -(void) gymBuddy{;
@@ -73,6 +74,24 @@
     }];
 }
 
+-(void) fetchRecipesPosts{
+    PFQuery *postQuery = [PFQuery queryWithClassName:@"Post"];
+    [postQuery orderByDescending:@"createdAt"];
+    [postQuery includeKey:@"author"];
+    postQuery.limit = 20;
+
+    [postQuery findObjectsInBackgroundWithBlock:^(NSArray *posts, NSError *error) {
+        if (posts) {
+            self.arrayofRecipesPosts = posts;
+            [self.fitnessTableView reloadData];
+        }
+        else {
+            NSLog(@"%@", error);
+        }
+        [self.refreshControl endRefreshing];
+    }];
+}
+
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     if(self.segout.selectedSegmentIndex == 0) {
         FitnessFeedCell *cell = [self.fitnessTableView dequeueReusableCellWithIdentifier:@"postCell" forIndexPath:indexPath];
@@ -84,9 +103,19 @@
         cell.photoImageView.file = post[@"image"];
         [cell.photoImageView loadInBackground];
         return cell;
-    } else if (self.segout.selectedSegmentIndex == 1) {
-        
-    } else if (self.segout.selectedSegmentIndex == 2) {
+    }
+    else if (self.segout.selectedSegmentIndex == 1) {
+        FitnessFeedCell *cell = [self.fitnessTableView dequeueReusableCellWithIdentifier:@"postCellTwo" forIndexPath:indexPath];
+        Post *post = self.arrayofRecipesPosts[indexPath.row];
+        cell.post = post;
+        cell.author.text = [NSString stringWithFormat:@"%@%@%@", post[@"author"][@"firstName"]  , @" ", post[@"author"][@"lastName"]];;
+        cell.username.text = post[@"author"][@"username"];
+        cell.caption.text = post[@"caption"];
+        cell.photoImageView.file = post[@"image"];
+        [cell.photoImageView loadInBackground];
+        return cell;
+    }
+    else if (self.segout.selectedSegmentIndex == 2) {
         
     }
     
