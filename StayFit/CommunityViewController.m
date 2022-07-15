@@ -48,16 +48,19 @@
 }
 
 -(void) fitnessCase{
+    self.addButton.hidden = false;
     self.arrayOfFitnessPosts = [[NSMutableArray alloc] init];
     [self fetchPosts];
 }
 
 -(void) recipesCase{
+    self.addButton.hidden = false;
     self.arrayofRecipesPosts = [[NSMutableArray alloc] init];
     [self fetchRecipesPosts];
 }
 
--(void) gymBuddy{;
+-(void) gymBuddy{
+    self.addButton.hidden = true;
     self.arrayOfGymBuddies = [[NSMutableArray alloc] init];
     [self fetchGymBuddies];
 }

@@ -447,6 +447,7 @@
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                     <size key="freeformSize" width="414" height="896"/>
                     <connections>
+                        <outlet property="addButton" destination="1s0-iH-aaB" id="3Eu-Yq-64P"/>
                         <outlet property="fitnessTableView" destination="25F-16-Wr1" id="TiW-dR-jYc"/>
                         <outlet property="fitnessView" destination="idj-Cd-1cm" id="MHT-3v-JOa"/>
                         <outlet property="segout" destination="lMR-oI-kOc" id="NoN-2t-eBf"/>
