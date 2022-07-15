@@ -11,6 +11,7 @@
 #import "recipesPost.h"
 #import "NewPostViewController.h"
 #import "RecipesFeedCell.h"
+#import "GymBuddyCell.h"
 @interface CommunityViewController ()<UITableViewDataSource, UITableViewDelegate>
 @property (strong, nonatomic) NSArray *arrayOfFitnessPosts;
 @property (strong, nonatomic) NSArray *arrayofRecipesPosts;
@@ -98,7 +99,21 @@
 }
 
 -(void) fetchGymBuddies{
-    
+    PFQuery *postQuery = [PFQuery queryWithClassName:@"_User"];
+    [postQuery orderByDescending:@"createdAt"];
+    [postQuery includeKey:@"author"];
+    [postQuery whereKey:@"fitnessLevel" equalTo:[PFUser currentUser][@"fitnessLevel"]];
+    postQuery.limit = 20;
+    [postQuery findObjectsInBackgroundWithBlock:^(NSArray *posts, NSError *error) {
+        if (posts.count) {
+            self.arrayOfGymBuddies = posts;
+            [self.fitnessTableView reloadData];
+        }
+        else {
+            NSLog(@"%@", error);
+        }
+        [self.refreshControl endRefreshing];
+    }];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -128,7 +143,12 @@
     }
     
     else if (self.segout.selectedSegmentIndex == 2) {
-        
+        GymBuddyCell *cell = [self.fitnessTableView dequeueReusableCellWithIdentifier:@"postCellThree" forIndexPath:indexPath];
+        PFUser *user = self.arrayOfGymBuddies[indexPath.row];
+        cell.author.text = [NSString stringWithFormat:@"%@%@%@", user[@"firstName"] , @" ", user[@"lastName"]];
+        cell.username.text = user.username;
+        cell.levelOfFitness.text = user[@"fitnessLevel"];
+        return cell;
     }
     
     return [UITableViewCell new];

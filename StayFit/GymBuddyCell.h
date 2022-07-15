@@ -6,7 +6,6 @@
 //
 
 #import <UIKit/UIKit.h>
-
 NS_ASSUME_NONNULL_BEGIN
 
 @interface GymBuddyCell : UITableViewCell
@@ -14,7 +13,6 @@ NS_ASSUME_NONNULL_BEGIN
 @property (weak, nonatomic) IBOutlet UILabel *username;
 @property (weak, nonatomic) IBOutlet UILabel *levelOfFitness;
 @property (weak, nonatomic) IBOutlet UILabel *location;
-
 @end
 
 NS_ASSUME_NONNULL_END
