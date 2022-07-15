@@ -144,10 +144,10 @@
     
     else if (self.segout.selectedSegmentIndex == 2) {
         GymBuddyCell *cell = [self.fitnessTableView dequeueReusableCellWithIdentifier:@"postCellThree" forIndexPath:indexPath];
-        PFUser *user = self.arrayOfGymBuddies[indexPath.row];
-        cell.author.text = [NSString stringWithFormat:@"%@%@%@", user[@"firstName"] , @" ", user[@"lastName"]];
-        cell.username.text = user.username;
-        cell.levelOfFitness.text = user[@"fitnessLevel"];
+        PFObject *user = [self.arrayOfGymBuddies objectAtIndex:indexPath.row];
+        cell.author.text = [user objectForKey:@"firstName"];
+        cell.username.text = [user objectForKey:@"username"];
+        cell.levelOfFitness.text = [user objectForKey:@"fitnessLevel"];
         return cell;
     }
     
@@ -173,7 +173,7 @@
     }
     
     else if (self.segout.selectedSegmentIndex == 2) {
-        
+        return self.arrayOfGymBuddies.count;
     }
     
     return 0;
