@@ -103,6 +103,7 @@
     [postQuery orderByDescending:@"createdAt"];
     [postQuery includeKey:@"author"];
     [postQuery whereKey:@"fitnessLevel" equalTo:[PFUser currentUser][@"fitnessLevel"]];
+    [postQuery whereKey:@"username" notEqualTo:[PFUser currentUser].username];
     postQuery.limit = 20;
     [postQuery findObjectsInBackgroundWithBlock:^(NSArray *posts, NSError *error) {
         if (posts.count) {
