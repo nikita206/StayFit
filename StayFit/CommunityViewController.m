@@ -14,6 +14,7 @@
 @interface CommunityViewController ()<UITableViewDataSource, UITableViewDelegate>
 @property (strong, nonatomic) NSArray *arrayOfFitnessPosts;
 @property (strong, nonatomic) NSArray *arrayofRecipesPosts;
+@property (strong, nonatomic) NSArray *arrayOfGymBuddies;
 @property (strong, nonatomic) UIRefreshControl *refreshControl;
 @end
 
@@ -56,7 +57,8 @@
 }
 
 -(void) gymBuddy{;
-
+    self.arrayOfGymBuddies = [[NSMutableArray alloc] init];
+    [self fetchGymBuddies];
 }
 
 -(void) fetchPosts{
@@ -95,6 +97,10 @@
     }];
 }
 
+-(void) fetchGymBuddies{
+    
+}
+
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     if(self.segout.selectedSegmentIndex == 0) {
         FitnessFeedCell *cell = [self.fitnessTableView dequeueReusableCellWithIdentifier:@"postCell" forIndexPath:indexPath];
@@ -105,6 +111,7 @@
         cell.caption.text = post[@"caption"];
         cell.photoImageView.file = post[@"image"];
         [cell.photoImageView loadInBackground];
+        cell.level.text = post[@"author"][@"fitnessLevel"];
         return cell;
     }
     
