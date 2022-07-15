@@ -103,6 +103,7 @@
     [postQuery orderByDescending:@"createdAt"];
     [postQuery includeKey:@"author"];
     [postQuery whereKey:@"fitnessLevel" equalTo:[PFUser currentUser][@"fitnessLevel"]];
+    [postQuery whereKey:@"city" equalTo:[PFUser currentUser][@"city"]];
     [postQuery whereKey:@"username" notEqualTo:[PFUser currentUser].username];
     postQuery.limit = 20;
     [postQuery findObjectsInBackgroundWithBlock:^(NSArray *posts, NSError *error) {
@@ -149,6 +150,7 @@
         cell.author.text = [user objectForKey:@"firstName"];
         cell.username.text = [user objectForKey:@"username"];
         cell.levelOfFitness.text = [user objectForKey:@"fitnessLevel"];
+        cell.location.text = [user objectForKey:@"city"];
         return cell;
     }
     
