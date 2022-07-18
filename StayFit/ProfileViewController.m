@@ -6,6 +6,7 @@
 //
 
 #import "ProfileViewController.h"
+#import "Post.h"
 
 @interface ProfileViewController () <UIImagePickerControllerDelegate, UINavigationControllerDelegate>
 
@@ -16,6 +17,7 @@
 - (void)viewDidLoad {
     PFUser *user = [PFUser currentUser];
     [super viewDidLoad];
+    self.author.text = [NSString stringWithFormat:@"%@%@%@", user[@"firstName"]  , @" ", user[@"lastName"]];
     self.profilePic.file = user[@"profileImage"];
     [self.profilePic loadInBackground];
     self.profilePic.layer.cornerRadius = self.profilePic.frame.size.width/2.1;
@@ -24,16 +26,6 @@
     [self.profilePic addGestureRecognizer:profileTap];
     [self.profilePic setUserInteractionEnabled:YES];
 }
-
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 - (IBAction)didTapLogout:(id)sender {
     [PFUser logOutInBackgroundWithBlock:^(NSError * _Nullable error) {

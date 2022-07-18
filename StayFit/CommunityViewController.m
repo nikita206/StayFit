@@ -135,7 +135,7 @@
         FitnessFeedCell *cell = [self.fitnessTableView dequeueReusableCellWithIdentifier:@"postCell" forIndexPath:indexPath];
         Post *post = self.arrayOfFitnessPosts[indexPath.row];
         cell.post = post;
-        cell.author.text = [NSString stringWithFormat:@"%@%@%@", post[@"author"][@"firstName"]  , @" ", post[@"author"][@"lastName"]];;
+        cell.author.text = [NSString stringWithFormat:@"%@%@%@", post[@"author"][@"firstName"]  , @" ", post[@"author"][@"lastName"]];
         cell.username.text = post[@"author"][@"username"];
         cell.caption.text = post[@"caption"];
         cell.photoImageView.file = post[@"image"];
@@ -148,7 +148,7 @@
         RecipesFeedCell *cell = [self.fitnessTableView dequeueReusableCellWithIdentifier:@"postCellTwo" forIndexPath:indexPath];
         recipesPost *post = self.arrayofRecipesPosts[indexPath.row];
         cell.post = post;
-        cell.author.text = [NSString stringWithFormat:@"%@%@%@", post[@"author"][@"firstName"]  , @" ", post[@"author"][@"lastName"]];;
+        cell.author.text = [NSString stringWithFormat:@"%@%@%@", post[@"author"][@"firstName"]  , @" ", post[@"author"][@"lastName"]];
         cell.username.text = post[@"author"][@"username"];
         cell.caption.text = post[@"caption"];
         cell.photoImageView.file = post[@"image"];
@@ -159,7 +159,7 @@
     else if (self.segout.selectedSegmentIndex == 2) {
         GymBuddyCell *cell = [self.fitnessTableView dequeueReusableCellWithIdentifier:@"postCellThree" forIndexPath:indexPath];
         PFObject *user = [self.arrayOfGymBuddies objectAtIndex:indexPath.row];
-        cell.author.text = [user objectForKey:@"firstName"];
+        cell.author.text = [NSString stringWithFormat:@"%@%@%@", [user objectForKey:@"firstName"]  , @" ", [user objectForKey:@"lastName"]];
         cell.username.text = [user objectForKey:@"username"];
         cell.levelOfFitness.text = [user objectForKey:@"fitnessLevel"];
         cell.location.text = [user objectForKey:@"city"];
