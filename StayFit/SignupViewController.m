@@ -17,12 +17,15 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    //creating picker view array for States
     stateArray = @[@"Alabama", @"Alaska", @"American Samoa", @"Arizona", @"Arkansas", @"California", @"Colorado", @"Connecticut", @"Delaware", @"District of Columbia", @"Florida", @"Georgia", @"Guam", @"Hawaii", @"Idaho", @"Illinois", @"Indiana", @"Iowa", @"Kansas", @"Kentucky", @"Louisiana", @"Maine", @"Maryland", @"Massachusetts", @"Michigan", @"Minnesota", @"Minor Outlying Islands", @"Mississippi", @"Missouri", @"Montana", @"Nebraska", @"Nevada", @"New Hampshire", @"New Jersey", @"New Mexico", @"New York", @"North Carolina", @"North Dakota", @"Northern Mariana Islands", @"Ohio", @"Oklahoma", @"Oregon", @"Pennsylvania", @"Puerto Rico", @"Rhode Island", @"South Carolina", @"South Dakota", @"Tennessee", @"Texas", @"U.S. Virgin Islands", @"Utah", @"Vermont", @"Virginia", @"Washington", @"West Virginia", @"Wisconsin", @"Wyoming"];
     statePicker = [[UIPickerView alloc] init];
     [statePicker setDataSource:self];
     [statePicker setDelegate:self];
     self.statePicker.tag = 0;
     [state setInputView:statePicker];
+    
+    //creating picker view array for level of fitness
     levelArray = @[@"Beginner", @"Intermediate", @"Advanced"];
     levelPicker = [[UIPickerView alloc] init];
     [levelPicker setDataSource:self];
@@ -70,10 +73,10 @@
 }
 
 - (void)registerUser {
-    //initializes a user object
+    //initializing a user object
     PFUser *newUser = [PFUser user];
     
-    //sets user properties
+    //setting user properties
     newUser[@"firstName"] = self.firstName.text;
     newUser[@"lastName"] = self.lastName.text;
     newUser.email = self.email.text;
@@ -85,7 +88,7 @@
     newUser[@"state"] = self.state.text;
     newUser[@"fitnessLevel"] = self.fitnessLevel.text;
     
-    // call sign up function on the object
+    //calling sign up function on the object
     [newUser signUpInBackgroundWithBlock:^(BOOL succeeded, NSError * error) {
         if (error != nil) {
             NSLog(@"Error: %@", error.localizedDescription);
@@ -99,6 +102,7 @@
 }
 
 - (IBAction)didTapSignup:(id)sender {
+    //checks if any field in signup is empty
     if([self.firstName.text isEqual:@""] || [self.lastName.text isEqual:@""] || [self.email.text isEqual:@""] || [self.username.text isEqual:@""] || [self.password.text isEqual:@""] || [self.weight.text isEqual:@""] || [self.height.text isEqual:@""] || [self.city.text isEqual:@""] || [self.state.text isEqual:@""] || [self.fitnessLevel.text isEqual:@""]){
     
     UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Error"
@@ -107,9 +111,7 @@
         
     UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"Cancel"
                                                             style:UIAlertActionStyleCancel
-                                                          handler:^(UIAlertAction * _Nonnull action) {
-                                                                 // handle cancel response here. Doing nothing will dismiss the view.
-                                                          }];
+                                                          handler:^(UIAlertAction * _Nonnull action) {}];
         //cancel action to the alertController
     [alert addAction:cancelAction];
 
@@ -120,9 +122,7 @@
                                                          }];
         // add the OK action to the alert controller
     [alert addAction:okAction];
-        [self presentViewController:alert animated:YES completion:^{
-            // optional code for what happens after the alert controller has finished presenting
-        }];
+        [self presentViewController:alert animated:YES completion:^{}];
         
     }
     else{
@@ -131,7 +131,8 @@
 }
 
 - (IBAction)didTapBack:(id)sender {
-    NSLog(@"going back!");
+    //segue to go back to the login page
+    NSLog(@"Going back to login page");
     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
     UIViewController *login = [storyboard instantiateViewControllerWithIdentifier:@"login"];
     self.view.window.rootViewController = login;

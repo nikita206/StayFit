@@ -23,7 +23,7 @@
 @synthesize segout;
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
+    //refreshes the page each time a post is added
     self.refreshControl = [[UIRefreshControl alloc] init];
     [self.refreshControl addTarget:self action:@selector(fetchPosts) forControlEvents:UIControlEventValueChanged];
     [self.fitnessTableView insertSubview:self.refreshControl atIndex:0];
@@ -34,6 +34,7 @@
 }
 
 - (IBAction)segact:(id)sender {
+    //checks which segment is active
     switch (self.segout.selectedSegmentIndex){
         case 0:
             [self fitnessCase];
@@ -76,6 +77,7 @@
 }
 
 -(void) fetchFitnessPosts{
+    //creates a new query for fitness posts
         PFQuery *postQuery = [PFQuery queryWithClassName:@"Post"];
         [postQuery orderByDescending:@"createdAt"];
         [postQuery includeKey:@"author"];
@@ -93,6 +95,7 @@
         }];
 }
 -(void) fetchRecipesPosts{
+    //creates a new query for recipes posts
     PFQuery *postQuery = [PFQuery queryWithClassName:@"recipesPost"];
     [postQuery orderByDescending:@"createdAt"];
     [postQuery includeKey:@"author"];
@@ -111,6 +114,7 @@
 }
 
 -(void) fetchGymBuddies{
+    //creates a new query for matching gym buddies
     PFQuery *postQuery = [PFQuery queryWithClassName:@"_User"];
     [postQuery orderByDescending:@"createdAt"];
     [postQuery includeKey:@"author"];
@@ -131,6 +135,7 @@
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
+    //sets table view according to the active segment
     if(self.segout.selectedSegmentIndex == 0) {
         FitnessFeedCell *cell = [self.fitnessTableView dequeueReusableCellWithIdentifier:@"postCell" forIndexPath:indexPath];
         Post *post = self.arrayOfFitnessPosts[indexPath.row];
@@ -165,20 +170,19 @@
         cell.location.text = [user objectForKey:@"city"];
         return cell;
     }
-    
     return [UITableViewCell new];
-    
 }
+
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
+    //segue for when the add button is clicked for a new post
     if([[segue identifier] isEqualToString:@"makeNewPost"]){
-        
         NewPostViewController *newPostViewController = [segue destinationViewController];
-       
         newPostViewController.segoutValue = (int)self.segout.selectedSegmentIndex;
     }
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
+    //returns number of rows on the basis of segment that is active
     if(self.segout.selectedSegmentIndex == 0) {
         return self.arrayOfFitnessPosts.count;
     }

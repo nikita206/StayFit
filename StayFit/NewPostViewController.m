@@ -21,6 +21,7 @@
 }
 
 - (IBAction)shareButton:(id)sender {
+    //takes the user back to the segment that was active after share button is clicked
     if(self.segoutValue == 0){
     if(self.image.image && ![self.caption.text isEqualToString:@""]){
         [Post postUserImage:self.image.image withCaption:self.caption.text withCompletion:^(BOOL succeeded, NSError * _Nullable error) {
@@ -29,9 +30,6 @@
             }
             else{
                 NSLog(@"Awesome");
-//                UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-//                UITabBarController *tabController = [storyboard instantiateViewControllerWithIdentifier:@"TabBarController"];
-//                self.view.window.rootViewController = tabController;
                 [self.navigationController popViewControllerAnimated:YES];
             }
         }];
@@ -56,12 +54,10 @@
     
     // Get the image captured by the UIImagePickerController
     UIImage *originalImage = info[UIImagePickerControllerOriginalImage];
-
-    // Do something with the images (based on your use case)
     UIImage *resizedImage = [self resizeImage:originalImage withSize:CGSizeMake(500,500)];
     [self.image setImage:resizedImage];
     
-    // Dismiss UIImagePickerController to go back to your original view controller
+    // Dismisses UIImagePickerController to go back to your original view controller
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 

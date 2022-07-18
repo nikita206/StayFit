@@ -22,17 +22,8 @@
     [self.signUp setUserInteractionEnabled:YES];
 }
 
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
-
 - (void)loginUser {
+    //sets the usrrname and password to text fields
     NSString *username = self.username.text;
     NSString *password = self.password.text;
     
@@ -41,7 +32,6 @@
             NSLog(@"User log in failed: %@", error.localizedDescription);
         } else {
             NSLog(@"User logged in successfully");
-//            [self performSegueWithIdentifier:@"loginSegue" sender:nil];
             UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
             UITabBarController *tabController = [storyboard instantiateViewControllerWithIdentifier:@"TabBarController"];
             self.view.window.rootViewController = tabController;
@@ -70,10 +60,7 @@
                                                          }];
         // add the OK action to the alert controller
     [alert addAction:okAction];
-        [self presentViewController:alert animated:YES completion:^{
-            // optional code for what happens after the alert controller has finished presenting
-        }];
-        
+        [self presentViewController:alert animated:YES completion:^{}];
     }
     else{
     [self loginUser];
@@ -81,13 +68,14 @@
 }
 
 -(void) didTapSignup {
-    NSLog(@"taking you there!");
+    NSLog(@"Taking you to the signup page");
     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
     UINavigationController *signup = [storyboard instantiateViewControllerWithIdentifier:@"signup"];
     self.view.window.rootViewController = signup;
 }
 
 -(void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
+    //dismisses the keyboard
     [[self view] endEditing:YES];
 }
 @end
