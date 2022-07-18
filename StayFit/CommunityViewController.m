@@ -146,6 +146,10 @@
         cell.photoImageView.file = post[@"image"];
         [cell.photoImageView loadInBackground];
         cell.level.text = post[@"author"][@"fitnessLevel"];
+        cell.pfp.file = post[@"author"][@"profileImage"];
+        [cell.pfp loadInBackground];
+        cell.pfp.layer.cornerRadius = cell.pfp.frame.size.width/2;
+        cell.pfp.clipsToBounds = YES;
         return cell;
     }
     
@@ -158,6 +162,10 @@
         cell.caption.text = post[@"caption"];
         cell.photoImageView.file = post[@"image"];
         [cell.photoImageView loadInBackground];
+        cell.pfp.file = post[@"author"][@"profileImage"];
+        [cell.pfp loadInBackground];
+        cell.pfp.layer.cornerRadius = cell.pfp.frame.size.width/2;
+        cell.pfp.clipsToBounds = YES;
         return cell;
     }
     
