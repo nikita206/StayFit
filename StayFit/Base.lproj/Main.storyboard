@@ -431,7 +431,7 @@
                     </view>
                     <navigationItem key="navigationItem" id="gg7-DP-5tX">
                         <nil key="title"/>
-                        <segmentedControl key="titleView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="bar" selectedSegmentIndex="0" id="lMR-oI-kOc">
+                        <segmentedControl key="titleView" opaque="NO" contentMode="scaleToFill" restorationIdentifier="segment" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="bar" selectedSegmentIndex="0" id="lMR-oI-kOc">
                             <rect key="frame" x="71" y="5.5" width="272" height="33"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <segments>

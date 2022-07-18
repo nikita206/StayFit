@@ -25,13 +25,14 @@
     if(self.image.image && ![self.caption.text isEqualToString:@""]){
         [Post postUserImage:self.image.image withCaption:self.caption.text withCompletion:^(BOOL succeeded, NSError * _Nullable error) {
             if (error) {
-                NSLog(@"%@", "could not post");
+                NSLog(@"%s", "could not post");
             }
             else{
                 NSLog(@"Awesome");
-                UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-                UITabBarController *tabController = [storyboard instantiateViewControllerWithIdentifier:@"TabBarController"];
-                self.view.window.rootViewController = tabController;
+//                UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+//                UITabBarController *tabController = [storyboard instantiateViewControllerWithIdentifier:@"TabBarController"];
+//                self.view.window.rootViewController = tabController;
+                [self.navigationController popViewControllerAnimated:YES];
             }
         }];
     }
@@ -40,13 +41,11 @@
     if(self.image.image && ![self.caption.text isEqualToString:@""]){
         [recipesPost postUserImage:self.image.image withCaption:self.caption.text withCompletion:^(BOOL succeeded, NSError * _Nullable error) {
             if (error) {
-                NSLog(@"%@", "could not post");
+                NSLog(@"%s", "could not post");
             }
             else{
                 NSLog(@"Awesome");
-                UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-                UITabBarController *tabController = [storyboard instantiateViewControllerWithIdentifier:@"TabBarController"];
-                self.view.window.rootViewController = tabController;
+                [self.navigationController popViewControllerAnimated:YES];
             }
         }];
     }

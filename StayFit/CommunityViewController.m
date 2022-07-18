@@ -50,7 +50,7 @@
 -(void) fitnessCase{
     self.addButton.hidden = false;
     self.arrayOfFitnessPosts = [[NSMutableArray alloc] init];
-    [self fetchPosts];
+    [self fetchFitnessPosts];
 }
 
 -(void) recipesCase{
@@ -65,24 +65,33 @@
     [self fetchGymBuddies];
 }
 
--(void) fetchPosts{
-    PFQuery *postQuery = [PFQuery queryWithClassName:@"Post"];
-    [postQuery orderByDescending:@"createdAt"];
-    [postQuery includeKey:@"author"];
-    postQuery.limit = 20;
-
-    [postQuery findObjectsInBackgroundWithBlock:^(NSArray *posts, NSError *error) {
-        if (posts) {
-            self.arrayOfFitnessPosts = posts;
-            [self.fitnessTableView reloadData];
-        }
-        else {
-            NSLog(@"%@", error);
-        }
-        [self.refreshControl endRefreshing];
-    }];
+-(void) fetchPosts {
+    if (self.segout.selectedSegmentIndex == 0) {
+        [self fetchFitnessPosts];
+    } else if (self.segout.selectedSegmentIndex == 1) {
+        [self fetchRecipesPosts];
+    } else {
+        [self fetchGymBuddies];
+    }
 }
 
+-(void) fetchFitnessPosts{
+        PFQuery *postQuery = [PFQuery queryWithClassName:@"Post"];
+        [postQuery orderByDescending:@"createdAt"];
+        [postQuery includeKey:@"author"];
+        postQuery.limit = 20;
+    
+        [postQuery findObjectsInBackgroundWithBlock:^(NSArray *posts, NSError *error) {
+            if (posts) {
+                self.arrayOfFitnessPosts = posts;
+                [self.fitnessTableView reloadData];
+            }
+            else {
+                NSLog(@"%@", error);
+            }
+            [self.refreshControl endRefreshing];
+        }];
+}
 -(void) fetchRecipesPosts{
     PFQuery *postQuery = [PFQuery queryWithClassName:@"recipesPost"];
     [postQuery orderByDescending:@"createdAt"];
