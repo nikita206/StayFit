@@ -18,6 +18,8 @@
     PFUser *user = [PFUser currentUser];
     [super viewDidLoad];
     self.author.text = [NSString stringWithFormat:@"%@%@%@", user[@"firstName"]  , @" ", user[@"lastName"]];
+    self.username.text = [NSString stringWithFormat:@"%@%@", @"@" , user.username];
+    self.level.text = user[@"fitnessLevel"];
     self.profilePic.file = user[@"profileImage"];
     [self.profilePic loadInBackground];
     self.profilePic.layer.cornerRadius = self.profilePic.frame.size.width/2.1;

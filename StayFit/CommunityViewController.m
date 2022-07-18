@@ -141,7 +141,7 @@
         Post *post = self.arrayOfFitnessPosts[indexPath.row];
         cell.post = post;
         cell.author.text = [NSString stringWithFormat:@"%@%@%@", post[@"author"][@"firstName"]  , @" ", post[@"author"][@"lastName"]];
-        cell.username.text = post[@"author"][@"username"];
+        cell.username.text = [NSString stringWithFormat:@"%@%@", @"@"  , post[@"author"][@"username"]];
         cell.caption.text = post[@"caption"];
         cell.photoImageView.file = post[@"image"];
         [cell.photoImageView loadInBackground];
@@ -154,7 +154,7 @@
         recipesPost *post = self.arrayofRecipesPosts[indexPath.row];
         cell.post = post;
         cell.author.text = [NSString stringWithFormat:@"%@%@%@", post[@"author"][@"firstName"]  , @" ", post[@"author"][@"lastName"]];
-        cell.username.text = post[@"author"][@"username"];
+        cell.username.text = [NSString stringWithFormat:@"%@%@", @"@"  , post[@"author"][@"username"]];
         cell.caption.text = post[@"caption"];
         cell.photoImageView.file = post[@"image"];
         [cell.photoImageView loadInBackground];

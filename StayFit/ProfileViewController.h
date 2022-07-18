@@ -16,6 +16,8 @@ NS_ASSUME_NONNULL_BEGIN
 - (IBAction)didTapLogout:(id)sender;
 @property (weak, nonatomic) IBOutlet PFImageView *profilePic;
 @property (weak, nonatomic) IBOutlet UILabel *author;
+@property (weak, nonatomic) IBOutlet UILabel *username;
+@property (weak, nonatomic) IBOutlet UILabel *level;
 
 @end
 
