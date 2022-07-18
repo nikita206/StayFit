@@ -6,11 +6,15 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "Parse/Parse.h"
+#import "Parse/PFImageView.h"
+
 
 NS_ASSUME_NONNULL_BEGIN
 
 @interface ProfileViewController : UIViewController
 - (IBAction)didTapLogout:(id)sender;
+@property (weak, nonatomic) IBOutlet PFImageView *profilePic;
 
 @end
 
