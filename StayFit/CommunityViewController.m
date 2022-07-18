@@ -12,6 +12,7 @@
 #import "NewPostViewController.h"
 #import "RecipesFeedCell.h"
 #import "GymBuddyCell.h"
+#import <QuartzCore/QuartzCore.h>
 @interface CommunityViewController ()<UITableViewDataSource, UITableViewDelegate>
 @property (strong, nonatomic) NSArray *arrayOfFitnessPosts;
 @property (strong, nonatomic) NSArray *arrayofRecipesPosts;
@@ -176,6 +177,17 @@
         cell.username.text = [user objectForKey:@"username"];
         cell.levelOfFitness.text = [user objectForKey:@"fitnessLevel"];
         cell.location.text = [user objectForKey:@"city"];
+        cell.pfp.file = [user objectForKey:@"profileImage"];
+        [cell.pfp loadInBackground];
+        cell.pfp.layer.cornerRadius = 12;
+        cell.pfp.clipsToBounds = YES;
+        CALayer *imageViewLayer = cell.pfp.layer;
+        CAGradientLayer *maskLayer = [CAGradientLayer layer];
+        maskLayer.colors = @[ (id)([UIColor blackColor].CGColor), (id)([UIColor clearColor].CGColor) ];
+        maskLayer.startPoint = CGPointMake(0, 0);
+        maskLayer.endPoint = CGPointMake(1, 1);
+        maskLayer.frame = imageViewLayer.bounds; 
+        imageViewLayer.mask = maskLayer;
         return cell;
     }
     return [UITableViewCell new];

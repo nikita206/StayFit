@@ -369,40 +369,40 @@
                                                     <outlet property="username" destination="BXf-2c-XQx" id="M1C-mm-bqq"/>
                                                 </connections>
                                             </tableViewCell>
-                                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="postCellThree" rowHeight="328" id="O4K-ac-3DB" customClass="GymBuddyCell">
-                                                <rect key="frame" x="0.0" y="700.5" width="414" height="328"/>
+                                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="postCellThree" rowHeight="414" id="O4K-ac-3DB" customClass="GymBuddyCell">
+                                                <rect key="frame" x="0.0" y="700.5" width="414" height="414"/>
                                                 <autoresizingMask key="autoresizingMask"/>
                                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="O4K-ac-3DB" id="gcS-DL-ERm">
-                                                    <rect key="frame" x="0.0" y="0.0" width="414" height="328"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="414" height="414"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <subviews>
                                                         <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="uOH-cB-wVH" customClass="PFImageView">
-                                                            <rect key="frame" x="0.0" y="3" width="414" height="320"/>
+                                                            <rect key="frame" x="6" y="3" width="401" height="401"/>
                                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                         </imageView>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Nikita Agarwal" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bva-JY-Wgj">
-                                                            <rect key="frame" x="20" y="216" width="252" height="21"/>
+                                                            <rect key="frame" x="20" y="282" width="252" height="21"/>
                                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                             <fontDescription key="fontDescription" type="system" weight="medium" pointSize="17"/>
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vhR-0D-3QD">
-                                                            <rect key="frame" x="20" y="239" width="91" height="21"/>
+                                                            <rect key="frame" x="20" y="305" width="91" height="21"/>
                                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                                             <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Level of Fitness" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qPn-DU-tDd">
-                                                            <rect key="frame" x="20" y="260" width="150" height="19"/>
+                                                            <rect key="frame" x="20" y="326" width="150" height="19"/>
                                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                             <color key="textColor" red="0.0010359504400000001" green="0.26026698129999998" blue="0.63348327019999995" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Location" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CoU-RX-2nR">
-                                                            <rect key="frame" x="20" y="282" width="139" height="22"/>
+                                                            <rect key="frame" x="20" y="348" width="139" height="22"/>
                                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                             <nil key="textColor"/>
@@ -414,6 +414,7 @@
                                                     <outlet property="author" destination="bva-JY-Wgj" id="PCc-Dx-15E"/>
                                                     <outlet property="levelOfFitness" destination="qPn-DU-tDd" id="gNO-ch-wNy"/>
                                                     <outlet property="location" destination="CoU-RX-2nR" id="Ivd-l8-Dli"/>
+                                                    <outlet property="pfp" destination="uOH-cB-wVH" id="2sK-nh-vdF"/>
                                                     <outlet property="username" destination="vhR-0D-3QD" id="tX5-tY-BtL"/>
                                                 </connections>
                                             </tableViewCell>
