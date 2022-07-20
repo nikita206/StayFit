@@ -186,7 +186,7 @@
         maskLayer.colors = @[ (id)([UIColor blackColor].CGColor), (id)([UIColor clearColor].CGColor) ];
         maskLayer.startPoint = CGPointMake(0, 0);
         maskLayer.endPoint = CGPointMake(1, 1);
-        maskLayer.frame = imageViewLayer.bounds; 
+        maskLayer.frame = imageViewLayer.bounds;
         imageViewLayer.mask = maskLayer;
         return cell;
     }
