@@ -7,15 +7,19 @@
 
 #import "RecommendedWorkoutViewController.h"
 #import "Parse/Parse.h"
+#import "WorkoutCell.h"
 
-@interface RecommendedWorkoutViewController ()
-
+@interface RecommendedWorkoutViewController () <UITableViewDelegate, UITableViewDataSource>
+@property (nonatomic, strong) NSMutableArray *workoutArray;
 @end
 
 @implementation RecommendedWorkoutViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.tableView.dataSource = self;
+    self.tableView.delegate = self;
+    self.workoutArray = [[NSMutableArray alloc] init];
     [self fetchWorkouts];
 }
 
@@ -49,7 +53,6 @@
         [task resume];
     }
     else if([currentUser[@"fitnessLevel"]  isEqual: @"Intermediate"]){
-        
         // creates NSURL object
         NSURL *url = [NSURL URLWithString:@"https://api.api-ninjas.com/v1/exercises?difficulty=intermediate"];
         
@@ -60,7 +63,6 @@
         [request setHTTPMethod:@"GET"];
         [request setValue:@"Aq8IKvomBOkXPQELcAKs7Q==kffUR94hO4SaCim1" forHTTPHeaderField:@"X-Api-Key "];
         [request setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
-        
         // creates session
         NSURLSession *session = [NSURLSession sessionWithConfiguration:[NSURLSessionConfiguration defaultSessionConfiguration] delegate:nil delegateQueue:[NSOperationQueue mainQueue]];
         
@@ -70,9 +72,12 @@
                    NSLog(@"%@", [error localizedDescription]);
                }
                else {
-                   NSDictionary *dataDictionary = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:nil];
-
-                  NSLog(@"%@", dataDictionary);
+                   self.workoutArray = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:nil];
+                  NSLog(@"%@", self.workoutArray);
+                    for(NSDictionary *workout in self.workoutArray){
+                        NSLog(@"%@", workout[@"name"]);
+                    }
+                    [self.tableView reloadData];
                    }
         }];
         [task resume];
@@ -102,10 +107,22 @@
                    NSDictionary *dataDictionary = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:nil];
 
                   NSLog(@"%@", dataDictionary);
+                   [self.tableView reloadData];
                    }
         }];
         [task resume];
     }
+}
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
+    return self.workoutArray.count;
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
+    WorkoutCell *cell = [tableView dequeueReusableCellWithIdentifier:@"workout"];
+    NSDictionary *workout = self.workoutArray[indexPath.row];
+    cell.workoutName.text = workout[@"name"];
+    return cell;
 }
 
 @end

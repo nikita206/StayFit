@@ -10,6 +10,7 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface RecommendedWorkoutViewController : ViewController
+@property (weak, nonatomic) IBOutlet UITableView *tableView;
 
 @end
 
