@@ -7,6 +7,7 @@
 
 #import "RecommendedWorkoutViewController.h"
 #import "Parse/Parse.h"
+#import "DetailsViewController.h"
 #import "WorkoutCell.h"
 
 @interface RecommendedWorkoutViewController () <UITableViewDelegate, UITableViewDataSource>
@@ -151,4 +152,13 @@
     return v;
 }
 
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    if([[segue identifier]  isEqualToString:@"details"]) {
+    WorkoutCell *cell = sender;
+    NSIndexPath *indexPath = [self.tableView indexPathForCell:cell];
+    NSMutableArray *dataToPass = self.workoutArray[indexPath.row];
+    DetailsViewController *detailVC = [segue destinationViewController];
+    detailVC.detailArray = dataToPass;
+    }
+}
 @end

@@ -553,7 +553,7 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="workout" id="jkQ-Pb-JuT" customClass="WorkoutCell">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" restorationIdentifier="details" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="workout" id="jkQ-Pb-JuT" customClass="WorkoutCell">
                                         <rect key="frame" x="0.0" y="44.5" width="353" height="162"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="jkQ-Pb-JuT" id="bvE-rQ-ZSS">
@@ -588,6 +588,7 @@
                                             <outlet property="muscle" destination="udO-6N-AIs" id="bQ0-Ms-SHu"/>
                                             <outlet property="type" destination="tDa-YG-gfC" id="1te-iE-dYa"/>
                                             <outlet property="workoutName" destination="7uc-Hl-h4A" id="4e0-w7-lqH"/>
+                                            <segue destination="9jl-2s-dr2" kind="show" id="ujM-M7-mDd"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -605,20 +606,29 @@
             </objects>
             <point key="canvasLocation" x="-933.33333333333337" y="1618.5267857142856"/>
         </scene>
-        <!--View Controller-->
+        <!--Details View Controller-->
         <scene sceneID="ETG-wp-pdW">
             <objects>
-                <viewController id="9jl-2s-dr2" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="details" id="9jl-2s-dr2" customClass="DetailsViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="iwt-mJ-Hgw">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="kaM-T2-Eye">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <viewLayoutGuide key="contentLayoutGuide" id="j9l-3Y-ntA"/>
+                                <viewLayoutGuide key="frameLayoutGuide" id="t8Q-fm-86g"/>
+                            </scrollView>
+                        </subviews>
                         <viewLayoutGuide key="safeArea" id="vO6-Nx-l7i"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     </view>
+                    <navigationItem key="navigationItem" id="vnx-NX-P5R"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="HjE-aX-6fc" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-61" y="1619"/>
+            <point key="canvasLocation" x="-62.318840579710148" y="1618.5267857142856"/>
         </scene>
         <!--Profile-->
         <scene sceneID="TYj-Dh-738">

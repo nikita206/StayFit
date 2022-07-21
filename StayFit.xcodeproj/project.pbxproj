@@ -19,6 +19,7 @@
 		21A4D6BB2881EEDF001FC7E9 /* GymBuddyCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 21A4D6BA2881EEDF001FC7E9 /* GymBuddyCell.m */; };
 		21A4D6C1288771DE001FC7E9 /* RecommendedWorkoutViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 21A4D6C0288771DE001FC7E9 /* RecommendedWorkoutViewController.m */; };
 		21A4D6C428887C64001FC7E9 /* WorkoutCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 21A4D6C328887C64001FC7E9 /* WorkoutCell.m */; };
+		21A4D6CA2889FE88001FC7E9 /* DetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 21A4D6C92889FE88001FC7E9 /* DetailsViewController.m */; };
 		21A530A72878ABE300F2E9A7 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 21A530A62878ABE300F2E9A7 /* AppDelegate.m */; };
 		21A530AA2878ABE300F2E9A7 /* SceneDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 21A530A92878ABE300F2E9A7 /* SceneDelegate.m */; };
 		21A530AD2878ABE300F2E9A7 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 21A530AC2878ABE300F2E9A7 /* ViewController.m */; };
@@ -74,6 +75,8 @@
 		21A4D6C0288771DE001FC7E9 /* RecommendedWorkoutViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RecommendedWorkoutViewController.m; sourceTree = "<group>"; };
 		21A4D6C228887C64001FC7E9 /* WorkoutCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WorkoutCell.h; sourceTree = "<group>"; };
 		21A4D6C328887C64001FC7E9 /* WorkoutCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WorkoutCell.m; sourceTree = "<group>"; };
+		21A4D6C82889FE88001FC7E9 /* DetailsViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DetailsViewController.h; sourceTree = "<group>"; };
+		21A4D6C92889FE88001FC7E9 /* DetailsViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DetailsViewController.m; sourceTree = "<group>"; };
 		21A530A22878ABE300F2E9A7 /* StayFit.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = StayFit.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		21A530A52878ABE300F2E9A7 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		21A530A62878ABE300F2E9A7 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -170,6 +173,8 @@
 				2166A9A32878EC0300359DA4 /* SignupViewController.m */,
 				21A4D6BF288771DE001FC7E9 /* RecommendedWorkoutViewController.h */,
 				21A4D6C0288771DE001FC7E9 /* RecommendedWorkoutViewController.m */,
+				21A4D6C82889FE88001FC7E9 /* DetailsViewController.h */,
+				21A4D6C92889FE88001FC7E9 /* DetailsViewController.m */,
 				21A4D6C228887C64001FC7E9 /* WorkoutCell.h */,
 				21A4D6C328887C64001FC7E9 /* WorkoutCell.m */,
 				21A4D6A1287CBE97001FC7E9 /* CommunityViewController.h */,
@@ -484,6 +489,7 @@
 				21A4D6B5287F72BA001FC7E9 /* recipesPost.m in Sources */,
 				21A4D6AF287DFA92001FC7E9 /* Post.m in Sources */,
 				21A4D6BB2881EEDF001FC7E9 /* GymBuddyCell.m in Sources */,
+				21A4D6CA2889FE88001FC7E9 /* DetailsViewController.m in Sources */,
 				21A4D6C1288771DE001FC7E9 /* RecommendedWorkoutViewController.m in Sources */,
 				21A4D6B2287E16E9001FC7E9 /* FitnessFeedCell.m in Sources */,
 				21A530B82878ABE400F2E9A7 /* main.m in Sources */,
