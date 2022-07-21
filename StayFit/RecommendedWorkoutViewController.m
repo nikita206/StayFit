@@ -23,6 +23,7 @@
     [self fetchWorkouts];
 }
 
+
 -(void) fetchWorkouts {
     PFUser *currentUser = [PFUser currentUser];
     if([currentUser[@"fitnessLevel"]  isEqual: @"Beginner"]){
@@ -46,8 +47,9 @@
                    NSLog(@"%@", [error localizedDescription]);
                }
                else {
-                   NSDictionary *dataDictionary = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:nil];
-                  NSLog(@"%@", dataDictionary);
+                   self.workoutArray = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:nil];
+                  NSLog(@"%@", self.workoutArray);
+                    [self.tableView reloadData];
                    }
         }];
         [task resume];
@@ -74,9 +76,6 @@
                else {
                    self.workoutArray = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:nil];
                   NSLog(@"%@", self.workoutArray);
-                    for(NSDictionary *workout in self.workoutArray){
-                        NSLog(@"%@", workout[@"name"]);
-                    }
                     [self.tableView reloadData];
                    }
         }];
@@ -104,25 +103,52 @@
                    NSLog(@"%@", [error localizedDescription]);
                }
                else {
-                   NSDictionary *dataDictionary = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:nil];
-
-                  NSLog(@"%@", dataDictionary);
-                   [self.tableView reloadData];
+                   self.workoutArray = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:nil];
+                  NSLog(@"%@", self.workoutArray);
+                    [self.tableView reloadData];
                    }
         }];
         [task resume];
     }
 }
 
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
+    WorkoutCell *cell = [tableView dequeueReusableCellWithIdentifier:@"workout"];
+    NSDictionary *workout = self.workoutArray[indexPath.section];
+    cell.layer.cornerRadius = 7.0f;
+    cell.layer.masksToBounds = YES;
+    cell.workoutName.text = workout[@"name"];
+    cell.muscle.text = [NSString stringWithFormat:@"%@%@", @"Muscle targeted: ", workout[@"muscle"]];
+    cell.type.text = [NSString stringWithFormat:@"%@%@", @"Type of workout: ", workout[@"type"]];
+    cell.instructions.text = workout[@"instructions"];
+    return cell;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+  return 120;
+}
+
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
+{
     return self.workoutArray.count;
 }
 
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
-    WorkoutCell *cell = [tableView dequeueReusableCellWithIdentifier:@"workout"];
-    NSDictionary *workout = self.workoutArray[indexPath.row];
-    cell.workoutName.text = workout[@"name"];
-    return cell;
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
+    return 1;
+}
+
+-(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
+{
+    return 20;
+}
+
+-(UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
+{
+    UIView *v = [UIView new];
+    [v setBackgroundColor:[UIColor clearColor]];
+    return v;
 }
 
 @end
