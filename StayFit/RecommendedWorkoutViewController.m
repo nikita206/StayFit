@@ -122,6 +122,9 @@
     cell.muscle.text = [NSString stringWithFormat:@"%@%@", @"Muscle targeted: ", workout[@"muscle"]];
     cell.type.text = [NSString stringWithFormat:@"%@%@", @"Type of workout: ", workout[@"type"]];
     cell.instructions.text = workout[@"instructions"];
+    cell.layer.masksToBounds = false;
+    cell.layer.shadowOpacity = 0.23;
+    cell.layer.shadowRadius = 4;
     return cell;
 }
 
@@ -156,9 +159,9 @@
     if([[segue identifier]  isEqualToString:@"details"]) {
     WorkoutCell *cell = sender;
     NSIndexPath *indexPath = [self.tableView indexPathForCell:cell];
-    NSMutableArray *dataToPass = self.workoutArray[indexPath.row];
+    NSDictionary *dataToPass = self.workoutArray[indexPath.section];
     DetailsViewController *detailVC = [segue destinationViewController];
-    detailVC.detailArray = dataToPass;
+    detailVC.detailDict = dataToPass;
     }
 }
 @end

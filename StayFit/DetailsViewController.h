@@ -10,7 +10,12 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface DetailsViewController : ViewController
-@property (strong, nonatomic) NSMutableArray *detailArray;
+@property (weak, nonatomic) IBOutlet UILabel *name;
+@property (weak, nonatomic) IBOutlet UILabel *type;
+@property (weak, nonatomic) IBOutlet UILabel *muscle;
+@property (weak, nonatomic) IBOutlet UILabel *level;
+@property (weak, nonatomic) IBOutlet UILabel *instructions;
+@property (strong, nonatomic) NSDictionary *detailDict;
 @end
 
 NS_ASSUME_NONNULL_END

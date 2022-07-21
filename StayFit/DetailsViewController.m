@@ -15,17 +15,11 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
+    self.name.text = self.detailDict[@"name"];
+    self.muscle.text = self.detailDict[@"muscle"];
+    self.type.text = self.detailDict[@"type"];
+    self.level.text = self.detailDict[@"difficulty"];
+    self.instructions.text = self.detailDict[@"instructions"];
 }
-
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 @end
