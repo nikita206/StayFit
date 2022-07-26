@@ -9,6 +9,8 @@
 #import "Parse/Parse.h"
 #import "DetailsViewController.h"
 #import "WorkoutCell.h"
+#import "QuartzCore/CALayer.h"
+#import <UIKit/UIKit.h>
 
 @interface RecommendedWorkoutViewController () <UITableViewDelegate, UITableViewDataSource>
 @property (nonatomic, strong) NSMutableArray *workoutArray;
@@ -116,21 +118,18 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     WorkoutCell *cell = [tableView dequeueReusableCellWithIdentifier:@"workout"];
     NSDictionary *workout = self.workoutArray[indexPath.section];
-    cell.layer.cornerRadius = 7.0f;
+    cell.layer.cornerRadius = 5.0f;
     cell.layer.masksToBounds = YES;
     cell.workoutName.text = workout[@"name"];
     cell.muscle.text = [NSString stringWithFormat:@"%@%@", @"Muscle targeted: ", workout[@"muscle"]];
     cell.type.text = [NSString stringWithFormat:@"%@%@", @"Type of workout: ", workout[@"type"]];
     cell.instructions.text = workout[@"instructions"];
-    cell.layer.masksToBounds = false;
-    cell.layer.shadowOpacity = 0.23;
-    cell.layer.shadowRadius = 4;
     return cell;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-  return 120;
+  return 110;
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
@@ -145,7 +144,7 @@
 
 -(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {
-    return 20;
+    return 0.01;
 }
 
 -(UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section

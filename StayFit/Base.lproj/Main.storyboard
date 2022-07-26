@@ -552,16 +552,23 @@
                                 <rect key="frame" x="20" y="0.0" width="353" height="896"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <label key="tableHeaderView" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Workouts For You" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="k0H-Gj-zOL">
+                                    <rect key="frame" x="0.0" y="0.0" width="353" height="21"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <fontDescription key="fontDescription" type="system" weight="medium" pointSize="19"/>
+                                    <nil key="textColor"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" restorationIdentifier="details" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="workout" id="jkQ-Pb-JuT" customClass="WorkoutCell">
-                                        <rect key="frame" x="0.0" y="44.5" width="353" height="162"/>
+                                        <rect key="frame" x="0.0" y="65.5" width="353" height="162"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="jkQ-Pb-JuT" id="bvE-rQ-ZSS">
                                             <rect key="frame" x="0.0" y="0.0" width="353" height="162"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7uc-Hl-h4A">
-                                                    <rect key="frame" x="11" y="11" width="383" height="20"/>
+                                                    <rect key="frame" x="11" y="11" width="383" height="23"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" type="system" weight="medium" pointSize="20"/>
                                                     <color key="textColor" red="0.0010359504400000001" green="0.26026698129999998" blue="0.63348327019999995" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
@@ -583,7 +590,7 @@
                                                 </label>
                                             </subviews>
                                         </tableViewCellContentView>
-                                        <color key="backgroundColor" red="0.8573834087501141" green="0.93461566870050816" blue="1" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                        <color key="backgroundColor" red="0.67858138950000002" green="0.85844395929999995" blue="1" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                         <connections>
                                             <outlet property="muscle" destination="udO-6N-AIs" id="bQ0-Ms-SHu"/>
                                             <outlet property="type" destination="tDa-YG-gfC" id="1te-iE-dYa"/>
