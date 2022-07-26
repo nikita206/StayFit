@@ -246,9 +246,9 @@
         case 2:
             //since gym buddy segment is active, returns count of array of gym buddy Posts
             return self.arrayOfGymBuddies.count;
+        default:
+            return 0;
     }
-    //default return value
-    return 0;
 }
 
 @end

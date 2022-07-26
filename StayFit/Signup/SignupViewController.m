@@ -62,9 +62,10 @@
         case 1:
             //returns each row's contents for fitness level picker view
             return [levelArray objectAtIndex:row];
+        default:
+            //default value
+            return 0;
     }
-    //default return value
-    return 0;
 }
 
 -(void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component{
