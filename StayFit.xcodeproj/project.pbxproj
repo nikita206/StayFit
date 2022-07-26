@@ -153,6 +153,27 @@
 			path = Signup;
 			sourceTree = "<group>";
 		};
+		219DB16328909A2B00F1AC47 /* Tab Bar Controller */ = {
+			isa = PBXGroup;
+			children = (
+				219DB16428909A5B00F1AC47 /* Recommended Workout Tab */,
+			);
+			path = "Tab Bar Controller";
+			sourceTree = "<group>";
+		};
+		219DB16428909A5B00F1AC47 /* Recommended Workout Tab */ = {
+			isa = PBXGroup;
+			children = (
+				21A4D6BF288771DE001FC7E9 /* RecommendedWorkoutViewController.h */,
+				21A4D6C0288771DE001FC7E9 /* RecommendedWorkoutViewController.m */,
+				21A4D6C228887C64001FC7E9 /* WorkoutCell.h */,
+				21A4D6C328887C64001FC7E9 /* WorkoutCell.m */,
+				21A4D6C82889FE88001FC7E9 /* DetailsViewController.h */,
+				21A4D6C92889FE88001FC7E9 /* DetailsViewController.m */,
+			);
+			path = "Recommended Workout Tab";
+			sourceTree = "<group>";
+		};
 		21A530992878ABE300F2E9A7 = {
 			isa = PBXGroup;
 			children = (
@@ -187,12 +208,7 @@
 				21A530AE2878ABE300F2E9A7 /* Main.storyboard */,
 				219DB160289096C200F1AC47 /* Login */,
 				219DB162289099E500F1AC47 /* Signup */,
-				21A4D6BF288771DE001FC7E9 /* RecommendedWorkoutViewController.h */,
-				21A4D6C0288771DE001FC7E9 /* RecommendedWorkoutViewController.m */,
-				21A4D6C82889FE88001FC7E9 /* DetailsViewController.h */,
-				21A4D6C92889FE88001FC7E9 /* DetailsViewController.m */,
-				21A4D6C228887C64001FC7E9 /* WorkoutCell.h */,
-				21A4D6C328887C64001FC7E9 /* WorkoutCell.m */,
+				219DB16328909A2B00F1AC47 /* Tab Bar Controller */,
 				21A4D6A1287CBE97001FC7E9 /* CommunityViewController.h */,
 				21A4D6A2287CBE97001FC7E9 /* CommunityViewController.m */,
 				21A4D6B0287E16E9001FC7E9 /* FitnessFeedCell.h */,
