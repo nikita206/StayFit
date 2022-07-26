@@ -30,20 +30,24 @@
     [self.fitnessTableView insertSubview:self.refreshControl atIndex:0];
     self.fitnessTableView.dataSource = self;
     self.fitnessTableView.delegate = self;
+    //default view is fitness segment when user clicks on community tab
     [self fitnessCase];
     
 }
 
 - (IBAction)segact:(id)sender {
-    //checks which segment is active
+    //checks which segment (Fitness, Recipes, Gym Buddy) is active
     switch (self.segout.selectedSegmentIndex){
         case 0:
+            //if the current segment is fitness
             [self fitnessCase];
             break;
         case 1:
+            //if the current segment is recipes
             [self recipesCase];
             break;
         case 2:
+            //if the current segment is Gym Buddy
             [self gymBuddy];
             break;
     }
@@ -51,71 +55,88 @@
 
 -(void) fitnessCase{
     self.addButton.hidden = false;
+    //stores all the posts in an array
     self.arrayOfFitnessPosts = [[NSMutableArray alloc] init];
     [self fetchFitnessPosts];
 }
 
 -(void) recipesCase{
+    //stores all the posts in an array
     self.addButton.hidden = false;
+    //stores all the posts in an array
     self.arrayofRecipesPosts = [[NSMutableArray alloc] init];
     [self fetchRecipesPosts];
 }
 
 -(void) gymBuddy{
+    //hides the "New Post" button in Gym Buddy segment
     self.addButton.hidden = true;
+    //stores all the posts in an array
     self.arrayOfGymBuddies = [[NSMutableArray alloc] init];
     [self fetchGymBuddies];
 }
 
 -(void) fetchPosts {
-    if (self.segout.selectedSegmentIndex == 0) {
-        [self fetchFitnessPosts];
-    } else if (self.segout.selectedSegmentIndex == 1) {
-        [self fetchRecipesPosts];
-    } else {
-        [self fetchGymBuddies];
+    //checks which segment (Fitness, Recipes, Gym Buddy) is active go fetch posts of respective segments
+    switch (self.segout.selectedSegmentIndex){
+        case 0:
+            //if the current segment is fitness
+            [self fetchFitnessPosts];
+            break;
+        case 1:
+            //if the current segment is recipes
+            [self fetchRecipesPosts];
+            break;
+        case 2:
+            //if the current segment is Gym Buddy
+            [self fetchGymBuddies];
+            break;
     }
 }
 
 -(void) fetchFitnessPosts{
-    //creates a new query for fitness posts
-        PFQuery *postQuery = [PFQuery queryWithClassName:@"Post"];
-        [postQuery orderByDescending:@"createdAt"];
-        [postQuery includeKey:@"author"];
-        postQuery.limit = 20;
-    
-        [postQuery findObjectsInBackgroundWithBlock:^(NSArray *posts, NSError *error) {
-            if (posts) {
+    //creates a new query for fitness posts in the descending order of post created time
+    PFQuery *postQuery = [PFQuery queryWithClassName:@"Post"];
+    [postQuery orderByDescending:@"createdAt"];
+    [postQuery includeKey:@"author"];
+    postQuery.limit = 20;
+    [postQuery findObjectsInBackgroundWithBlock:^(NSArray *posts, NSError *error) {
+            if (posts.count) {
+                //loads the fitness posts onto the view if found
                 self.arrayOfFitnessPosts = posts;
                 [self.fitnessTableView reloadData];
             }
             else {
+                //throws an error with descriptions if no posts are found in the array
                 NSLog(@"%@", error);
             }
+            //ends the refresh control once posts are loaded
             [self.refreshControl endRefreshing];
         }];
 }
 -(void) fetchRecipesPosts{
-    //creates a new query for recipes posts
+    //creates a new query for recipes posts in the descending order of post created time
     PFQuery *postQuery = [PFQuery queryWithClassName:@"recipesPost"];
     [postQuery orderByDescending:@"createdAt"];
     [postQuery includeKey:@"author"];
     postQuery.limit = 20;
-
     [postQuery findObjectsInBackgroundWithBlock:^(NSArray *posts, NSError *error) {
         if (posts.count) {
+            //loads the recipes posts onto the view if found
             self.arrayofRecipesPosts = posts;
             [self.fitnessTableView reloadData];
         }
         else {
-            NSLog(@"%@", @"no posts");
+            //throws an error with descriptions if no posts are found in the array
+            NSLog(@"%@", error);
         }
+        //ends the refresh control once posts are loaded
         [self.refreshControl endRefreshing];
     }];
 }
 
 -(void) fetchGymBuddies{
-    //creates a new query for matching gym buddies
+    //creates a new query for matching gym buddies on the basis of location and fitness level
     PFQuery *postQuery = [PFQuery queryWithClassName:@"_User"];
     [postQuery orderByDescending:@"createdAt"];
     [postQuery includeKey:@"author"];
@@ -125,20 +146,25 @@
     postQuery.limit = 20;
     [postQuery findObjectsInBackgroundWithBlock:^(NSArray *posts, NSError *error) {
         if (posts.count) {
+            //loads the gym buddies posts onto the view if found
             self.arrayOfGymBuddies = posts;
             [self.fitnessTableView reloadData];
         }
         else {
+            //throws an error with descriptions if no posts are found in the array
             NSLog(@"%@", error);
         }
+        //ends the refresh control once posts are loaded
         [self.refreshControl endRefreshing];
     }];
 }
 
+//sets table view according to the active segment
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
-    //sets table view according to the active segment
+    //loads data when the fitness segment is active
     if(self.segout.selectedSegmentIndex == 0) {
         FitnessFeedCell *cell = [self.fitnessTableView dequeueReusableCellWithIdentifier:@"postCell" forIndexPath:indexPath];
+        //sets the contents for each cell
         Post *post = self.arrayOfFitnessPosts[indexPath.row];
         cell.post = post;
         cell.author.text = [NSString stringWithFormat:@"%@%@%@", post[@"author"][@"firstName"]  , @" ", post[@"author"][@"lastName"]];
@@ -149,13 +175,15 @@
         cell.level.text = post[@"author"][@"fitnessLevel"];
         cell.pfp.file = post[@"author"][@"profileImage"];
         [cell.pfp loadInBackground];
+        //sets the radius for porfile pic
         cell.pfp.layer.cornerRadius = cell.pfp.frame.size.width/2;
         cell.pfp.clipsToBounds = YES;
         return cell;
     }
-    
+    //loads data when the recipes segment is active
     else if (self.segout.selectedSegmentIndex == 1) {
         RecipesFeedCell *cell = [self.fitnessTableView dequeueReusableCellWithIdentifier:@"postCellTwo" forIndexPath:indexPath];
+        //sets the contents for each cell
         recipesPost *post = self.arrayofRecipesPosts[indexPath.row];
         cell.post = post;
         cell.author.text = [NSString stringWithFormat:@"%@%@%@", post[@"author"][@"firstName"]  , @" ", post[@"author"][@"lastName"]];
@@ -165,13 +193,15 @@
         [cell.photoImageView loadInBackground];
         cell.pfp.file = post[@"author"][@"profileImage"];
         [cell.pfp loadInBackground];
+        //sets radius for profile pic
         cell.pfp.layer.cornerRadius = cell.pfp.frame.size.width/2;
         cell.pfp.clipsToBounds = YES;
         return cell;
     }
-    
+    //loads data when Gym Buddy segment is active
     else if (self.segout.selectedSegmentIndex == 2) {
         GymBuddyCell *cell = [self.fitnessTableView dequeueReusableCellWithIdentifier:@"postCellThree" forIndexPath:indexPath];
+        //sets the contents for each cell
         PFObject *user = [self.arrayOfGymBuddies objectAtIndex:indexPath.row];
         cell.author.text = [NSString stringWithFormat:@"%@%@%@", [user objectForKey:@"firstName"]  , @" ", [user objectForKey:@"lastName"]];
         cell.username.text = [user objectForKey:@"username"];
@@ -181,6 +211,7 @@
         [cell.pfp loadInBackground];
         cell.pfp.layer.cornerRadius = 12;
         cell.pfp.clipsToBounds = YES;
+        //sets a gradient to the background image
         CALayer *imageViewLayer = cell.pfp.layer;
         CAGradientLayer *maskLayer = [CAGradientLayer layer];
         maskLayer.colors = @[ (id)([UIColor blackColor].CGColor), (id)([UIColor clearColor].CGColor) ];
@@ -203,18 +234,18 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     //returns number of rows on the basis of segment that is active
-    if(self.segout.selectedSegmentIndex == 0) {
-        return self.arrayOfFitnessPosts.count;
+    switch(self.segout.selectedSegmentIndex){
+        case 0:
+            //since fitness segment is active, returns count of array of fitness Posts
+            return self.arrayOfFitnessPosts.count;
+        case 1:
+            //since recipes segment is active, returns count of array of recipes Posts
+            return self.arrayofRecipesPosts.count;
+        case 2:
+            //since gym buddy segment is active, returns count of array of gym buddy Posts
+            return self.arrayOfGymBuddies.count;
     }
-    
-    else if (self.segout.selectedSegmentIndex == 1) {
-        return self.arrayofRecipesPosts.count;
-    }
-    
-    else if (self.segout.selectedSegmentIndex == 2) {
-        return self.arrayOfGymBuddies.count;
-    }
-    
+    //default return value
     return 0;
 }
 
