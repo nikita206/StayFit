@@ -141,6 +141,11 @@
     WorkoutCell *cell = [tableView dequeueReusableCellWithIdentifier:@"workout"];
     //identifies the information to be displayed in each cell
     NSDictionary *workout = self.workoutArray[indexPath.section];
+    [self recommendWorkouts:cell workout:workout];
+    return cell;
+}
+
+-(UITableViewCell *)recommendWorkouts:(WorkoutCell *)cell workout:(NSDictionary *)workout {
     //used to set corner radius of cells
     cell.layer.cornerRadius = 5.0f;
     cell.layer.masksToBounds = YES;
