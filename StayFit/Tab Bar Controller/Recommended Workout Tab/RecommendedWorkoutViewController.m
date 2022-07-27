@@ -12,8 +12,9 @@
 #import "QuartzCore/CALayer.h"
 #import <UIKit/UIKit.h>
 
-@interface RecommendedWorkoutViewController () <UITableViewDelegate, UITableViewDataSource>
+@interface RecommendedWorkoutViewController () <UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate>
 @property (nonatomic, strong) NSMutableArray *workoutArray;
+@property (nonatomic, strong) NSMutableArray *filteredWorkoutArray;
 @end
 
 @implementation RecommendedWorkoutViewController
@@ -22,6 +23,7 @@
     [super viewDidLoad];
     self.tableView.dataSource = self;
     self.tableView.delegate = self;
+    self.searchBar.delegate = self;
     //clears the background outside search bar
     [self.searchBar setBackgroundColor:[UIColor clearColor]];
     [self.searchBar setBackgroundImage:[UIImage new]];
@@ -71,6 +73,7 @@
            }
            else {
                self.workoutArray = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:nil];
+               self.filteredWorkoutArray = self.workoutArray;
                //prints out the contents of the API for verification
               NSLog(@"%@", self.workoutArray);
                //loads data into the table View
@@ -99,6 +102,7 @@
            }
            else {
                self.workoutArray = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:nil];
+               self.filteredWorkoutArray = self.workoutArray;
               //prints out the contents of the API for verification
               NSLog(@"%@", self.workoutArray);
                //loads contents into table view
@@ -127,6 +131,7 @@
            }
            else {
                self.workoutArray = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:nil];
+               self.filteredWorkoutArray = self.workoutArray;
                //prints out the contents of the API for verification
               NSLog(@"%@", self.workoutArray);
                //loads contents into table view
@@ -140,7 +145,7 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     WorkoutCell *cell = [tableView dequeueReusableCellWithIdentifier:@"workout"];
     //identifies the information to be displayed in each cell
-    NSDictionary *workout = self.workoutArray[indexPath.section];
+    NSDictionary *workout = self.filteredWorkoutArray[indexPath.section];
     [self recommendWorkouts:cell workout:workout];
     return cell;
 }
@@ -166,7 +171,7 @@
 //number of cells required in a table view
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return self.workoutArray.count;
+    return self.filteredWorkoutArray.count;
 }
 
 //used to identify number of rows in a table view
@@ -186,6 +191,22 @@
     UIView *v = [UIView new];
     [v setBackgroundColor:[UIColor clearColor]];
     return v;
+}
+
+- (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText {
+    //checks if anything is typed into the search bar
+    if (searchText.length != 0) {
+        NSPredicate *predicate = [NSPredicate predicateWithBlock:^BOOL(NSDictionary *evaluatedObject, NSDictionary *bindings) {
+            //checks the search bar content with the title of the exercise
+            return [evaluatedObject[@"name"] containsString:searchText];
+        }];
+        self.filteredWorkoutArray = [self.workoutArray filteredArrayUsingPredicate:predicate];
+    }
+    else {
+        //displays all workout cells if search bar is blank
+        self.filteredWorkoutArray = self.workoutArray;
+    }
+    [self.tableView reloadData];
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
