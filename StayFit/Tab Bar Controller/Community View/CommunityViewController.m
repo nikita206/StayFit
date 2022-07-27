@@ -167,18 +167,7 @@
             FitnessFeedCell *cell = [self.fitnessTableView dequeueReusableCellWithIdentifier:@"postCell" forIndexPath:indexPath];
             //sets the contents for each cell
             Post *post = self.arrayOfFitnessPosts[indexPath.row];
-            cell.post = post;
-            cell.author.text = [NSString stringWithFormat:@"%@%@%@", post[@"author"][@"firstName"]  , @" ", post[@"author"][@"lastName"]];
-            cell.username.text = [NSString stringWithFormat:@"%@%@", @"@"  , post[@"author"][@"username"]];
-            cell.caption.text = post[@"caption"];
-            cell.photoImageView.file = post[@"image"];
-            [cell.photoImageView loadInBackground];
-            cell.level.text = post[@"author"][@"fitnessLevel"];
-            cell.pfp.file = post[@"author"][@"profileImage"];
-            [cell.pfp loadInBackground];
-            //sets the radius for porfile pic
-            cell.pfp.layer.cornerRadius = cell.pfp.frame.size.width/2;
-            cell.pfp.clipsToBounds = YES;
+            [self caseFitness: cell post: post];
             return cell;
         }
         //loads data when the recipes segment is active
@@ -186,17 +175,7 @@
             RecipesFeedCell *cell = [self.fitnessTableView dequeueReusableCellWithIdentifier:@"postCellTwo" forIndexPath:indexPath];
             //sets the contents for each cell
             recipesPost *post = self.arrayofRecipesPosts[indexPath.row];
-            cell.post = post;
-            cell.author.text = [NSString stringWithFormat:@"%@%@%@", post[@"author"][@"firstName"]  , @" ", post[@"author"][@"lastName"]];
-            cell.username.text = [NSString stringWithFormat:@"%@%@", @"@"  , post[@"author"][@"username"]];
-            cell.caption.text = post[@"caption"];
-            cell.photoImageView.file = post[@"image"];
-            [cell.photoImageView loadInBackground];
-            cell.pfp.file = post[@"author"][@"profileImage"];
-            [cell.pfp loadInBackground];
-            //sets radius for profile pic
-            cell.pfp.layer.cornerRadius = cell.pfp.frame.size.width/2;
-            cell.pfp.clipsToBounds = YES;
+            [self caseRecipes: cell post: post];
             return cell;
         }
         //loads data when Gym Buddy segment is active
@@ -204,26 +183,62 @@
             GymBuddyCell *cell = [self.fitnessTableView dequeueReusableCellWithIdentifier:@"postCellThree" forIndexPath:indexPath];
             //sets the contents for each cell
             PFObject *user = [self.arrayOfGymBuddies objectAtIndex:indexPath.row];
-            cell.author.text = [NSString stringWithFormat:@"%@%@%@", [user objectForKey:@"firstName"]  , @" ", [user objectForKey:@"lastName"]];
-            cell.username.text = [user objectForKey:@"username"];
-            cell.levelOfFitness.text = [user objectForKey:@"fitnessLevel"];
-            cell.location.text = [user objectForKey:@"city"];
-            cell.pfp.file = [user objectForKey:@"profileImage"];
-            [cell.pfp loadInBackground];
-            cell.pfp.layer.cornerRadius = 12;
-            cell.pfp.clipsToBounds = YES;
-            //sets a gradient to the background image
-            CALayer *imageViewLayer = cell.pfp.layer;
-            CAGradientLayer *maskLayer = [CAGradientLayer layer];
-            maskLayer.colors = @[ (id)([UIColor blackColor].CGColor), (id)([UIColor clearColor].CGColor) ];
-            maskLayer.startPoint = CGPointMake(0, 0);
-            maskLayer.endPoint = CGPointMake(1, 1);
-            maskLayer.frame = imageViewLayer.bounds;
-            imageViewLayer.mask = maskLayer;
+            [self caseGymBuddy: cell user:user];
             return cell;
         }
     }
     return [UITableViewCell new];
+}
+
+-(UITableViewCell *)caseFitness:(FitnessFeedCell *)cell post:(Post *)post {
+    cell.post = post;
+    cell.author.text = [NSString stringWithFormat:@"%@%@%@", post[@"author"][@"firstName"]  , @" ", post[@"author"][@"lastName"]];
+    cell.username.text = [NSString stringWithFormat:@"%@%@", @"@"  , post[@"author"][@"username"]];
+    cell.caption.text = post[@"caption"];
+    cell.photoImageView.file = post[@"image"];
+    [cell.photoImageView loadInBackground];
+    cell.level.text = post[@"author"][@"fitnessLevel"];
+    cell.pfp.file = post[@"author"][@"profileImage"];
+    [cell.pfp loadInBackground];
+    //sets the radius for porfile pic
+    cell.pfp.layer.cornerRadius = cell.pfp.frame.size.width/2;
+    cell.pfp.clipsToBounds = YES;
+    return cell;
+}
+
+-(UITableViewCell *)caseRecipes:(RecipesFeedCell *)cell post:(Post *)post {
+    cell.post = post;
+    cell.author.text = [NSString stringWithFormat:@"%@%@%@", post[@"author"][@"firstName"]  , @" ", post[@"author"][@"lastName"]];
+    cell.username.text = [NSString stringWithFormat:@"%@%@", @"@"  , post[@"author"][@"username"]];
+    cell.caption.text = post[@"caption"];
+    cell.photoImageView.file = post[@"image"];
+    [cell.photoImageView loadInBackground];
+    cell.pfp.file = post[@"author"][@"profileImage"];
+    [cell.pfp loadInBackground];
+    //sets radius for profile pic
+    cell.pfp.layer.cornerRadius = cell.pfp.frame.size.width/2;
+    cell.pfp.clipsToBounds = YES;
+    return cell;
+}
+
+-(UITableViewCell *)caseGymBuddy:(GymBuddyCell *)cell user:(PFUser *)user {
+    cell.author.text = [NSString stringWithFormat:@"%@%@%@", [user objectForKey:@"firstName"]  , @" ", [user objectForKey:@"lastName"]];
+    cell.username.text = [user objectForKey:@"username"];
+    cell.levelOfFitness.text = [user objectForKey:@"fitnessLevel"];
+    cell.location.text = [user objectForKey:@"city"];
+    cell.pfp.file = [user objectForKey:@"profileImage"];
+    [cell.pfp loadInBackground];
+    cell.pfp.layer.cornerRadius = 12;
+    cell.pfp.clipsToBounds = YES;
+    //sets a gradient to the background image
+    CALayer *imageViewLayer = cell.pfp.layer;
+    CAGradientLayer *maskLayer = [CAGradientLayer layer];
+    maskLayer.colors = @[ (id)([UIColor blackColor].CGColor), (id)([UIColor clearColor].CGColor) ];
+    maskLayer.startPoint = CGPointMake(0, 0);
+    maskLayer.endPoint = CGPointMake(1, 1);
+    maskLayer.frame = imageViewLayer.bounds;
+    imageViewLayer.mask = maskLayer;
+    return cell;
 }
 
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
