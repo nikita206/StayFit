@@ -128,7 +128,7 @@
         }
         else {
             //throws an error with descriptions if no posts are found in the array
-            NSLog(@"%@", error);
+            NSLog(@"%@", @"this is an error");
         }
         //ends the refresh control once posts are loaded
         [self.refreshControl endRefreshing];
