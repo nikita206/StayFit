@@ -11,6 +11,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface RecommendedWorkoutViewController : ViewController
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
+@property (weak, nonatomic) IBOutlet UISearchBar *searchBar;
 
 @end
 

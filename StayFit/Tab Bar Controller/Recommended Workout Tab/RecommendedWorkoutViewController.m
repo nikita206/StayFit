@@ -22,6 +22,12 @@
     [super viewDidLoad];
     self.tableView.dataSource = self;
     self.tableView.delegate = self;
+    //clears the background outside search bar
+    [self.searchBar setBackgroundColor:[UIColor clearColor]];
+    [self.searchBar setBackgroundImage:[UIImage new]];
+    [self.searchBar setTranslucent:YES];
+    //sets white background inside search bar
+    self.searchBar.searchTextField.backgroundColor = [UIColor whiteColor];
     self.workoutArray = [[NSMutableArray alloc] init];
     [self fetchWorkouts];
 }
