@@ -46,10 +46,8 @@
 - (IBAction)didTapLogin:(id)sender {
     //checks that username and password fields are not blank when user tries to login
     if([self.username.text isEqual:@""] || [self.password.text isEqual:@""]){
-        
         //throws an alert if either of the fields are blank
         UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Error" message:@"Please check all that all the fields are filled" preferredStyle:(UIAlertControllerStyleAlert)];
-
         //creates an OK button to dismiss the aler
         UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {}];
         [alert addAction:okAction];

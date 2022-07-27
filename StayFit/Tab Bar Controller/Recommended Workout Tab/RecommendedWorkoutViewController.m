@@ -35,93 +35,105 @@
 -(void) fetchWorkouts {
     //sets the current user using parse
     PFUser *currentUser = [PFUser currentUser];
-    
+
     //API call if the logged in user's fitness level is beginner
     if([currentUser[@"fitnessLevel"]  isEqual: @"Beginner"]){
-        // creates NSURL object
-        NSURL *url = [NSURL URLWithString:@"https://api.api-ninjas.com/v1/exercises?difficulty=beginner"];
-        // creates NSURLMutableRequest with the NSURL
-        NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL: url];
-        // configures the NSURLMutable Request with method and headers
-        [request setHTTPMethod:@"GET"];
-        [request setValue:@"Aq8IKvomBOkXPQELcAKs7Q==kffUR94hO4SaCim1" forHTTPHeaderField:@"X-Api-Key "];
-        [request setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
-        // creates session
-        NSURLSession *session = [NSURLSession sessionWithConfiguration:[NSURLSessionConfiguration defaultSessionConfiguration] delegate:nil delegateQueue:[NSOperationQueue mainQueue]];
-        //creates  session task
-        NSURLSessionDataTask *task = [session dataTaskWithRequest:request completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
-               if (error != nil) {
-                   //throws an error with description if API call cannot be made
-                   NSLog(@"%@", [error localizedDescription]);
-               }
-               else {
-                   self.workoutArray = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:nil];
-                   //prints out the contents of the API for verification
-                  NSLog(@"%@", self.workoutArray);
-                   //loads data into the table View
-                    [self.tableView reloadData];
-                   }
-        }];
-        [task resume];
+        [self fitnessWorkouts];
     }
     
     //API call if the logged in user's fitness level is intermediate
     else if([currentUser[@"fitnessLevel"]  isEqual: @"Intermediate"]){
-        // creates NSURL object
-        NSURL *url = [NSURL URLWithString:@"https://api.api-ninjas.com/v1/exercises?difficulty=intermediate"];
-        // creates NSURLMutableRequest with the NSURL
-        NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL: url];
-        // configures the NSURLMutable Request with method and headers
-        [request setHTTPMethod:@"GET"];
-        [request setValue:@"Aq8IKvomBOkXPQELcAKs7Q==kffUR94hO4SaCim1" forHTTPHeaderField:@"X-Api-Key "];
-        [request setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
-        // creates session
-        NSURLSession *session = [NSURLSession sessionWithConfiguration:[NSURLSessionConfiguration defaultSessionConfiguration] delegate:nil delegateQueue:[NSOperationQueue mainQueue]];
-        //creates  session task
-        NSURLSessionDataTask *task = [session dataTaskWithRequest:request completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
-               if (error != nil) {
-                   //throws an error with description if API call cannot be made
-                   NSLog(@"%@", [error localizedDescription]);
-               }
-               else {
-                   self.workoutArray = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:nil];
-                  //prints out the contents of the API for verification
-                  NSLog(@"%@", self.workoutArray);
-                   //loads contents into table view
-                    [self.tableView reloadData];
-                   }
-        }];
-        [task resume];
+        [self recipesPosts];
     }
     
     //API call if the logged in user's fitness level is advanced
     else if([currentUser[@"fitnessLevel"]  isEqual: @"Advanced"]){
-        // creates NSURL object
-        NSURL *url = [NSURL URLWithString:@"https://api.api-ninjas.com/v1/exercises?difficulty=advanced"];
-        // creates NSURLMutableRequest with the NSURL
-        NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL: url];
-        // configures the NSURLMutable Request with method and headers
-        [request setHTTPMethod:@"GET"];
-        [request setValue:@"Aq8IKvomBOkXPQELcAKs7Q==kffUR94hO4SaCim1" forHTTPHeaderField:@"X-Api-Key "];
-        [request setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
-        // creates session
-        NSURLSession *session = [NSURLSession sessionWithConfiguration:[NSURLSessionConfiguration defaultSessionConfiguration] delegate:nil delegateQueue:[NSOperationQueue mainQueue]];
-        //creates  session task
-        NSURLSessionDataTask *task = [session dataTaskWithRequest:request completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
-               if (error != nil) {
-                   //throws an error with description if API call cannot be made
-                   NSLog(@"%@", [error localizedDescription]);
-               }
-               else {
-                   self.workoutArray = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:nil];
-                   //prints out the contents of the API for verification
-                  NSLog(@"%@", self.workoutArray);
-                   //loads contents into table view
-                    [self.tableView reloadData];
-                   }
-        }];
-        [task resume];
+        [self gymBuddy];
     }
+}
+
+-(void)fitnessWorkouts{
+    // creates NSURL object
+    NSURL *url = [NSURL URLWithString:@"https://api.api-ninjas.com/v1/exercises?difficulty=beginner"];
+    // creates NSURLMutableRequest with the NSURL
+    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL: url];
+    // configures the NSURLMutable Request with method and headers
+    [request setHTTPMethod:@"GET"];
+    [request setValue:@"Aq8IKvomBOkXPQELcAKs7Q==kffUR94hO4SaCim1" forHTTPHeaderField:@"X-Api-Key "];
+    [request setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
+    // creates session
+    NSURLSession *session = [NSURLSession sessionWithConfiguration:[NSURLSessionConfiguration defaultSessionConfiguration] delegate:nil delegateQueue:[NSOperationQueue mainQueue]];
+    //creates  session task
+    NSURLSessionDataTask *task = [session dataTaskWithRequest:request completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+           if (error != nil) {
+               //throws an error with description if API call cannot be made
+               NSLog(@"%@", [error localizedDescription]);
+           }
+           else {
+               self.workoutArray = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:nil];
+               //prints out the contents of the API for verification
+              NSLog(@"%@", self.workoutArray);
+               //loads data into the table View
+                [self.tableView reloadData];
+               }
+    }];
+    [task resume];
+}
+
+-(void) recipesPosts{
+    // creates NSURL object
+    NSURL *url = [NSURL URLWithString:@"https://api.api-ninjas.com/v1/exercises?difficulty=intermediate"];
+    // creates NSURLMutableRequest with the NSURL
+    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL: url];
+    // configures the NSURLMutable Request with method and headers
+    [request setHTTPMethod:@"GET"];
+    [request setValue:@"Aq8IKvomBOkXPQELcAKs7Q==kffUR94hO4SaCim1" forHTTPHeaderField:@"X-Api-Key "];
+    [request setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
+    // creates session
+    NSURLSession *session = [NSURLSession sessionWithConfiguration:[NSURLSessionConfiguration defaultSessionConfiguration] delegate:nil delegateQueue:[NSOperationQueue mainQueue]];
+    //creates  session task
+    NSURLSessionDataTask *task = [session dataTaskWithRequest:request completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+           if (error != nil) {
+               //throws an error with description if API call cannot be made
+               NSLog(@"%@", [error localizedDescription]);
+           }
+           else {
+               self.workoutArray = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:nil];
+              //prints out the contents of the API for verification
+              NSLog(@"%@", self.workoutArray);
+               //loads contents into table view
+                [self.tableView reloadData];
+               }
+    }];
+    [task resume];
+}
+
+-(void) gymBuddy{
+    // creates NSURL object
+    NSURL *url = [NSURL URLWithString:@"https://api.api-ninjas.com/v1/exercises?difficulty=advanced"];
+    // creates NSURLMutableRequest with the NSURL
+    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL: url];
+    // configures the NSURLMutable Request with method and headers
+    [request setHTTPMethod:@"GET"];
+    [request setValue:@"Aq8IKvomBOkXPQELcAKs7Q==kffUR94hO4SaCim1" forHTTPHeaderField:@"X-Api-Key "];
+    [request setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
+    // creates session
+    NSURLSession *session = [NSURLSession sessionWithConfiguration:[NSURLSessionConfiguration defaultSessionConfiguration] delegate:nil delegateQueue:[NSOperationQueue mainQueue]];
+    //creates  session task
+    NSURLSessionDataTask *task = [session dataTaskWithRequest:request completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+           if (error != nil) {
+               //throws an error with description if API call cannot be made
+               NSLog(@"%@", [error localizedDescription]);
+           }
+           else {
+               self.workoutArray = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:nil];
+               //prints out the contents of the API for verification
+              NSLog(@"%@", self.workoutArray);
+               //loads contents into table view
+                [self.tableView reloadData];
+               }
+    }];
+    [task resume];
 }
 
 //sets the contents of the cells that contain workout title
