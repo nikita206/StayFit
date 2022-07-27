@@ -4,6 +4,8 @@
 target 'StayFit' do
   # Comment the next line if you don't want to use dynamic frameworks
   #use_frameworks!
+ pod 'GoogleMaps'
+ pod 'GooglePlaces'
 
   # Pods for StayFit
 pod 'Parse'

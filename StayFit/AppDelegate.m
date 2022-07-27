@@ -7,6 +7,7 @@
 
 #import "AppDelegate.h"
 #import "Parse/Parse.h"
+@import GooglePlaces;
 @interface AppDelegate ()
 
 @end
@@ -15,7 +16,7 @@
 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(  NSDictionary *)launchOptions {
-
+    [GMSPlacesClient provideAPIKey:@"AIzaSyBCuLEQUkPbYZRMG6YZ43HEBBAFYEue8WI"];
     ParseClientConfiguration *config = [ParseClientConfiguration  configurationWithBlock:^(id<ParseMutableClientConfiguration> configuration) {
 
         configuration.applicationId = @"B41Ic6pERsBeCMkH4wSmLPJ6SLFaG8HIHR3xSuP5";
