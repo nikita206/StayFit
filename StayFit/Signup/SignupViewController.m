@@ -20,20 +20,12 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    //creates an array for the picker view of States
-    stateArray = @[@"Alabama", @"Alaska", @"American Samoa", @"Arizona", @"Arkansas", @"California", @"Colorado", @"Connecticut", @"Delaware", @"District of Columbia", @"Florida", @"Georgia", @"Guam", @"Hawaii", @"Idaho", @"Illinois", @"Indiana", @"Iowa", @"Kansas", @"Kentucky", @"Louisiana", @"Maine", @"Maryland", @"Massachusetts", @"Michigan", @"Minnesota", @"Minor Outlying Islands", @"Mississippi", @"Missouri", @"Montana", @"Nebraska", @"Nevada", @"New Hampshire", @"New Jersey", @"New Mexico", @"New York", @"North Carolina", @"North Dakota", @"Northern Mariana Islands", @"Ohio", @"Oklahoma", @"Oregon", @"Pennsylvania", @"Puerto Rico", @"Rhode Island", @"South Carolina", @"South Dakota", @"Tennessee", @"Texas", @"U.S. Virgin Islands", @"Utah", @"Vermont", @"Virginia", @"Washington", @"West Virginia", @"Wisconsin", @"Wyoming"];
-    statePicker = [[UIPickerView alloc] init];
-    [statePicker setDataSource:self];
-    [statePicker setDelegate:self];
-    self.statePicker.tag = 0;
-    [state setInputView:statePicker];
-    
     //creates an array for the picker view of fitness level
     levelArray = @[@"Beginner", @"Intermediate", @"Advanced"];
     levelPicker = [[UIPickerView alloc] init];
     [levelPicker setDataSource:self];
     [levelPicker setDelegate:self];
-    self.levelPicker.tag = 1;
+    self.levelPicker.tag = 0;
     [fitnessLevel setInputView:levelPicker];
 }
 
@@ -43,44 +35,18 @@
 }
 
 - (NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component {
-    //checks which picker view needs to be showed(states/fitness level) in order to identify number of rows to be displayed
-    switch (pickerView.tag){
-        case 0:
-            //returns number of rows for states picker view
-            return [stateArray count];
-        case 1:
-            //returns number of rows for fitness level picker view
-            return [levelArray count];
-    }
-    //default return value
-    return 0;
+        //returns number of rows for fitness level picker view
+        return [levelArray count];
 }
 
 -(NSString *)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component{
-    //displays each row's content in picker view
-    switch(pickerView.tag){
-        case 0:
-            //returns each row's contents for states picker view
-            return [stateArray objectAtIndex:row];
-        case 1:
-            //returns each row's contents for fitness level picker view
-            return [levelArray objectAtIndex:row];
-        default:
-            //default value
-            return 0;
-    }
+    //returns each row's contents for fitness level picker view
+    return [levelArray objectAtIndex:row];
 }
 
 -(void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component{
     //checks which row was selected by the user in picker view
-    switch(pickerView.tag){
-        case 0:
-            [state setText:[stateArray objectAtIndex:row]];
-            break;
-        case 1:
-            [fitnessLevel setText:[levelArray objectAtIndex:row]];
-            break;
-    }
+    [fitnessLevel setText:[levelArray objectAtIndex:row]];
 }
 
 -(void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
