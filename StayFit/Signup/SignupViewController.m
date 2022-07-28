@@ -151,7 +151,6 @@
 - (void)autocompleteClicked {
   GMSAutocompleteViewController *acController = [[GMSAutocompleteViewController alloc] init];
   acController.delegate = self;
-  // Specifies the place data types to return.
   GMSPlaceField fields = (GMSPlaceFieldName | GMSPlaceFieldPlaceID | GMSPlaceFieldAddressComponents);
   acController.placeFields = fields;
    
