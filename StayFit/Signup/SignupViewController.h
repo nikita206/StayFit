@@ -32,6 +32,8 @@ NS_ASSUME_NONNULL_BEGIN
 - (NSInteger)pickerView:(nonnull UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component;
 -(NSString *)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component;
 -(void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component;
+@property (nonatomic) float latitude;
+@property (nonatomic) float longitude;
 @end
 
 NS_ASSUME_NONNULL_END
