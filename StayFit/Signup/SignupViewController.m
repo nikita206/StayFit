@@ -25,7 +25,6 @@
     levelPicker = [[UIPickerView alloc] init];
     [levelPicker setDataSource:self];
     [levelPicker setDelegate:self];
-    self.levelPicker.tag = 0;
     [fitnessLevel setInputView:levelPicker];
 }
 
@@ -141,6 +140,11 @@ didAutocompleteWithPlace:(GMSPlace *)place {
         {
             //automatically sets the name of the city
             self.city.text = component.name;
+        }
+        if ( [component.type  isEqual: @"administrative_area_level_1"] )
+        {
+            //automatically sets the name of the state
+            self.state.text = component.name;
         }
     }
 }
