@@ -151,7 +151,7 @@
 - (void)autocompleteClicked {
   GMSAutocompleteViewController *acController = [[GMSAutocompleteViewController alloc] init];
   acController.delegate = self;
-  GMSPlaceField fields = (GMSPlaceFieldName | GMSPlaceFieldPlaceID | GMSPlaceFieldAddressComponents);
+  GMSPlaceField fields = (GMSPlaceFieldName | GMSPlaceFieldPlaceID | GMSPlaceFieldAddressComponents | GMSPlaceFieldFormattedAddress);
   acController.placeFields = fields;
    
 
@@ -169,6 +169,14 @@
 didAutocompleteWithPlace:(GMSPlace *)place {
   [self dismissViewControllerAnimated:YES completion:nil];
     self.addressField.text = place.name;
+    for ( GMSAddressComponent * component in place.addressComponents) {
+        //checking the array to see where locality is located
+        if ( [component.type  isEqual: @"locality"] )
+        {
+            //automatically sets the name of the city
+            self.city.text = component.name;
+        }
+    }
 }
 
 - (void)viewController:(GMSAutocompleteViewController *)viewController
