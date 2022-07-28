@@ -7,12 +7,15 @@
 
 #import "SignupViewController.h"
 #import "Parse/Parse.h"
+@import GooglePlaces;
 
 @interface SignupViewController ()
 
 @end
 
-@implementation SignupViewController
+@implementation SignupViewController {
+      GMSAutocompleteFilter *_filter;
+}
 @synthesize state,statePicker, stateArray, fitnessLevel, levelArray, levelPicker;
 
 - (void)viewDidLoad {
@@ -73,8 +76,10 @@
     switch(pickerView.tag){
         case 0:
             [state setText:[stateArray objectAtIndex:row]];
+            break;
         case 1:
             [fitnessLevel setText:[levelArray objectAtIndex:row]];
+            break;
     }
 }
 
@@ -97,6 +102,7 @@
     newUser[@"city"] = self.city.text;
     newUser[@"state"] = self.state.text;
     newUser[@"fitnessLevel"] = self.fitnessLevel.text;
+    newUser[@"address"] = self.addressField.text;
     
     //calls sign up function on the object
     [newUser signUpInBackgroundWithBlock:^(BOOL succeeded, NSError * error) {
@@ -135,5 +141,53 @@
     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
     UIViewController *login = [storyboard instantiateViewControllerWithIdentifier:@"login"];
     self.view.window.rootViewController = login;
+}
+
+//if the button to add address is clicked then a new view is opened
+- (IBAction)address:(id)sender {
+    [self autocompleteClicked];
+}
+
+- (void)autocompleteClicked {
+  GMSAutocompleteViewController *acController = [[GMSAutocompleteViewController alloc] init];
+  acController.delegate = self;
+  GMSPlaceField fields = (GMSPlaceFieldName | GMSPlaceFieldPlaceID | GMSPlaceFieldAddressComponents);
+  acController.placeFields = fields;
+   
+
+  // Specifies filter for address
+  _filter = [[GMSAutocompleteFilter alloc] init];
+  _filter.type = kGMSPlacesAutocompleteTypeFilterAddress;
+  acController.autocompleteFilter = _filter;
+
+  // Display the autocomplete view controller.
+  [self presentViewController:acController animated:YES completion:nil];
+}
+
+  // Handles the user's selection and dismisses the view
+- (void)viewController:(GMSAutocompleteViewController *)viewController
+didAutocompleteWithPlace:(GMSPlace *)place {
+  [self dismissViewControllerAnimated:YES completion:nil];
+    self.addressField.text = place.name;
+}
+
+- (void)viewController:(GMSAutocompleteViewController *)viewController
+didFailAutocompleteWithError:(NSError *)error {
+  [self dismissViewControllerAnimated:YES completion:nil];
+  NSLog(@"Error: %@", [error description]);
+}
+
+  //dismisses the view if user cancels
+- (void)wasCancelled:(GMSAutocompleteViewController *)viewController {
+  [self dismissViewControllerAnimated:YES completion:nil];
+}
+
+  // Turn the network activity indicator on and off again.
+- (void)didRequestAutocompletePredictions:(GMSAutocompleteViewController *)viewController {
+  [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
+}
+
+- (void)didUpdateAutocompletePredictions:(GMSAutocompleteViewController *)viewController {
+  [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
 }
 @end

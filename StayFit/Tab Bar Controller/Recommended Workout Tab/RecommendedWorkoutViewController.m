@@ -40,21 +40,21 @@
 
     //API call if the logged in user's fitness level is beginner
     if([currentUser[@"fitnessLevel"]  isEqual: @"Beginner"]){
-        [self fitnessWorkouts];
+        [self fitnessBeginner];
     }
     
     //API call if the logged in user's fitness level is intermediate
     else if([currentUser[@"fitnessLevel"]  isEqual: @"Intermediate"]){
-        [self recipesPosts];
+        [self fitnessIntermediate];
     }
     
     //API call if the logged in user's fitness level is advanced
     else if([currentUser[@"fitnessLevel"]  isEqual: @"Advanced"]){
-        [self gymBuddy];
+        [self fitnessAdvanced];
     }
 }
 
--(void)fitnessWorkouts{
+-(void)fitnessBeginner{
     // creates NSURL object
     NSURL *url = [NSURL URLWithString:@"https://api.api-ninjas.com/v1/exercises?difficulty=beginner"];
     // creates NSURLMutableRequest with the NSURL
@@ -83,7 +83,7 @@
     [task resume];
 }
 
--(void) recipesPosts{
+-(void) fitnessIntermediate{
     // creates NSURL object
     NSURL *url = [NSURL URLWithString:@"https://api.api-ninjas.com/v1/exercises?difficulty=intermediate"];
     // creates NSURLMutableRequest with the NSURL
@@ -112,9 +112,9 @@
     [task resume];
 }
 
--(void) gymBuddy{
+-(void)fitnessAdvanced{
     // creates NSURL object
-    NSURL *url = [NSURL URLWithString:@"https://api.api-ninjas.com/v1/exercises?difficulty=advanced"];
+    NSURL *url = [NSURL URLWithString:@"https://api.api-ninjas.com/v1/exercises?difficulty=expert"];
     // creates NSURLMutableRequest with the NSURL
     NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL: url];
     // configures the NSURLMutable Request with method and headers
@@ -132,7 +132,7 @@
            else {
                self.workoutArray = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:nil];
                self.filteredWorkoutArray = self.workoutArray;
-               //prints out the contents of the API for verification
+              //prints out the contents of the API for verification
               NSLog(@"%@", self.workoutArray);
                //loads contents into table view
                 [self.tableView reloadData];
