@@ -10,6 +10,7 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface SignupViewController : UIViewController<UIPickerViewDelegate,UIPickerViewDataSource>{}
+- (IBAction)address:(id)sender;
 @property (weak, nonatomic) IBOutlet UITextField *height;
 @property (weak, nonatomic) IBOutlet UITextField *weight;
 @property (weak, nonatomic) IBOutlet UITextField *password;
