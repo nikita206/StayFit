@@ -76,8 +76,10 @@
     switch(pickerView.tag){
         case 0:
             [state setText:[stateArray objectAtIndex:row]];
+            break;
         case 1:
             [fitnessLevel setText:[levelArray objectAtIndex:row]];
+            break;
     }
 }
 
@@ -100,6 +102,7 @@
     newUser[@"city"] = self.city.text;
     newUser[@"state"] = self.state.text;
     newUser[@"fitnessLevel"] = self.fitnessLevel.text;
+    newUser[@"address"] = self.addressField.text;
     
     //calls sign up function on the object
     [newUser signUpInBackgroundWithBlock:^(BOOL succeeded, NSError * error) {
@@ -140,6 +143,7 @@
     self.view.window.rootViewController = login;
 }
 
+//if the button to add address is clicked then a new view is opened
 - (IBAction)address:(id)sender {
     [self autocompleteClicked];
 }
@@ -147,12 +151,12 @@
 - (void)autocompleteClicked {
   GMSAutocompleteViewController *acController = [[GMSAutocompleteViewController alloc] init];
   acController.delegate = self;
-
-  // Specify the place data types to return.
-  GMSPlaceField fields = (GMSPlaceFieldName | GMSPlaceFieldPlaceID);
+  // Specifies the place data types to return.
+  GMSPlaceField fields = (GMSPlaceFieldName | GMSPlaceFieldPlaceID | GMSPlaceFieldAddressComponents);
   acController.placeFields = fields;
+   
 
-  // Specify a filter.
+  // Specifies filter for address
   _filter = [[GMSAutocompleteFilter alloc] init];
   _filter.type = kGMSPlacesAutocompleteTypeFilterAddress;
   acController.autocompleteFilter = _filter;
@@ -161,24 +165,20 @@
   [self presentViewController:acController animated:YES completion:nil];
 }
 
-  // Handle the user's selection.
+  // Handles the user's selection and dismisses the view
 - (void)viewController:(GMSAutocompleteViewController *)viewController
 didAutocompleteWithPlace:(GMSPlace *)place {
   [self dismissViewControllerAnimated:YES completion:nil];
-  // Do something with the selected place.
-  NSLog(@"Place name %@", place.name);
-  NSLog(@"Place ID %@", place.placeID);
-  NSLog(@"Place attributions %@", place.attributions.string);
+    self.addressField.text = place.name;
 }
 
 - (void)viewController:(GMSAutocompleteViewController *)viewController
 didFailAutocompleteWithError:(NSError *)error {
   [self dismissViewControllerAnimated:YES completion:nil];
-  // TODO: handle the error.
   NSLog(@"Error: %@", [error description]);
 }
 
-  // User canceled the operation.
+  //dismisses the view if user cancels
 - (void)wasCancelled:(GMSAutocompleteViewController *)viewController {
   [self dismissViewControllerAnimated:YES completion:nil];
 }
