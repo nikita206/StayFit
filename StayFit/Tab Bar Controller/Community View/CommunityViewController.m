@@ -57,6 +57,7 @@
     self.addButton.hidden = false;
     //hides the slider in fitness segment
     self.slider.hidden = true;
+    self.value.hidden = true;
     //stores all the posts in an array
     self.arrayOfFitnessPosts = [[NSMutableArray alloc] init];
     [self fetchFitnessPosts];
@@ -66,6 +67,7 @@
     self.addButton.hidden = false;
     //hides the slider in recipes segment
     self.slider.hidden = true;
+    self.value.hidden = true;
     //stores all the posts in an array
     self.arrayofRecipesPosts = [[NSMutableArray alloc] init];
     [self fetchRecipesPosts];
@@ -75,6 +77,7 @@
     //hides the "New Post" button in Gym Buddy segment
     self.addButton.hidden = true;
     self.slider.hidden = false;
+    self.value.hidden = false;
     //stores all the posts in an array
     self.arrayOfGymBuddies = [[NSMutableArray alloc] init];
     [self fetchGymBuddies];
@@ -132,6 +135,7 @@
         }
         else {
             //throws an error with descriptions if no posts are found in the array
+            
             NSLog(@"%@", error);
         }
         //ends the refresh control once posts are loaded
@@ -159,6 +163,7 @@
             [self.fitnessTableView reloadData];
         }
         else {
+            [self.fitnessTableView reloadData];
             //throws an error with descriptions if no posts are found in the array
             NSLog(@"%@", error);
         }
@@ -190,8 +195,11 @@
         case 2: {
             GymBuddyCell *cell = [self.fitnessTableView dequeueReusableCellWithIdentifier:@"postCellThree" forIndexPath:indexPath];
             //sets the contents for each cell
-            PFObject *user = [self.arrayOfGymBuddies objectAtIndex:indexPath.row];
-            [self caseGymBuddy: cell user:user];
+            if(self.arrayOfGymBuddies.count){
+                PFObject *user = [self.arrayOfGymBuddies objectAtIndex:indexPath.row];
+                [self caseGymBuddy: cell user:user];
+            }
+            
             return cell;
         }
     }

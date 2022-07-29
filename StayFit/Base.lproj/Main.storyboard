@@ -511,6 +511,22 @@
             </objects>
             <point key="canvasLocation" x="2771.0144927536235" y="1619.1964285714284"/>
         </scene>
+        <!--View Controller-->
+        <scene sceneID="fhr-eJ-7Sd">
+            <objects>
+                <viewController id="htA-EM-1lS" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="roj-OY-nPt">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <viewLayoutGuide key="safeArea" id="zql-3S-40e"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="Yyb-35-Bz1"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="J6f-BL-4ke" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="4395.652173913044" y="1619.8660714285713"/>
+        </scene>
         <!--New Post-->
         <scene sceneID="YxW-aE-DZ6">
             <objects>
@@ -840,7 +856,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="NR0-XM-V5m" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="5630.434782608696" y="1618.5267857142856"/>
+            <point key="canvasLocation" x="6540.579710144928" y="1618.5267857142856"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="TLS-Wm-HKX">
@@ -913,7 +929,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="B3v-wx-Och" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4720.289855072464" y="1618.5267857142856"/>
+            <point key="canvasLocation" x="5630.434782608696" y="1618.5267857142856"/>
         </scene>
         <!--Community-->
         <scene sceneID="ERd-ZF-g2w">
@@ -960,6 +976,24 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ZyA-I1-uCb" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1230" y="2338"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="QPa-GG-4sQ">
+            <objects>
+                <navigationController storyboardIdentifier="noPosts" automaticallyAdjustsScrollViewInsets="NO" id="eEe-QM-exM" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="9Zu-cl-bfP">
+                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="htA-EM-1lS" kind="relationship" relationship="rootViewController" id="Zat-H5-eQX"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="iU1-TV-P3s" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3485.507246376812" y="1619.8660714285713"/>
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
