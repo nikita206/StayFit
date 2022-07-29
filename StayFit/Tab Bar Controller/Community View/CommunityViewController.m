@@ -55,7 +55,6 @@
 
 -(void) fitnessCase{
     self.addButton.hidden = false;
-    //hides the slider in fitness segment
     self.slider.hidden = true;
     self.value.hidden = true;
     //stores all the posts in an array
@@ -65,7 +64,6 @@
 
 -(void) recipesCase{
     self.addButton.hidden = false;
-    //hides the slider in recipes segment
     self.slider.hidden = true;
     self.value.hidden = true;
     //stores all the posts in an array
@@ -135,7 +133,6 @@
         }
         else {
             //throws an error with descriptions if no posts are found in the array
-            
             NSLog(@"%@", error);
         }
         //ends the refresh control once posts are loaded
@@ -194,12 +191,11 @@
         //loads data when Gym Buddy segment is active
         case 2: {
             GymBuddyCell *cell = [self.fitnessTableView dequeueReusableCellWithIdentifier:@"postCellThree" forIndexPath:indexPath];
-            //sets the contents for each cell
+            //sets the contents for each cell if array is not null
             if(self.arrayOfGymBuddies.count){
                 PFObject *user = [self.arrayOfGymBuddies objectAtIndex:indexPath.row];
                 [self caseGymBuddy: cell user:user];
             }
-            
             return cell;
         }
     }
