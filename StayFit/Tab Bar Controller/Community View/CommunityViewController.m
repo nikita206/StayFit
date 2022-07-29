@@ -57,6 +57,7 @@
     self.addButton.hidden = false;
     self.slider.hidden = true;
     self.value.hidden = true;
+    self.blankText.hidden = true;
     //stores all the posts in an array
     self.arrayOfFitnessPosts = [[NSMutableArray alloc] init];
     [self fetchFitnessPosts];
@@ -65,6 +66,7 @@
 -(void) recipesCase{
     self.addButton.hidden = false;
     self.slider.hidden = true;
+    self.blankText.hidden = true;
     self.value.hidden = true;
     //stores all the posts in an array
     self.arrayofRecipesPosts = [[NSMutableArray alloc] init];
@@ -157,10 +159,12 @@
         if (posts.count) {
             //loads the gym buddies posts onto the view if found
             self.arrayOfGymBuddies = posts;
+            self.blankText.hidden = true;
             [self.fitnessTableView reloadData];
         }
         else {
             [self.fitnessTableView reloadData];
+            self.blankText.hidden = false;
             //throws an error with descriptions if no posts are found in the array
             NSLog(@"%@", error);
         }
@@ -237,7 +241,7 @@
     cell.author.text = [NSString stringWithFormat:@"%@%@%@", [user objectForKey:@"firstName"]  , @" ", [user objectForKey:@"lastName"]];
     cell.username.text = [user objectForKey:@"username"];
     cell.levelOfFitness.text = [user objectForKey:@"fitnessLevel"];
-    cell.location.text = [user objectForKey:@"city"];
+    cell.location.text = [NSString stringWithFormat:@"%@, %@", [user objectForKey:@"address"], [user objectForKey:@"city"]];
     cell.pfp.file = [user objectForKey:@"profileImage"];
     [cell.pfp loadInBackground];
     cell.pfp.layer.cornerRadius = 12;
@@ -280,8 +284,8 @@
 
 - (IBAction)sliderChange:(id)sender {
     UISlider *slider = (UISlider *) sender;
-    NSString *newValue = [NSString stringWithFormat:@"%f", slider.value];
-    self.value.text = newValue;
+    NSString *newValue = [NSString stringWithFormat:@"%0.2f", slider.value];
+    self.value.text = [NSString stringWithFormat:@"%@ %@", newValue, @"miles"];
     [self fetchGymBuddies];
 }
 @end
