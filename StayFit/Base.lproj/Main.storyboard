@@ -458,6 +458,23 @@
                                             <segue destination="oQV-na-e30" kind="show" identifier="makeNewPost" id="tWc-lZ-Q2n"/>
                                         </connections>
                                     </button>
+                                    <slider opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="1" minValue="1" maxValue="10" translatesAutoresizingMaskIntoConstraints="NO" id="DJc-ca-zxw">
+                                        <rect key="frame" x="47" y="96" width="331" height="30"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <color key="minimumTrackTintColor" red="0.30872855999999999" green="0.48264666719999999" blue="0.76256707700000004" alpha="0.83580815399999997" colorSpace="custom" customColorSpace="displayP3"/>
+                                        <color key="maximumTrackTintColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <color key="thumbTintColor" red="0.30872855999999999" green="0.48264666719999999" blue="0.76256707700000004" alpha="0.83580815399999997" colorSpace="custom" customColorSpace="displayP3"/>
+                                        <connections>
+                                            <action selector="sliderChange:" destination="KbG-20-cIs" eventType="valueChanged" id="tQf-nJ-RQ2"/>
+                                        </connections>
+                                    </slider>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XCa-H0-4dN">
+                                        <rect key="frame" x="140" y="133" width="144" height="38"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </view>
@@ -486,6 +503,8 @@
                         <outlet property="fitnessTableView" destination="25F-16-Wr1" id="TiW-dR-jYc"/>
                         <outlet property="fitnessView" destination="idj-Cd-1cm" id="MHT-3v-JOa"/>
                         <outlet property="segout" destination="lMR-oI-kOc" id="NoN-2t-eBf"/>
+                        <outlet property="slider" destination="DJc-ca-zxw" id="XUy-9a-rYT"/>
+                        <outlet property="value" destination="XCa-H0-4dN" id="abh-xa-zkA"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="H92-Sx-JRr" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
