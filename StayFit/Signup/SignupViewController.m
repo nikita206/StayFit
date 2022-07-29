@@ -21,6 +21,7 @@ bool isGrantedNotificationAccess;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    //setting up notification that pops when user signs up
     isGrantedNotificationAccess = false;
     UNUserNotificationCenter *center = [UNUserNotificationCenter currentNotificationCenter];
     UNAuthorizationOptions options = UNAuthorizationOptionAlert+UNAuthorizationOptionSound;
@@ -93,13 +94,16 @@ bool isGrantedNotificationAccess;
 }
 
 - (IBAction)didTapSignup:(id)sender {
+    //checks if notification access is allowed
     if(isGrantedNotificationAccess){
         UNUserNotificationCenter *center = [UNUserNotificationCenter currentNotificationCenter];
         UNMutableNotificationContent *content = [[UNMutableNotificationContent alloc] init];
+        //sets notification details
         content.title = @"StayFit";
         content.subtitle = @"Registration Successful";
         content.body = @"Thanks for registering with StayFit! Please login to continue.";
         content.sound = [UNNotificationSound defaultSound];
+        //notification is sent 2 seconds after the button is pressed
         UNTimeIntervalNotificationTrigger *trigger = [UNTimeIntervalNotificationTrigger triggerWithTimeInterval:2 repeats:NO];
         UNNotificationRequest *request =  [UNNotificationRequest requestWithIdentifier:@"UYLocalNotification" content:content trigger:trigger];
         [center addNotificationRequest:request withCompletionHandler:nil];
