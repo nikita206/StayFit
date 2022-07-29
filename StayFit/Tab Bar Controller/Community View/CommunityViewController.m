@@ -55,14 +55,17 @@
 
 -(void) fitnessCase{
     self.addButton.hidden = false;
+    self.slider.hidden = true;
+    self.value.hidden = true;
     //stores all the posts in an array
     self.arrayOfFitnessPosts = [[NSMutableArray alloc] init];
     [self fetchFitnessPosts];
 }
 
 -(void) recipesCase{
-    //stores all the posts in an array
     self.addButton.hidden = false;
+    self.slider.hidden = true;
+    self.value.hidden = true;
     //stores all the posts in an array
     self.arrayofRecipesPosts = [[NSMutableArray alloc] init];
     [self fetchRecipesPosts];
@@ -71,6 +74,8 @@
 -(void) gymBuddy{
     //hides the "New Post" button in Gym Buddy segment
     self.addButton.hidden = true;
+    self.slider.hidden = false;
+    self.value.hidden = false;
     //stores all the posts in an array
     self.arrayOfGymBuddies = [[NSMutableArray alloc] init];
     [self fetchGymBuddies];
@@ -137,20 +142,25 @@
 
 -(void) fetchGymBuddies{
     //creates a new query for matching gym buddies on the basis of location and fitness level
-    PFQuery *postQuery = [PFQuery queryWithClassName:@"_User"];
-    [postQuery orderByDescending:@"createdAt"];
-    [postQuery includeKey:@"author"];
-    [postQuery whereKey:@"fitnessLevel" equalTo:[PFUser currentUser][@"fitnessLevel"]];
-    [postQuery whereKey:@"city" equalTo:[PFUser currentUser][@"city"]];
-    [postQuery whereKey:@"username" notEqualTo:[PFUser currentUser].username];
-    postQuery.limit = 20;
-    [postQuery findObjectsInBackgroundWithBlock:^(NSArray *posts, NSError *error) {
+    // User's location
+    PFGeoPoint *userGeoPoint = [PFUser currentUser][@"location"];
+    //query for places
+    PFQuery *query = [PFQuery queryWithClassName:@"_User"];
+    // Interested in locations near user.
+    [query whereKey:@"location" nearGeoPoint:userGeoPoint withinMiles:[self.value.text doubleValue]];
+    [query whereKey:@"username" notEqualTo:[PFUser currentUser].username];
+    query.limit = 10;
+    //final list of objects
+    self.arrayOfGymBuddies = [query findObjects];
+    
+    [query findObjectsInBackgroundWithBlock:^(NSArray *posts, NSError *error) {
         if (posts.count) {
             //loads the gym buddies posts onto the view if found
             self.arrayOfGymBuddies = posts;
             [self.fitnessTableView reloadData];
         }
         else {
+            [self.fitnessTableView reloadData];
             //throws an error with descriptions if no posts are found in the array
             NSLog(@"%@", error);
         }
@@ -181,9 +191,11 @@
         //loads data when Gym Buddy segment is active
         case 2: {
             GymBuddyCell *cell = [self.fitnessTableView dequeueReusableCellWithIdentifier:@"postCellThree" forIndexPath:indexPath];
-            //sets the contents for each cell
-            PFObject *user = [self.arrayOfGymBuddies objectAtIndex:indexPath.row];
-            [self caseGymBuddy: cell user:user];
+            //sets the contents for each cell if array is not null
+            if(self.arrayOfGymBuddies.count){
+                PFObject *user = [self.arrayOfGymBuddies objectAtIndex:indexPath.row];
+                [self caseGymBuddy: cell user:user];
+            }
             return cell;
         }
     }
@@ -266,4 +278,10 @@
     }
 }
 
+- (IBAction)sliderChange:(id)sender {
+    UISlider *slider = (UISlider *) sender;
+    NSString *newValue = [NSString stringWithFormat:@"%f", slider.value];
+    self.value.text = newValue;
+    [self fetchGymBuddies];
+}
 @end

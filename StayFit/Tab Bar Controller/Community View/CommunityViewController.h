@@ -15,6 +15,9 @@ NS_ASSUME_NONNULL_BEGIN
 - (IBAction)segact:(id)sender;;
 @property (weak, nonatomic) IBOutlet UIView *fitnessView;
 @property (weak, nonatomic) IBOutlet UITableView *fitnessTableView;
+- (IBAction)sliderChange:(id)sender;
+@property (weak, nonatomic) IBOutlet UISlider *slider;
+@property (weak, nonatomic) IBOutlet UILabel *value;
 @property (assign, nonatomic) BOOL isMoreDataLoading;
 @end
 

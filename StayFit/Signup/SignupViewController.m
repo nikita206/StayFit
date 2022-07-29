@@ -68,7 +68,8 @@
     newUser[@"state"] = self.state.text;
     newUser[@"fitnessLevel"] = self.fitnessLevel.text;
     newUser[@"address"] = self.addressField.text;
-    
+    PFGeoPoint *point = [PFGeoPoint geoPointWithLatitude: self.latitude longitude:self.longitude];
+    newUser[@"location"] = point;
     //calls sign up function on the object
     [newUser signUpInBackgroundWithBlock:^(BOOL succeeded, NSError * error) {
         if (error != nil) {
@@ -116,7 +117,7 @@
 - (void)autocompleteClicked {
   GMSAutocompleteViewController *acController = [[GMSAutocompleteViewController alloc] init];
   acController.delegate = self;
-  GMSPlaceField fields = (GMSPlaceFieldName | GMSPlaceFieldPlaceID | GMSPlaceFieldAddressComponents | GMSPlaceFieldFormattedAddress);
+  GMSPlaceField fields = (GMSPlaceFieldName | GMSPlaceFieldPlaceID | GMSPlaceFieldAddressComponents | GMSPlaceFieldFormattedAddress | GMSPlaceFieldCoordinate);
   acController.placeFields = fields;
    
 
@@ -147,6 +148,8 @@ didAutocompleteWithPlace:(GMSPlace *)place {
             self.state.text = component.name;
         }
     }
+    self.latitude = (float)place.coordinate.latitude;
+    self.longitude = (float)place.coordinate.longitude;
 }
 
 - (void)viewController:(GMSAutocompleteViewController *)viewController
