@@ -31,6 +31,7 @@
 		21A530CC2878ABE400F2E9A7 /* StayFitUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 21A530CB2878ABE400F2E9A7 /* StayFitUITests.m */; };
 		21A530CE2878ABE400F2E9A7 /* StayFitUITestsLaunchTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 21A530CD2878ABE400F2E9A7 /* StayFitUITestsLaunchTests.m */; };
 		21A530DF2878B30400F2E9A7 /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 21A530DE2878B30400F2E9A7 /* LoginViewController.m */; };
+		21CC63BB28948C40008269E1 /* UserNotifications.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 21CC63BA28948C3F008269E1 /* UserNotifications.framework */; };
 		28E1BB506377E109260B6946 /* libPods-StayFit.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 37E9515A5A750C633A0284A1 /* libPods-StayFit.a */; };
 		54A037C5257BE3C4E038F2F7 /* libPods-StayFitTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6DDD6F3D79CC28D1090D1260 /* libPods-StayFitTests.a */; };
 /* End PBXBuildFile section */
@@ -96,6 +97,7 @@
 		21A530CD2878ABE400F2E9A7 /* StayFitUITestsLaunchTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = StayFitUITestsLaunchTests.m; sourceTree = "<group>"; };
 		21A530DD2878B30400F2E9A7 /* LoginViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LoginViewController.h; sourceTree = "<group>"; };
 		21A530DE2878B30400F2E9A7 /* LoginViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LoginViewController.m; sourceTree = "<group>"; };
+		21CC63BA28948C3F008269E1 /* UserNotifications.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UserNotifications.framework; path = System/Library/Frameworks/UserNotifications.framework; sourceTree = SDKROOT; };
 		37E9515A5A750C633A0284A1 /* libPods-StayFit.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-StayFit.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		51BDAE4BFEF1D2771CA01CC5 /* Pods-StayFitTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-StayFitTests.release.xcconfig"; path = "Target Support Files/Pods-StayFitTests/Pods-StayFitTests.release.xcconfig"; sourceTree = "<group>"; };
 		5DD465C256208D52E5EA85F9 /* Pods-StayFit-StayFitUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-StayFit-StayFitUITests.debug.xcconfig"; path = "Target Support Files/Pods-StayFit-StayFitUITests/Pods-StayFit-StayFitUITests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -112,6 +114,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				21CC63BB28948C40008269E1 /* UserNotifications.framework in Frameworks */,
 				28E1BB506377E109260B6946 /* libPods-StayFit.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -293,6 +296,7 @@
 		5BDDF623D6B91C9826F811B8 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				21CC63BA28948C3F008269E1 /* UserNotifications.framework */,
 				37E9515A5A750C633A0284A1 /* libPods-StayFit.a */,
 				C58CF4241D1D1703FB6BA444 /* libPods-StayFit-StayFitUITests.a */,
 				6DDD6F3D79CC28D1090D1260 /* libPods-StayFitTests.a */,

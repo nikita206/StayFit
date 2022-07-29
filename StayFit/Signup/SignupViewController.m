@@ -12,6 +12,7 @@
 @interface SignupViewController ()
 
 @end
+bool isGrantedNotificationAccess;
 
 @implementation SignupViewController {
       GMSAutocompleteFilter *_filter;
@@ -20,6 +21,13 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    //setting up notification that pops when user signs up
+    isGrantedNotificationAccess = false;
+    UNUserNotificationCenter *center = [UNUserNotificationCenter currentNotificationCenter];
+    UNAuthorizationOptions options = UNAuthorizationOptionAlert+UNAuthorizationOptionSound;
+    [center requestAuthorizationWithOptions:options completionHandler:^(BOOL granted, NSError * _Nullable error) {
+        isGrantedNotificationAccess = granted;
+    }];
     //creates an array for the picker view of fitness level
     levelArray = @[@"Beginner", @"Intermediate", @"Advanced"];
     levelPicker = [[UIPickerView alloc] init];
@@ -86,6 +94,20 @@
 }
 
 - (IBAction)didTapSignup:(id)sender {
+    //checks if notification access is allowed
+    if(isGrantedNotificationAccess){
+        UNUserNotificationCenter *center = [UNUserNotificationCenter currentNotificationCenter];
+        UNMutableNotificationContent *content = [[UNMutableNotificationContent alloc] init];
+        //sets notification details
+        content.title = @"StayFit";
+        content.subtitle = @"Registration Successful";
+        content.body = @"Thanks for registering with StayFit! Please login to continue.";
+        content.sound = [UNNotificationSound defaultSound];
+        //notification is sent 2 seconds after the button is pressed
+        UNTimeIntervalNotificationTrigger *trigger = [UNTimeIntervalNotificationTrigger triggerWithTimeInterval:2 repeats:NO];
+        UNNotificationRequest *request =  [UNNotificationRequest requestWithIdentifier:@"UYLocalNotification" content:content trigger:trigger];
+        [center addNotificationRequest:request withCompletionHandler:nil];
+    }
     //checks if any field in signup is empty
     if([self.firstName.text isEqual:@""] || [self.lastName.text isEqual:@""] || [self.email.text isEqual:@""] || [self.username.text isEqual:@""] || [self.password.text isEqual:@""] || [self.weight.text isEqual:@""] || [self.height.text isEqual:@""] || [self.city.text isEqual:@""] || [self.state.text isEqual:@""] || [self.fitnessLevel.text isEqual:@""]){
         UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Error" message:@"Please check all that all the fields are filled" preferredStyle:(UIAlertControllerStyleAlert)];
