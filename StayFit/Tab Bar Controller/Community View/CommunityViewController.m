@@ -241,7 +241,7 @@
     cell.author.text = [NSString stringWithFormat:@"%@%@%@", [user objectForKey:@"firstName"]  , @" ", [user objectForKey:@"lastName"]];
     cell.username.text = [user objectForKey:@"username"];
     cell.levelOfFitness.text = [user objectForKey:@"fitnessLevel"];
-    cell.location.text = [user objectForKey:@"city"];
+    cell.location.text = [NSString stringWithFormat:@"%@, %@", [user objectForKey:@"address"], [user objectForKey:@"city"]];
     cell.pfp.file = [user objectForKey:@"profileImage"];
     [cell.pfp loadInBackground];
     cell.pfp.layer.cornerRadius = 12;
