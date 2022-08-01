@@ -29,7 +29,7 @@ bool isGrantedNotificationAccess;
         isGrantedNotificationAccess = granted;
     }];
     //creates an array for the picker view of fitness level
-    levelArray = @[@"Beginner", @"Intermediate", @"Advanced"];
+    levelArray = @[@"Beginner", @"Intermediate", @"Expert"];
     levelPicker = [[UIPickerView alloc] init];
     [levelPicker setDataSource:self];
     [levelPicker setDelegate:self];
