@@ -152,24 +152,27 @@
     [query whereKey:@"location" nearGeoPoint:userGeoPoint withinMiles:[self.value.text doubleValue]];
     [query whereKey:@"username" notEqualTo:[PFUser currentUser].username];
     query.limit = 10;
-    //final list of objects
-    self.arrayOfGymBuddies = [query findObjects];
     
     [query findObjectsInBackgroundWithBlock:^(NSArray *posts, NSError *error) {
-        if (posts.count) {
-            //loads the gym buddies posts onto the view if found
-            self.arrayOfGymBuddies = posts;
-            self.blankText.hidden = true;
-            [self.fitnessTableView reloadData];
+        if(!error){
+            if (posts.count) {
+                //loads the gym buddies posts onto the view if found
+                self.arrayOfGymBuddies = posts;
+                self.blankText.hidden = true;
+                [self.fitnessTableView reloadData];
+            }
+            else {
+                self.arrayOfGymBuddies = posts;
+                [self.fitnessTableView reloadData];
+                self.blankText.hidden = false;
+            }
+            //ends the refresh control once posts are loaded
+            [self.refreshControl endRefreshing];
         }
-        else {
-            [self.fitnessTableView reloadData];
-            self.blankText.hidden = false;
-            //throws an error with descriptions if no posts are found in the array
+        else
+        {
             NSLog(@"%@", error);
         }
-        //ends the refresh control once posts are loaded
-        [self.refreshControl endRefreshing];
     }];
 }
 
@@ -197,13 +200,13 @@
             GymBuddyCell *cell = [self.fitnessTableView dequeueReusableCellWithIdentifier:@"postCellThree" forIndexPath:indexPath];
             //sets the contents for each cell if array is not null
             if(self.arrayOfGymBuddies.count){
-                PFObject *user = [self.arrayOfGymBuddies objectAtIndex:indexPath.row];
-                [self caseGymBuddy: cell user:user];
+                PFUser *user = [self.arrayOfGymBuddies objectAtIndex:indexPath.row];
+                [self caseGymBuddy: cell user: user];
             }
             return cell;
         }
     }
-    return [UITableViewCell new];
+    return nil;
 }
 
 -(UITableViewCell *)caseFitness:(FitnessFeedCell *)cell post:(Post *)post {
@@ -242,7 +245,7 @@
     cell.username.text = [user objectForKey:@"username"];
     cell.levelOfFitness.text = [user objectForKey:@"fitnessLevel"];
     cell.location.text = [NSString stringWithFormat:@"%@, %@", [user objectForKey:@"address"], [user objectForKey:@"city"]];
-    cell.pfp.file = [user objectForKey:@"profileImage"];
+    cell.pfp.file = user[@"profileImage"];
     [cell.pfp loadInBackground];
     cell.pfp.layer.cornerRadius = 12;
     cell.pfp.clipsToBounds = YES;
