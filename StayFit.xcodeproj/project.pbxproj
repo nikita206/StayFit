@@ -32,6 +32,8 @@
 		21A530CE2878ABE400F2E9A7 /* StayFitUITestsLaunchTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 21A530CD2878ABE400F2E9A7 /* StayFitUITestsLaunchTests.m */; };
 		21A530DF2878B30400F2E9A7 /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 21A530DE2878B30400F2E9A7 /* LoginViewController.m */; };
 		21CC63BB28948C40008269E1 /* UserNotifications.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 21CC63BA28948C3F008269E1 /* UserNotifications.framework */; };
+		21CC63CD28988D90008269E1 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 21CC63CC28988D8F008269E1 /* CoreData.framework */; };
+		21CC63D0289894FE008269E1 /* users.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 21CC63CE289894FE008269E1 /* users.xcdatamodeld */; };
 		28E1BB506377E109260B6946 /* libPods-StayFit.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 37E9515A5A750C633A0284A1 /* libPods-StayFit.a */; };
 		54A037C5257BE3C4E038F2F7 /* libPods-StayFitTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6DDD6F3D79CC28D1090D1260 /* libPods-StayFitTests.a */; };
 /* End PBXBuildFile section */
@@ -98,6 +100,8 @@
 		21A530DD2878B30400F2E9A7 /* LoginViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LoginViewController.h; sourceTree = "<group>"; };
 		21A530DE2878B30400F2E9A7 /* LoginViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LoginViewController.m; sourceTree = "<group>"; };
 		21CC63BA28948C3F008269E1 /* UserNotifications.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UserNotifications.framework; path = System/Library/Frameworks/UserNotifications.framework; sourceTree = SDKROOT; };
+		21CC63CC28988D8F008269E1 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
+		21CC63CF289894FE008269E1 /* users.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = users.xcdatamodel; sourceTree = "<group>"; };
 		37E9515A5A750C633A0284A1 /* libPods-StayFit.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-StayFit.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		51BDAE4BFEF1D2771CA01CC5 /* Pods-StayFitTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-StayFitTests.release.xcconfig"; path = "Target Support Files/Pods-StayFitTests/Pods-StayFitTests.release.xcconfig"; sourceTree = "<group>"; };
 		5DD465C256208D52E5EA85F9 /* Pods-StayFit-StayFitUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-StayFit-StayFitUITests.debug.xcconfig"; path = "Target Support Files/Pods-StayFit-StayFitUITests/Pods-StayFit-StayFitUITests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -114,6 +118,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				21CC63CD28988D90008269E1 /* CoreData.framework in Frameworks */,
 				21CC63BB28948C40008269E1 /* UserNotifications.framework in Frameworks */,
 				28E1BB506377E109260B6946 /* libPods-StayFit.a in Frameworks */,
 			);
@@ -156,17 +161,17 @@
 			path = Signup;
 			sourceTree = "<group>";
 		};
-		219DB16328909A2B00F1AC47 /* Tab Bar Controller */ = {
+		219DB16328909A2B00F1AC47 /* TabBarController */ = {
 			isa = PBXGroup;
 			children = (
-				219DB16428909A5B00F1AC47 /* Recommended Workout Tab */,
-				219DB16528909CD900F1AC47 /* Community View */,
-				219DB1692890A69A00F1AC47 /* Profile View */,
+				219DB16428909A5B00F1AC47 /* RecommendedWorkouts */,
+				219DB16528909CD900F1AC47 /* CommunityView */,
+				219DB1692890A69A00F1AC47 /* ProfileView */,
 			);
-			path = "Tab Bar Controller";
+			path = TabBarController;
 			sourceTree = "<group>";
 		};
-		219DB16428909A5B00F1AC47 /* Recommended Workout Tab */ = {
+		219DB16428909A5B00F1AC47 /* RecommendedWorkouts */ = {
 			isa = PBXGroup;
 			children = (
 				21A4D6BF288771DE001FC7E9 /* RecommendedWorkoutViewController.h */,
@@ -176,24 +181,24 @@
 				21A4D6C82889FE88001FC7E9 /* DetailsViewController.h */,
 				21A4D6C92889FE88001FC7E9 /* DetailsViewController.m */,
 			);
-			path = "Recommended Workout Tab";
+			path = RecommendedWorkouts;
 			sourceTree = "<group>";
 		};
-		219DB16528909CD900F1AC47 /* Community View */ = {
+		219DB16528909CD900F1AC47 /* CommunityView */ = {
 			isa = PBXGroup;
 			children = (
 				21A4D6A1287CBE97001FC7E9 /* CommunityViewController.h */,
 				21A4D6A2287CBE97001FC7E9 /* CommunityViewController.m */,
 				21A4D6A7287DE1AC001FC7E9 /* NewPostViewController.h */,
 				21A4D6A8287DE1AD001FC7E9 /* NewPostViewController.m */,
-				219DB1662890A46600F1AC47 /* Fitness Segment */,
-				219DB1672890A48200F1AC47 /* Recipes Segment */,
-				219DB1682890A4AE00F1AC47 /* Gym Segment */,
+				219DB1662890A46600F1AC47 /* FitnessSegment */,
+				219DB1672890A48200F1AC47 /* RecipesSegment */,
+				219DB1682890A4AE00F1AC47 /* GymBuddySegment */,
 			);
-			path = "Community View";
+			path = CommunityView;
 			sourceTree = "<group>";
 		};
-		219DB1662890A46600F1AC47 /* Fitness Segment */ = {
+		219DB1662890A46600F1AC47 /* FitnessSegment */ = {
 			isa = PBXGroup;
 			children = (
 				21A4D6B0287E16E9001FC7E9 /* FitnessFeedCell.h */,
@@ -201,10 +206,10 @@
 				21A4D6AD287DFA92001FC7E9 /* Post.h */,
 				21A4D6AE287DFA92001FC7E9 /* Post.m */,
 			);
-			path = "Fitness Segment";
+			path = FitnessSegment;
 			sourceTree = "<group>";
 		};
-		219DB1672890A48200F1AC47 /* Recipes Segment */ = {
+		219DB1672890A48200F1AC47 /* RecipesSegment */ = {
 			isa = PBXGroup;
 			children = (
 				21A4D6B6287F780B001FC7E9 /* RecipesFeedCell.h */,
@@ -212,25 +217,25 @@
 				21A4D6B3287F72BA001FC7E9 /* recipesPost.h */,
 				21A4D6B4287F72BA001FC7E9 /* recipesPost.m */,
 			);
-			path = "Recipes Segment";
+			path = RecipesSegment;
 			sourceTree = "<group>";
 		};
-		219DB1682890A4AE00F1AC47 /* Gym Segment */ = {
+		219DB1682890A4AE00F1AC47 /* GymBuddySegment */ = {
 			isa = PBXGroup;
 			children = (
 				21A4D6B92881EEDF001FC7E9 /* GymBuddyCell.h */,
 				21A4D6BA2881EEDF001FC7E9 /* GymBuddyCell.m */,
 			);
-			path = "Gym Segment";
+			path = GymBuddySegment;
 			sourceTree = "<group>";
 		};
-		219DB1692890A69A00F1AC47 /* Profile View */ = {
+		219DB1692890A69A00F1AC47 /* ProfileView */ = {
 			isa = PBXGroup;
 			children = (
 				21A4D69E287CB390001FC7E9 /* ProfileViewController.h */,
 				21A4D69F287CB390001FC7E9 /* ProfileViewController.m */,
 			);
-			path = "Profile View";
+			path = ProfileView;
 			sourceTree = "<group>";
 		};
 		21A530992878ABE300F2E9A7 = {
@@ -267,11 +272,12 @@
 				21A530AE2878ABE300F2E9A7 /* Main.storyboard */,
 				219DB160289096C200F1AC47 /* Login */,
 				219DB162289099E500F1AC47 /* Signup */,
-				219DB16328909A2B00F1AC47 /* Tab Bar Controller */,
+				219DB16328909A2B00F1AC47 /* TabBarController */,
 				21A530B12878ABE400F2E9A7 /* Assets.xcassets */,
 				21A530B32878ABE400F2E9A7 /* LaunchScreen.storyboard */,
 				21A530B62878ABE400F2E9A7 /* Info.plist */,
 				21A530B72878ABE400F2E9A7 /* main.m */,
+				21CC63CE289894FE008269E1 /* users.xcdatamodeld */,
 			);
 			path = StayFit;
 			sourceTree = "<group>";
@@ -296,6 +302,7 @@
 		5BDDF623D6B91C9826F811B8 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				21CC63CC28988D8F008269E1 /* CoreData.framework */,
 				21CC63BA28948C3F008269E1 /* UserNotifications.framework */,
 				37E9515A5A750C633A0284A1 /* libPods-StayFit.a */,
 				C58CF4241D1D1703FB6BA444 /* libPods-StayFit-StayFitUITests.a */,
@@ -565,6 +572,7 @@
 				21A4D6B5287F72BA001FC7E9 /* recipesPost.m in Sources */,
 				21A4D6AF287DFA92001FC7E9 /* Post.m in Sources */,
 				21A4D6BB2881EEDF001FC7E9 /* GymBuddyCell.m in Sources */,
+				21CC63D0289894FE008269E1 /* users.xcdatamodeld in Sources */,
 				21A4D6CA2889FE88001FC7E9 /* DetailsViewController.m in Sources */,
 				21A4D6C1288771DE001FC7E9 /* RecommendedWorkoutViewController.m in Sources */,
 				21A4D6B2287E16E9001FC7E9 /* FitnessFeedCell.m in Sources */,
@@ -901,6 +909,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		21CC63CE289894FE008269E1 /* users.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				21CC63CF289894FE008269E1 /* users.xcdatamodel */,
+			);
+			currentVersion = 21CC63CF289894FE008269E1 /* users.xcdatamodel */;
+			path = users.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 21A5309A2878ABE300F2E9A7 /* Project object */;
 }

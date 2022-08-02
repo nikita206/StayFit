@@ -8,8 +8,13 @@
 #import "SignupViewController.h"
 #import "Parse/Parse.h"
 @import GooglePlaces;
+#import "AppDelegate.h"
 
-@interface SignupViewController ()
+@interface SignupViewController (){
+    AppDelegate *appDelegate;
+      NSManagedObjectContext *context;
+      NSArray *dictionaries;
+}
 
 @end
 bool isGrantedNotificationAccess;
@@ -78,6 +83,14 @@ bool isGrantedNotificationAccess;
     newUser[@"address"] = self.addressField.text;
     PFGeoPoint *point = [PFGeoPoint geoPointWithLatitude: self.latitude longitude:self.longitude];
     newUser[@"location"] = point;
+    //Get Context
+    appDelegate = (AppDelegate *)[[UIApplication sharedApplication]delegate];
+    context = appDelegate.persistentContainer.viewContext;
+    //Save Data to core data
+    NSManagedObject *entityObj = [NSEntityDescription insertNewObjectForEntityForName:@"Users" inManagedObjectContext:context];
+    [entityObj setValue:[NSString stringWithFormat:@"%@%@%@", self.username.text, @"#", self.password.text] forKey:@"username_password"];
+    [appDelegate saveContext];
+    
     //calls sign up function on the object
     [newUser signUpInBackgroundWithBlock:^(BOOL succeeded, NSError * error) {
         if (error != nil) {

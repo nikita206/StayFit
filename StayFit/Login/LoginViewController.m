@@ -8,8 +8,11 @@
 #import "LoginViewController.h"
 #import "Parse/Parse.h"
 #import "SignupViewController.h"
-
-@interface LoginViewController ()
+#import "AppDelegate.h"
+@interface LoginViewController (){
+    AppDelegate *appDelegate;
+      NSManagedObjectContext *context;
+}
 
 @end
 
@@ -27,7 +30,21 @@
     //sets the username and password entered by the user to the text fields
     NSString *username = self.username.text;
     NSString *password = self.password.text;
-    
+    appDelegate = (AppDelegate *)[[UIApplication sharedApplication]delegate];
+    context = appDelegate.persistentContainer.viewContext;
+    //fetches data
+    NSFetchRequest *requestExamLocation = [NSFetchRequest fetchRequestWithEntityName:@"Users"];
+    NSArray *results = [context executeFetchRequest:requestExamLocation error:nil];
+    //checks if the username password combination is stored in core data
+    for(NSString *key in [results valueForKey:@"username_password"]){
+        if([key isEqual:[NSString stringWithFormat:@"%@%@%@", self.username.text, @"#", self.password.text]]){
+            NSLog(@"User logged in successfully");
+            //segue to the tab bar controller that opens when user logs in
+            UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+            UITabBarController *tabController = [storyboard instantiateViewControllerWithIdentifier:@"TabBarController"];
+            self.view.window.rootViewController = tabController;
+        }
+    }
     //initiates login user
     [PFUser logInWithUsernameInBackground:username password:password block:^(PFUser * user, NSError *  error) {
         if (error != nil) {
