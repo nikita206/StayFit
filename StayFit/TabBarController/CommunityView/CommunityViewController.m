@@ -285,6 +285,12 @@
     }
 }
 
+
+- (IBAction)sliderDidEndEditing:(id)sender {
+    NSLog(@"Did end editing");
+}
+
+
 - (IBAction)sliderChange:(id)sender {
     UISlider *slider = (UISlider *) sender;
     NSString *newValue = [NSString stringWithFormat:@"%0.2f", slider.value];

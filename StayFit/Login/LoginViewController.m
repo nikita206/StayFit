@@ -38,7 +38,7 @@
     //checks if the username password combination is stored in core data
     for(NSString *key in [results valueForKey:@"username_password"]){
         if([key isEqual:[NSString stringWithFormat:@"%@%@%@", self.username.text, @"#", self.password.text]]){
-            NSLog(@"User logged in successfully");
+            NSLog(@"Core data for login works");
             //segue to the tab bar controller that opens when user logs in
             UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
             UITabBarController *tabController = [storyboard instantiateViewControllerWithIdentifier:@"TabBarController"];
