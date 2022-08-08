@@ -20,7 +20,8 @@
 }
 @property (nonatomic, strong) NSMutableArray *workoutArray;
 @property (nonatomic, strong) NSMutableArray *filteredWorkoutArray;
-@property (nonatomic, strong) NSArray *resultsName;
+@property (nonatomic, strong) NSArray *result;
+@property (nonatomic, strong) NSMutableArray *resultCopy;
 @property (nonatomic, strong) NSString *level;
 @end
 
@@ -31,6 +32,7 @@
     self.tableView.dataSource = self;
     self.tableView.delegate = self;
     self.searchBar.delegate = self;
+    self.resultCopy = [[NSMutableArray alloc]init];
     //clears the background outside search bar
     [self.searchBar setBackgroundColor:[UIColor clearColor]];
     [self.searchBar setBackgroundImage:[UIImage new]];
@@ -47,8 +49,8 @@
     appDelegate = (AppDelegate *)[[UIApplication sharedApplication]delegate];
     context = appDelegate.persistentContainer.viewContext;
     NSFetchRequest *requestExamLocation = [NSFetchRequest fetchRequestWithEntityName:currentUser[@"fitnessLevel"]];
-    self.resultsName = [context executeFetchRequest:requestExamLocation error:nil];
-    if(![self.resultsName valueForKey:@"exerciseName"]){
+    self.result = [context executeFetchRequest:requestExamLocation error:nil];
+    if(true){
         self.level = [currentUser[@"fitnessLevel"] lowercaseString];
         // creates NSURL object
         NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@%@", @"https://api.api-ninjas.com/v1/exercises?difficulty=", self.level]];
@@ -77,7 +79,7 @@
                     context = appDelegate.persistentContainer.viewContext;
                     //fetches data
                     NSFetchRequest *requestExamLocation = [NSFetchRequest fetchRequestWithEntityName:currentUser[@"fitnessLevel"]];
-                    self.resultsName = [context executeFetchRequest:requestExamLocation error:nil];
+                    self.result = [context executeFetchRequest:requestExamLocation error:nil];
                         //save Data to core data
                        for(NSDictionary *key in self.filteredWorkoutArray){
                            NSManagedObject *entityObj = [NSEntityDescription insertNewObjectForEntityForName:currentUser[@"fitnessLevel"] inManagedObjectContext:context];
@@ -85,15 +87,23 @@
                            [entityObj setValue:key[@"name"] forKey:@"exerciseName"];
                        }
                         [appDelegate saveContext];
-                   NSLog(@"core data: %@", [self.resultsName valueForKey:@"exerciseName"]);
+                   NSLog(@"core data: %@", [self.result valueForKey:@"exerciseName"]);
                    //loads data into the table View
-                    [self.tableView reloadData];
+                   for(int i = 0; i < [self.result count]; i++){
+                       NSString *value = [self.result valueForKey:@"exerciseName"][i];
+                       NSLog(@"value is %@", value);
+                       if(value != [NSNull null]){
+                           [self.resultCopy addObject:value];
+                           NSLog(@"resultCopy is %@", self.resultCopy);
+                       }
+                   }
+                       [self.tableView reloadData];
                    }
         }];
         [task resume];
     }
     else{
-        NSLog(@"Data is already here %@", self.resultsName);
+        NSLog(@"Data is already here %@", self.result);
         [self.tableView reloadData];
     }
 }
@@ -103,8 +113,8 @@
     WorkoutCell *cell = [tableView dequeueReusableCellWithIdentifier:@"workout"];
     @try{
         //identifies the information to be displayed in each cell
-        NSString *workout = [self.resultsName valueForKey:@"exerciseName"][indexPath.section];
-        NSLog(@"workout is %@", workout);
+        NSString *workout = self.resultCopy[indexPath.section];
+   
         [self recommendWorkouts:cell workout:workout];
     }
     @catch(NSException *exception){
@@ -134,7 +144,7 @@
 //number of cells required in a table view
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return self.resultsName.count;
+    return 10;
 }
 
 //used to identify number of rows in a table view
