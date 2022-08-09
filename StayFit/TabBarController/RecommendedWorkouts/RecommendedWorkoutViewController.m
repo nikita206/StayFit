@@ -46,8 +46,10 @@
 -(void) fetchWorkouts {
     //sets the current user using parse
     PFUser *currentUser = [PFUser currentUser];
+    //gets Context
     appDelegate = (AppDelegate *)[[UIApplication sharedApplication]delegate];
     context = appDelegate.persistentContainer.viewContext;
+    //fetches data
     NSFetchRequest *requestExamLocation = [NSFetchRequest fetchRequestWithEntityName:currentUser[@"fitnessLevel"]];
     self.result = [context executeFetchRequest:requestExamLocation error:nil];
     if([self.result count] == 0){
@@ -69,27 +71,23 @@
                    NSLog(@"%@", [error localizedDescription]);
                }
                else {
+                   //adds API data to core data
                    self.workoutArray = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:nil];
                    self.filteredWorkoutArray = self.workoutArray;
-                   //prints out the contents of the API for verification
-                  NSLog(@"%@", self.workoutArray);
-                   
-                    //Get Context
-                    appDelegate = (AppDelegate *)[[UIApplication sharedApplication]delegate];
-                    context = appDelegate.persistentContainer.viewContext;
-                    //fetches data
-                    NSFetchRequest *requestExamLocation = [NSFetchRequest fetchRequestWithEntityName:currentUser[@"fitnessLevel"]];
-                    self.result = [context executeFetchRequest:requestExamLocation error:nil];
-                        //save Data to core data
-                       for(NSDictionary *key in self.filteredWorkoutArray){
-                           NSManagedObject *entityObj = [NSEntityDescription insertNewObjectForEntityForName:currentUser[@"fitnessLevel"] inManagedObjectContext:context];
-                           NSLog(@"names are %@", key[@"name"]);
-                           [entityObj setValue:key[@"name"] forKey:@"exerciseName"];
-                           [appDelegate saveContext];
-                       }
-                   NSLog(@"core data: %@", [self.result valueForKey:@"exerciseName"]);
-                       [self.tableView reloadData];
-                   }
+                   appDelegate = (AppDelegate *)[[UIApplication sharedApplication]delegate];
+                   context = appDelegate.persistentContainer.viewContext;
+                   NSFetchRequest *requestExamLocation = [NSFetchRequest fetchRequestWithEntityName:currentUser[@"fitnessLevel"]];
+                   self.result = [context executeFetchRequest:requestExamLocation error:nil];
+                    //save Data to core data
+                    for(NSDictionary *key in self.filteredWorkoutArray){
+                        NSManagedObject *entityObj = [NSEntityDescription insertNewObjectForEntityForName:currentUser[@"fitnessLevel"] inManagedObjectContext:context];
+                        NSLog(@"names are %@", key[@"name"]);
+                        [entityObj setValue:key[@"name"] forKey:@"exerciseName"];
+                        [appDelegate saveContext];
+                    }
+                NSLog(@"core data: %@", [self.result valueForKey:@"exerciseName"]);
+                [self.tableView reloadData];
+            }
         }];
         [task resume];
     }
@@ -105,7 +103,6 @@
     @try{
         //identifies the information to be displayed in each cell
         NSString *workout = [self.result valueForKey:@"exerciseName"][indexPath.section];
-   
         [self recommendWorkouts:cell workout:workout];
     }
     @catch(NSException *exception){
@@ -120,7 +117,7 @@
     cell.layer.masksToBounds = YES;
     //sets the contents of cells
     cell.workoutName.text = workout;
-//    cell.muscle.text = [NSString stringWithFormat:@"%@%@", @"Muscle targeted: ", workout[@"muscle"]];
+   // cell.muscle.text = [NSString stringWithFormat:@"%@%@", @"Muscle targeted: ", muscleName];
 //    cell.type.text = [NSString stringWithFormat:@"%@%@", @"Type of workout: ", workout[@"type"]];
 //    cell.instructions.text = workout[@"instructions"];
     return cell;
