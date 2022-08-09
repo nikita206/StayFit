@@ -11,10 +11,17 @@
 #import "WorkoutCell.h"
 #import "QuartzCore/CALayer.h"
 #import <UIKit/UIKit.h>
+#import "AppDelegate.h"
 
-@interface RecommendedWorkoutViewController () <UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate>
+@interface RecommendedWorkoutViewController () <UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate>{
+    AppDelegate *appDelegate;
+      NSManagedObjectContext *context;
+      NSArray *dictionaries;
+}
 @property (nonatomic, strong) NSMutableArray *workoutArray;
 @property (nonatomic, strong) NSMutableArray *filteredWorkoutArray;
+@property (nonatomic, strong) NSArray *result;
+@property (nonatomic, strong) NSMutableArray *resultCopy;
 @property (nonatomic, strong) NSString *level;
 @end
 
@@ -25,6 +32,7 @@
     self.tableView.dataSource = self;
     self.tableView.delegate = self;
     self.searchBar.delegate = self;
+    self.resultCopy = [[NSMutableArray alloc]init];
     //clears the background outside search bar
     [self.searchBar setBackgroundColor:[UIColor clearColor]];
     [self.searchBar setBackgroundImage:[UIImage new]];
@@ -38,53 +46,92 @@
 -(void) fetchWorkouts {
     //sets the current user using parse
     PFUser *currentUser = [PFUser currentUser];
-    self.level = [currentUser[@"fitnessLevel"] lowercaseString];
-    // creates NSURL object
-    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@%@", @"https://api.api-ninjas.com/v1/exercises?difficulty=", self.level]];
-    // creates NSURLMutableRequest with the NSURL
-    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL: url];
-    // configures the NSURLMutable Request with method and headers
-    [request setHTTPMethod:@"GET"];
-    [request setValue:@"Aq8IKvomBOkXPQELcAKs7Q==kffUR94hO4SaCim1" forHTTPHeaderField:@"X-Api-Key "];
-    [request setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
-    // creates session
-    NSURLSession *session = [NSURLSession sessionWithConfiguration:[NSURLSessionConfiguration defaultSessionConfiguration] delegate:nil delegateQueue:[NSOperationQueue mainQueue]];
-    //creates  session task
-    NSURLSessionDataTask *task = [session dataTaskWithRequest:request completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
-           if (error != nil) {
-               //throws an error with description if API call cannot be made
-               NSLog(@"%@", [error localizedDescription]);
-           }
-           else {
-               self.workoutArray = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:nil];
-               self.filteredWorkoutArray = self.workoutArray;
-               //prints out the contents of the API for verification
-              NSLog(@"%@", self.workoutArray);
-               //loads data into the table View
-                [self.tableView reloadData];
+    appDelegate = (AppDelegate *)[[UIApplication sharedApplication]delegate];
+    context = appDelegate.persistentContainer.viewContext;
+    NSFetchRequest *requestExamLocation = [NSFetchRequest fetchRequestWithEntityName:currentUser[@"fitnessLevel"]];
+    self.result = [context executeFetchRequest:requestExamLocation error:nil];
+    if(true){
+        self.level = [currentUser[@"fitnessLevel"] lowercaseString];
+        // creates NSURL object
+        NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@%@", @"https://api.api-ninjas.com/v1/exercises?difficulty=", self.level]];
+        // creates NSURLMutableRequest with the NSURL
+        NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL: url];
+        // configures the NSURLMutable Request with method and headers
+        [request setHTTPMethod:@"GET"];
+        [request setValue:@"Aq8IKvomBOkXPQELcAKs7Q==kffUR94hO4SaCim1" forHTTPHeaderField:@"X-Api-Key "];
+        [request setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
+        // creates session
+        NSURLSession *session = [NSURLSession sessionWithConfiguration:[NSURLSessionConfiguration defaultSessionConfiguration] delegate:nil delegateQueue:[NSOperationQueue mainQueue]];
+        //creates  session task
+        NSURLSessionDataTask *task = [session dataTaskWithRequest:request completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+               if (error != nil) {
+                   //throws an error with description if API call cannot be made
+                   NSLog(@"%@", [error localizedDescription]);
                }
-    }];
-    [task resume];
+               else {
+                   self.workoutArray = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:nil];
+                   self.filteredWorkoutArray = self.workoutArray;
+                   //prints out the contents of the API for verification
+                  NSLog(@"%@", self.workoutArray);
+                   
+                    //Get Context
+                    appDelegate = (AppDelegate *)[[UIApplication sharedApplication]delegate];
+                    context = appDelegate.persistentContainer.viewContext;
+                    //fetches data
+                    NSFetchRequest *requestExamLocation = [NSFetchRequest fetchRequestWithEntityName:currentUser[@"fitnessLevel"]];
+                    self.result = [context executeFetchRequest:requestExamLocation error:nil];
+                        //save Data to core data
+                       for(NSDictionary *key in self.filteredWorkoutArray){
+                           NSManagedObject *entityObj = [NSEntityDescription insertNewObjectForEntityForName:currentUser[@"fitnessLevel"] inManagedObjectContext:context];
+                           NSLog(@"names are %@", key[@"name"]);
+                           [entityObj setValue:key[@"name"] forKey:@"exerciseName"];
+                       }
+                        [appDelegate saveContext];
+                   NSLog(@"core data: %@", [self.result valueForKey:@"exerciseName"]);
+                   //loads data into the table View
+                   for(int i = 0; i < [self.result count]; i++){
+                       NSString *value = [self.result valueForKey:@"exerciseName"][i];
+                       NSLog(@"value is %@", value);
+                       if(value != [NSNull null]){
+                           [self.resultCopy addObject:value];
+                           NSLog(@"resultCopy is %@", self.resultCopy);
+                       }
+                   }
+                       [self.tableView reloadData];
+                   }
+        }];
+        [task resume];
+    }
+    else{
+        NSLog(@"Data is already here %@", self.result);
+        [self.tableView reloadData];
+    }
 }
 
 //sets the contents of the cells that contain workout title
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     WorkoutCell *cell = [tableView dequeueReusableCellWithIdentifier:@"workout"];
-    //identifies the information to be displayed in each cell
-    NSDictionary *workout = self.filteredWorkoutArray[indexPath.section];
-    [self recommendWorkouts:cell workout:workout];
+    @try{
+        //identifies the information to be displayed in each cell
+        NSString *workout = self.resultCopy[indexPath.section];
+   
+        [self recommendWorkouts:cell workout:workout];
+    }
+    @catch(NSException *exception){
+        NSLog(@"%@", exception);
+    }
     return cell;
 }
 
--(UITableViewCell *)recommendWorkouts:(WorkoutCell *)cell workout:(NSDictionary *)workout {
+-(UITableViewCell *)recommendWorkouts:(WorkoutCell *)cell workout:(NSString *)workout {
     //used to set corner radius of cells
     cell.layer.cornerRadius = 5.0f;
     cell.layer.masksToBounds = YES;
     //sets the contents of cells
-    cell.workoutName.text = workout[@"name"];
-    cell.muscle.text = [NSString stringWithFormat:@"%@%@", @"Muscle targeted: ", workout[@"muscle"]];
-    cell.type.text = [NSString stringWithFormat:@"%@%@", @"Type of workout: ", workout[@"type"]];
-    cell.instructions.text = workout[@"instructions"];
+    cell.workoutName.text = workout;
+//    cell.muscle.text = [NSString stringWithFormat:@"%@%@", @"Muscle targeted: ", workout[@"muscle"]];
+//    cell.type.text = [NSString stringWithFormat:@"%@%@", @"Type of workout: ", workout[@"type"]];
+//    cell.instructions.text = workout[@"instructions"];
     return cell;
 }
 
@@ -97,7 +144,7 @@
 //number of cells required in a table view
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return self.filteredWorkoutArray.count;
+    return 10;
 }
 
 //used to identify number of rows in a table view
@@ -126,11 +173,11 @@
             //checks the search bar content with the title of the exercise
             return [evaluatedObject[@"name"] containsString:searchText];
         }];
-        self.filteredWorkoutArray = [self.workoutArray filteredArrayUsingPredicate:predicate];
+        //self.filteredWorkoutArray = [self.workoutArray filteredArrayUsingPredicate:predicate];
     }
     else {
         //displays all workout cells if search bar is blank
-        self.filteredWorkoutArray = self.workoutArray;
+       self.filteredWorkoutArray = self.workoutArray;
     }
     [self.tableView reloadData];
 }

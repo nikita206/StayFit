@@ -466,6 +466,7 @@
                                         <color key="thumbTintColor" red="0.30872855999999999" green="0.48264666719999999" blue="0.76256707700000004" alpha="0.83580815399999997" colorSpace="custom" customColorSpace="displayP3"/>
                                         <connections>
                                             <action selector="sliderChange:" destination="KbG-20-cIs" eventType="valueChanged" id="tQf-nJ-RQ2"/>
+                                            <action selector="sliderDidEndEditing:" destination="KbG-20-cIs" eventType="editingDidEnd" id="X50-uz-qPQ"/>
                                         </connections>
                                     </slider>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XCa-H0-4dN">

@@ -38,26 +38,21 @@
     //checks if the username password combination is stored in core data
     for(NSString *key in [results valueForKey:@"username_password"]){
         if([key isEqual:[NSString stringWithFormat:@"%@%@%@", self.username.text, @"#", self.password.text]]){
-            NSLog(@"User logged in successfully");
-            //segue to the tab bar controller that opens when user logs in
-            UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-            UITabBarController *tabController = [storyboard instantiateViewControllerWithIdentifier:@"TabBarController"];
-            self.view.window.rootViewController = tabController;
+            NSLog(@"Core data for login works");
+            [PFUser logInWithUsernameInBackground:username password:password block:^(PFUser * user, NSError *  error) {
+                if (error != nil) {
+                    //throws an error along with its description if user cannot be logged in
+                    NSLog(@"User log in failed: %@", error.localizedDescription);
+                } else {
+                    NSLog(@"User logged in successfully");
+                    //segue to the tab bar controller that opens when user logs in
+                    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+                    UITabBarController *tabController = [storyboard instantiateViewControllerWithIdentifier:@"TabBarController"];
+                    self.view.window.rootViewController = tabController;
+                }
+            }];
         }
     }
-    //initiates login user
-    [PFUser logInWithUsernameInBackground:username password:password block:^(PFUser * user, NSError *  error) {
-        if (error != nil) {
-            //throws an error along with its description if user cannot be logged in
-            NSLog(@"User log in failed: %@", error.localizedDescription);
-        } else {
-            NSLog(@"User logged in successfully");
-            //segue to the tab bar controller that opens when user logs in
-            UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-            UITabBarController *tabController = [storyboard instantiateViewControllerWithIdentifier:@"TabBarController"];
-            self.view.window.rootViewController = tabController;
-        }
-    }];
 }
 
 - (IBAction)didTapLogin:(id)sender {
