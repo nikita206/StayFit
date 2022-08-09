@@ -46,11 +46,13 @@
 -(void) fetchWorkouts {
     //sets the current user using parse
     PFUser *currentUser = [PFUser currentUser];
+    //gets Context
     appDelegate = (AppDelegate *)[[UIApplication sharedApplication]delegate];
     context = appDelegate.persistentContainer.viewContext;
+    //fetches data
     NSFetchRequest *requestExamLocation = [NSFetchRequest fetchRequestWithEntityName:currentUser[@"fitnessLevel"]];
     self.result = [context executeFetchRequest:requestExamLocation error:nil];
-    if(true){
+    if([self.result count] == 0){
         self.level = [currentUser[@"fitnessLevel"] lowercaseString];
         // creates NSURL object
         NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@%@", @"https://api.api-ninjas.com/v1/exercises?difficulty=", self.level]];
@@ -69,41 +71,28 @@
                    NSLog(@"%@", [error localizedDescription]);
                }
                else {
+                   //adds API data to core data
                    self.workoutArray = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:nil];
                    self.filteredWorkoutArray = self.workoutArray;
-                   //prints out the contents of the API for verification
-                  NSLog(@"%@", self.workoutArray);
-                   
-                    //Get Context
-                    appDelegate = (AppDelegate *)[[UIApplication sharedApplication]delegate];
-                    context = appDelegate.persistentContainer.viewContext;
-                    //fetches data
-                    NSFetchRequest *requestExamLocation = [NSFetchRequest fetchRequestWithEntityName:currentUser[@"fitnessLevel"]];
-                    self.result = [context executeFetchRequest:requestExamLocation error:nil];
-                        //save Data to core data
-                       for(NSDictionary *key in self.filteredWorkoutArray){
-                           NSManagedObject *entityObj = [NSEntityDescription insertNewObjectForEntityForName:currentUser[@"fitnessLevel"] inManagedObjectContext:context];
-                           NSLog(@"names are %@", key[@"name"]);
-                           [entityObj setValue:key[@"name"] forKey:@"exerciseName"];
-                       }
+                   appDelegate = (AppDelegate *)[[UIApplication sharedApplication]delegate];
+                   context = appDelegate.persistentContainer.viewContext;
+                   NSFetchRequest *requestExamLocation = [NSFetchRequest fetchRequestWithEntityName:currentUser[@"fitnessLevel"]];
+                   self.result = [context executeFetchRequest:requestExamLocation error:nil];
+                    //save Data to core data
+                    for(NSDictionary *key in self.filteredWorkoutArray){
+                        NSManagedObject *entityObj = [NSEntityDescription insertNewObjectForEntityForName:currentUser[@"fitnessLevel"] inManagedObjectContext:context];
+                        NSLog(@"names are %@", key[@"name"]);
+                        [entityObj setValue:key[@"name"] forKey:@"exerciseName"];
                         [appDelegate saveContext];
-                   NSLog(@"core data: %@", [self.result valueForKey:@"exerciseName"]);
-                   //loads data into the table View
-                   for(int i = 0; i < [self.result count]; i++){
-                       NSString *value = [self.result valueForKey:@"exerciseName"][i];
-                       NSLog(@"value is %@", value);
-                       if(value != [NSNull null]){
-                           [self.resultCopy addObject:value];
-                           NSLog(@"resultCopy is %@", self.resultCopy);
-                       }
-                   }
-                       [self.tableView reloadData];
-                   }
+                    }
+                NSLog(@"core data: %@", [self.result valueForKey:@"exerciseName"]);
+                [self.tableView reloadData];
+            }
         }];
         [task resume];
     }
     else{
-        NSLog(@"Data is already here %@", self.result);
+        NSLog(@"Data is already here %@", [self.result valueForKey:@"exerciseName"]);
         [self.tableView reloadData];
     }
 }
@@ -113,8 +102,7 @@
     WorkoutCell *cell = [tableView dequeueReusableCellWithIdentifier:@"workout"];
     @try{
         //identifies the information to be displayed in each cell
-        NSString *workout = self.resultCopy[indexPath.section];
-   
+        NSString *workout = [self.result valueForKey:@"exerciseName"][indexPath.section];
         [self recommendWorkouts:cell workout:workout];
     }
     @catch(NSException *exception){
@@ -129,7 +117,7 @@
     cell.layer.masksToBounds = YES;
     //sets the contents of cells
     cell.workoutName.text = workout;
-//    cell.muscle.text = [NSString stringWithFormat:@"%@%@", @"Muscle targeted: ", workout[@"muscle"]];
+   // cell.muscle.text = [NSString stringWithFormat:@"%@%@", @"Muscle targeted: ", muscleName];
 //    cell.type.text = [NSString stringWithFormat:@"%@%@", @"Type of workout: ", workout[@"type"]];
 //    cell.instructions.text = workout[@"instructions"];
     return cell;
