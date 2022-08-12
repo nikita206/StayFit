@@ -18,12 +18,14 @@
 @property (strong, nonatomic) NSArray *arrayofRecipesPosts;
 @property (strong, nonatomic) NSArray *arrayOfGymBuddies;
 @property (strong, nonatomic) UIRefreshControl *refreshControl;
+@property (strong, nonatomic) NSMutableArray *liked;
 @end
 
 @implementation CommunityViewController
 @synthesize segout;
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.liked = [[NSMutableArray alloc]init];
     //refreshes the page each time a post is added
     self.refreshControl = [[UIRefreshControl alloc] init];
     [self.refreshControl addTarget:self action:@selector(fetchPosts) forControlEvents:UIControlEventValueChanged];
@@ -152,10 +154,15 @@
     [query whereKey:@"location" nearGeoPoint:userGeoPoint withinMiles:[self.value.text doubleValue]];
     [query whereKey:@"username" notEqualTo:[PFUser currentUser].username];
     query.limit = 10;
-    
     [query findObjectsInBackgroundWithBlock:^(NSArray *posts, NSError *error) {
         if(!error){
             if (posts.count) {
+                [self.liked removeAllObjects];
+                for (PFObject *object in posts) {
+                     NSLog(@"%@", object.objectId);
+                    [self.liked addObject:object.objectId];
+                }
+                NSLog(@"array is %@", self.liked);
                 //loads the gym buddies posts onto the view if found
                 self.arrayOfGymBuddies = posts;
                 self.blankText.hidden = true;
@@ -297,4 +304,55 @@
     self.value.text = [NSString stringWithFormat:@"%@ %@", newValue, @"miles"];
     [self fetchGymBuddies];
 }
+
+- (IBAction)didTapLike:(id)sender {
+    [self ShowAlert:@"Friend request sent"];
+    //checks in which row the button was clicked
+    CGPoint hitPoint = [sender convertPoint:CGPointZero toView:self.fitnessTableView];
+    NSIndexPath *hitIndex = [self.fitnessTableView indexPathForRowAtPoint:hitPoint];
+    PFObject *currentUserObject = [[PFUser currentUser]objectId];
+    [self setFriendRequest:currentUserObject index:hitIndex];
+}
+
+//creates an object in Parse
+-(void)setFriendRequest:(PFObject *)currentUserObject index:(NSIndexPath *)hitIndex{
+    PFQuery *query = [PFUser query];
+    [query whereKey:@"objectId" equalTo:currentUserObject];
+    PFObject *friend = [PFObject objectWithClassName:@"friends"];
+    //sets the column fields
+    friend[@"fromUser"] = currentUserObject;
+    //user at the cell that was selected
+    friend[@"toUser"] = self.liked[(long)hitIndex.row];
+    //sets the initial status to pending
+    friend[@"status"] = @"pending";
+    [friend saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+        if (succeeded) {
+            NSLog(@"friend req sent");
+        }
+        else {
+            NSLog(@"Error, friend request could not be sent");
+        }
+    }];
+}
+
+//shows a pop up with message when a button is clicked
+- (void) ShowAlert:(NSString *)Message {
+    UIAlertController * alert=[UIAlertController alertControllerWithTitle:nil
+                                                                  message:@""
+                                                           preferredStyle:UIAlertControllerStyleAlert];
+    UIView *firstSubview = alert.view.subviews.firstObject;
+    UIView *alertContentView = firstSubview.subviews.firstObject;
+    for (UIView *subSubView in alertContentView.subviews) {
+        subSubView.backgroundColor = [UIColor colorWithRed: 11.0/255.0 green: 104.0/255.0 blue:164.0/255.0 alpha: 1.0];
+    }
+    NSMutableAttributedString *AS = [[NSMutableAttributedString alloc] initWithString:Message];
+    [AS addAttribute: NSForegroundColorAttributeName value: [UIColor whiteColor] range: NSMakeRange(0,AS.length)];
+    [alert setValue:AS forKey:@"attributedTitle"];
+    [self presentViewController:alert animated:YES completion:nil];
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        [alert dismissViewControllerAnimated:YES completion:^{
+        }];
+    });
+}
+
 @end

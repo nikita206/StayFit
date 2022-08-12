@@ -8,6 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		064C2E09DFB9AC538A1EE994 /* libPods-StayFit-StayFitUITests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C58CF4241D1D1703FB6BA444 /* libPods-StayFit-StayFitUITests.a */; };
+		215CBE2028A5ABE800B393FA /* FriendRequestViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 215CBE1F28A5ABE800B393FA /* FriendRequestViewController.m */; };
+		215CBE2328A5AC3800B393FA /* friendreqTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 215CBE2228A5AC3800B393FA /* friendreqTableViewCell.m */; };
+		215CBE2628A5ED1000B393FA /* ProfileFriendsCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 215CBE2528A5ED1000B393FA /* ProfileFriendsCell.m */; };
 		2166A9A42878EC0300359DA4 /* SignupViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2166A9A32878EC0300359DA4 /* SignupViewController.m */; };
 		21A4D6A0287CB390001FC7E9 /* ProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 21A4D69F287CB390001FC7E9 /* ProfileViewController.m */; };
 		21A4D6A3287CBE97001FC7E9 /* CommunityViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 21A4D6A2287CBE97001FC7E9 /* CommunityViewController.m */; };
@@ -56,6 +59,12 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		215CBE1E28A5ABE800B393FA /* FriendRequestViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FriendRequestViewController.h; sourceTree = "<group>"; };
+		215CBE1F28A5ABE800B393FA /* FriendRequestViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FriendRequestViewController.m; sourceTree = "<group>"; };
+		215CBE2128A5AC3800B393FA /* friendreqTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = friendreqTableViewCell.h; sourceTree = "<group>"; };
+		215CBE2228A5AC3800B393FA /* friendreqTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = friendreqTableViewCell.m; sourceTree = "<group>"; };
+		215CBE2428A5ED1000B393FA /* ProfileFriendsCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ProfileFriendsCell.h; sourceTree = "<group>"; };
+		215CBE2528A5ED1000B393FA /* ProfileFriendsCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ProfileFriendsCell.m; sourceTree = "<group>"; };
 		2166A9A22878EC0300359DA4 /* SignupViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SignupViewController.h; sourceTree = "<group>"; };
 		2166A9A32878EC0300359DA4 /* SignupViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SignupViewController.m; sourceTree = "<group>"; };
 		21A4D69E287CB390001FC7E9 /* ProfileViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ProfileViewController.h; sourceTree = "<group>"; };
@@ -189,6 +198,8 @@
 			children = (
 				21A4D6A1287CBE97001FC7E9 /* CommunityViewController.h */,
 				21A4D6A2287CBE97001FC7E9 /* CommunityViewController.m */,
+				21A4D6B92881EEDF001FC7E9 /* GymBuddyCell.h */,
+				21A4D6BA2881EEDF001FC7E9 /* GymBuddyCell.m */,
 				21A4D6A7287DE1AC001FC7E9 /* NewPostViewController.h */,
 				21A4D6A8287DE1AD001FC7E9 /* NewPostViewController.m */,
 				219DB1662890A46600F1AC47 /* FitnessSegment */,
@@ -223,8 +234,6 @@
 		219DB1682890A4AE00F1AC47 /* GymBuddySegment */ = {
 			isa = PBXGroup;
 			children = (
-				21A4D6B92881EEDF001FC7E9 /* GymBuddyCell.h */,
-				21A4D6BA2881EEDF001FC7E9 /* GymBuddyCell.m */,
 			);
 			path = GymBuddySegment;
 			sourceTree = "<group>";
@@ -234,6 +243,12 @@
 			children = (
 				21A4D69E287CB390001FC7E9 /* ProfileViewController.h */,
 				21A4D69F287CB390001FC7E9 /* ProfileViewController.m */,
+				215CBE2428A5ED1000B393FA /* ProfileFriendsCell.h */,
+				215CBE2528A5ED1000B393FA /* ProfileFriendsCell.m */,
+				215CBE1E28A5ABE800B393FA /* FriendRequestViewController.h */,
+				215CBE1F28A5ABE800B393FA /* FriendRequestViewController.m */,
+				215CBE2128A5AC3800B393FA /* friendreqTableViewCell.h */,
+				215CBE2228A5AC3800B393FA /* friendreqTableViewCell.m */,
 			);
 			path = ProfileView;
 			sourceTree = "<group>";
@@ -564,7 +579,9 @@
 			files = (
 				21A4D6A3287CBE97001FC7E9 /* CommunityViewController.m in Sources */,
 				21A4D6A9287DE1AD001FC7E9 /* NewPostViewController.m in Sources */,
+				215CBE2328A5AC3800B393FA /* friendreqTableViewCell.m in Sources */,
 				2166A9A42878EC0300359DA4 /* SignupViewController.m in Sources */,
+				215CBE2028A5ABE800B393FA /* FriendRequestViewController.m in Sources */,
 				21A4D6C428887C64001FC7E9 /* WorkoutCell.m in Sources */,
 				21A530AD2878ABE300F2E9A7 /* ViewController.m in Sources */,
 				21A530A72878ABE300F2E9A7 /* AppDelegate.m in Sources */,
@@ -580,6 +597,7 @@
 				21A4D6A0287CB390001FC7E9 /* ProfileViewController.m in Sources */,
 				21A530AA2878ABE300F2E9A7 /* SceneDelegate.m in Sources */,
 				21A530DF2878B30400F2E9A7 /* LoginViewController.m in Sources */,
+				215CBE2628A5ED1000B393FA /* ProfileFriendsCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

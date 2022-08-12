@@ -7,17 +7,27 @@
 
 #import "ProfileViewController.h"
 #import "Post.h"
+#import "ProfileFriendsCell.h"
 
-@interface ProfileViewController () <UIImagePickerControllerDelegate, UINavigationControllerDelegate>
-
+@interface ProfileViewController () <UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITableViewDelegate, UITableViewDataSource>
+@property (nonatomic, strong) NSMutableArray *addedFriendArray;
 @end
 
 @implementation ProfileViewController
 
 - (void)viewDidLoad {
+    [super viewDidLoad];
+    self.tableView.dataSource = self;
+    self.tableView.delegate = self;
+    self.addedFriendArray = [[NSMutableArray alloc]init];
+    [self currentUser];
+    [self addedFriends];
+}
+
+//sets the details of the signed in user
+-(void)currentUser{
     //sets the current user as the user logged in
     PFUser *user = [PFUser currentUser];
-    [super viewDidLoad];
     //sets user details on the basis of logged in user
     self.author.text = [NSString stringWithFormat:@"%@%@%@", user[@"firstName"]  , @" ", user[@"lastName"]];
     self.username.text = [NSString stringWithFormat:@"%@%@", @"@" , user.username];
@@ -31,6 +41,62 @@
     UITapGestureRecognizer *profileTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(didTapPhoto)];
     [self.profilePic addGestureRecognizer:profileTap];
     [self.profilePic setUserInteractionEnabled:YES];
+}
+
+//runs the query to see the added friends of the signed in user
+-(void)addedFriends{
+    PFQuery *friendQuery = [PFQuery queryWithClassName:@"friends"];
+    PFObject *currentUserObject = [[PFUser currentUser]objectId];
+    [friendQuery whereKey:@"toUser" equalTo:currentUserObject];
+    //ensures that the friend request is accepted
+    [friendQuery whereKey:@"status" equalTo:@"accepted"];
+    //displays latest added users first
+    [friendQuery orderByDescending:@"createdAt"];
+    [friendQuery includeKey:@"toUser"];
+    [friendQuery findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+    if (error)
+    {
+        NSLog(@"Could not find friends");
+    }
+    else {
+        for (PFObject *object in objects) {
+            //adds the friend of the signed in user to the array
+            [self.addedFriendArray addObject:object[@"fromUser"]];
+        }
+        //to ensure that the data is appended correctly into the array
+        NSLog(@"array is %@", self.addedFriendArray);
+        [self.tableView reloadData];
+    }
+    }];
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
+    ProfileFriendsCell *cell = [self.tableView dequeueReusableCellWithIdentifier:@"addedFriends" forIndexPath:indexPath];
+    //gets the object ID of the friend
+    NSString *friendId = self.addedFriendArray[indexPath.row];
+    [self getFriendDetails:cell string:friendId];
+    return cell;
+}
+
+-(UITableViewCell *)getFriendDetails:(ProfileFriendsCell *)cell string:(NSString *)friendId{
+    //fetches details of the added friend
+    PFQuery *query = [PFQuery queryWithClassName:@"_User"];
+    [query whereKey:@"objectId" equalTo:friendId];
+    [query includeKey:@"firstName"];
+    PFObject* list = [query getFirstObject];
+    //sets the contents of the cell
+    cell.name.text = [NSString stringWithFormat:@"%@%@%@", list[@"firstName"]  , @" ", list[@"lastName"]];
+    cell.profilePic.file = list[@"profileImage"];
+    [cell.profilePic loadInBackground];
+    //sets the radius for porfile pic
+    cell.profilePic.layer.cornerRadius = cell.profilePic.frame.size.width/2;
+    cell.profilePic.clipsToBounds = YES;
+    cell.level.text = list[@"fitnessLevel"];
+    return cell;
+}
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
+    return self.addedFriendArray.count;
 }
 
 - (IBAction)didTapLogout:(id)sender {
@@ -57,7 +123,6 @@
                 NSLog(@"failed to upload profile picture");
             }
         }];
-    
     // Dismiss UIImagePickerController to go back to your original view controller
     [self dismissViewControllerAnimated:YES completion:nil];
 }

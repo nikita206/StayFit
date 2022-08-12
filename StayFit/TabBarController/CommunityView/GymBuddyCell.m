@@ -6,6 +6,8 @@
 //
 
 #import "GymBuddyCell.h"
+#import "CommunityViewController.h"
+#import "Parse/Parse.h"
 
 @implementation GymBuddyCell
 
