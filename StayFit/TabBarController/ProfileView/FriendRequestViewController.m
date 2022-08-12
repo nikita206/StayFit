@@ -10,7 +10,6 @@
 #import "Parse/Parse.h"
 @interface FriendRequestViewController ()  <UITableViewDelegate, UITableViewDataSource>
 @property (nonatomic, strong) NSMutableArray *friendreqArray;
-@property (nonatomic, strong) NSMutableArray *friendName;
 @property (nonatomic, strong) NSMutableArray *friendObjectId;
 @end
 
@@ -22,14 +21,18 @@
     self.tableView.delegate = self;
     self.friendObjectId = [[NSMutableArray alloc]init];
     self.friendreqArray = [[NSMutableArray alloc]init];
-    //creates a new query for fitness posts in the descending order of post created time
+    [self friendRequestsFromUser];
+}
+
+//stores information of users who sent the friend request to the current user
+-(void)friendRequestsFromUser{
+    //runs the query to see a list of users who sent the request
     PFQuery *friendQuery = [PFQuery queryWithClassName:@"friends"];
     PFObject *currentUserObject = [[PFUser currentUser]objectId];
-    NSLog(@"current user ID %@",currentUserObject);
     [friendQuery whereKey:@"toUser" equalTo:currentUserObject];
     [friendQuery whereKey:@"status" equalTo:@"pending"];
+    //added in the order of latest to oldest requests
     [friendQuery orderByDescending:@"createdAt"];
-    
     [friendQuery includeKey:@"toUser"];
     [friendQuery findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
     if (error)
@@ -37,45 +40,33 @@
         NSLog(@"could not find friends");
     }
     else {
-        NSLog(@"friendRequestCount = %d", objects.count);
         for (PFObject *object in objects) {
-             NSLog(@"object is %@", object);
+            //adds the id of the user who sent the request to array
             [self.friendreqArray addObject:object[@"fromUser"]];
+            //adds the object id of the request stored in Parse
             [self.friendObjectId addObject:object.objectId];
         }
-        NSLog(@"array is %@",self.friendObjectId);
         [self.tableView reloadData];
-
     }
     }];
 }
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     friendreqTableViewCell *cell = [self.tableView dequeueReusableCellWithIdentifier:@"friend" forIndexPath:indexPath];
-    //sets the contents for each cell
     NSString *friendId = self.friendreqArray[indexPath.row];
-    NSLog(@"%@",friendId);
-    
+    [self getRequestSenderDetails:cell string:friendId];
+    return cell;
+}
+
+-(UITableViewCell *)getRequestSenderDetails:(friendreqTableViewCell *)cell string:(NSString *)friendId{
+    //runs the query to get the details of the user who sent the friend request
     PFQuery *query = [PFQuery queryWithClassName:@"_User"];
     [query whereKey:@"objectId" equalTo:friendId];
     [query includeKey:@"firstName"];
     PFObject* list = [query getFirstObject];
-    NSLog(@"list is %@", list);
-    [query findObjectsInBackgroundWithBlock:^(NSArray *posts, NSError *error) {
-        if(!error){
-            if (posts.count) {
-                self.friendName = posts;
-            }
-        }
-        else
-        {
-            NSLog(@"%@", error);
-        }
-    }];
-    
+    //sets cell contents of the user who sent the friend request
     cell.name.text = [NSString stringWithFormat:@"%@%@%@", list[@"firstName"]  , @" ", list[@"lastName"]];
     cell.profilePic.file = list[@"profileImage"];
     [cell.profilePic loadInBackground];
-    //sets the radius for porfile pic
     cell.profilePic.layer.cornerRadius = cell.profilePic.frame.size.width/2;
     cell.profilePic.clipsToBounds = YES;
     cell.level.text = list[@"fitnessLevel"];

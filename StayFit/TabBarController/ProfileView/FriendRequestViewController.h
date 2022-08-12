@@ -13,7 +13,6 @@ NS_ASSUME_NONNULL_BEGIN
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 - (IBAction)accept:(id)sender;
 - (IBAction)decline:(id)sender;
-
 @end
 
 NS_ASSUME_NONNULL_END
