@@ -304,32 +304,38 @@
     self.value.text = [NSString stringWithFormat:@"%@ %@", newValue, @"miles"];
     [self fetchGymBuddies];
 }
+
 - (IBAction)didTapLike:(id)sender {
     [self ShowAlert:@"Friend request sent"];
+    //checks in which row the button was clicked
     CGPoint hitPoint = [sender convertPoint:CGPointZero toView:self.fitnessTableView];
     NSIndexPath *hitIndex = [self.fitnessTableView indexPathForRowAtPoint:hitPoint];
-    NSLog(@"This was the index %ld", (long)hitIndex.row);
     PFObject *currentUserObject = [[PFUser currentUser]objectId];
-    NSLog(@"current user id is %@", currentUserObject);
-    
+    [self setFriendRequest:currentUserObject index:hitIndex];
+}
+
+//creates an object in Parse
+-(void)setFriendRequest:(PFObject *)currentUserObject index:(NSIndexPath *)hitIndex{
     PFQuery *query = [PFUser query];
     [query whereKey:@"objectId" equalTo:currentUserObject];
-    //request them
     PFObject *friend = [PFObject objectWithClassName:@"friends"];
+    //sets the column fields
     friend[@"fromUser"] = currentUserObject;
-    //selected user is the user at the cell that was selected
+    //user at the cell that was selected
     friend[@"toUser"] = self.liked[(long)hitIndex.row];
-    // set the initial status to pending
+    //sets the initial status to pending
     friend[@"status"] = @"pending";
     [friend saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
         if (succeeded) {
             NSLog(@"friend req sent");
         }
         else {
-            NSLog(@"Error");
+            NSLog(@"Error, friend request could not be sent");
         }
     }];
 }
+
+//shows a pop up with message when a button is clicked
 - (void) ShowAlert:(NSString *)Message {
     UIAlertController * alert=[UIAlertController alertControllerWithTitle:nil
                                                                   message:@""

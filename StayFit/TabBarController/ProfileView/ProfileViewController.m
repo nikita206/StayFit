@@ -16,37 +16,18 @@
 @implementation ProfileViewController
 
 - (void)viewDidLoad {
+    [super viewDidLoad];
     self.tableView.dataSource = self;
     self.tableView.delegate = self;
     self.addedFriendArray = [[NSMutableArray alloc]init];
-    //creates a new query for fitness posts in the descending order of post created time
-    PFQuery *friendQuery = [PFQuery queryWithClassName:@"friends"];
-    PFObject *currentUserObject = [[PFUser currentUser]objectId];
-    NSLog(@"current user ID %@",currentUserObject);
-    [friendQuery whereKey:@"toUser" equalTo:currentUserObject];
-    [friendQuery whereKey:@"status" equalTo:@"accepted"];
-    [friendQuery orderByDescending:@"createdAt"];
-    
-    [friendQuery includeKey:@"toUser"];
-    [friendQuery findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
-    if (error)
-    {
-        NSLog(@"could not find friends");
-    }
-    else {
-        NSLog(@"friendRequestCount = %d", objects.count);
-        for (PFObject *object in objects) {
-             NSLog(@"%@", object[@"fromUser"]);
-            [self.addedFriendArray addObject:object[@"fromUser"]];
-        }
-        NSLog(@"array is %@", self.addedFriendArray);
-        [self.tableView reloadData];
-    }
-    }];
-    
+    [self currentUser];
+    [self addedFriends];
+}
+
+//sets the details of the signed in user
+-(void)currentUser{
     //sets the current user as the user logged in
     PFUser *user = [PFUser currentUser];
-    [super viewDidLoad];
     //sets user details on the basis of logged in user
     self.author.text = [NSString stringWithFormat:@"%@%@%@", user[@"firstName"]  , @" ", user[@"lastName"]];
     self.username.text = [NSString stringWithFormat:@"%@%@", @"@" , user.username];
@@ -62,29 +43,48 @@
     [self.profilePic setUserInteractionEnabled:YES];
 }
 
+//runs the query to see the added friends of the signed in user
+-(void)addedFriends{
+    PFQuery *friendQuery = [PFQuery queryWithClassName:@"friends"];
+    PFObject *currentUserObject = [[PFUser currentUser]objectId];
+    [friendQuery whereKey:@"toUser" equalTo:currentUserObject];
+    //ensures that the friend request is accepted
+    [friendQuery whereKey:@"status" equalTo:@"accepted"];
+    //displays latest added users first
+    [friendQuery orderByDescending:@"createdAt"];
+    [friendQuery includeKey:@"toUser"];
+    [friendQuery findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+    if (error)
+    {
+        NSLog(@"Could not find friends");
+    }
+    else {
+        for (PFObject *object in objects) {
+            //adds the friend of the signed in user to the array
+            [self.addedFriendArray addObject:object[@"fromUser"]];
+        }
+        //to ensure that the data is appended correctly into the array
+        NSLog(@"array is %@", self.addedFriendArray);
+        [self.tableView reloadData];
+    }
+    }];
+}
+
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     ProfileFriendsCell *cell = [self.tableView dequeueReusableCellWithIdentifier:@"addedFriends" forIndexPath:indexPath];
-    //sets the contents for each cell
+    //gets the object ID of the friend
     NSString *friendId = self.addedFriendArray[indexPath.row];
-    NSLog(@"%@",friendId);
-    
+    [self getFriendDetails:cell string:friendId];
+    return cell;
+}
+
+-(UITableViewCell *)getFriendDetails:(ProfileFriendsCell *)cell string:(NSString *)friendId{
+    //fetches details of the added friend
     PFQuery *query = [PFQuery queryWithClassName:@"_User"];
     [query whereKey:@"objectId" equalTo:friendId];
     [query includeKey:@"firstName"];
     PFObject* list = [query getFirstObject];
-    NSLog(@"%@", list[@"firstName"]);
-    [query findObjectsInBackgroundWithBlock:^(NSArray *posts, NSError *error) {
-        if(!error){
-            if (posts.count) {
-                NSLog(@"User Found");
-            }
-        }
-        else
-        {
-            NSLog(@"%@", error);
-        }
-    }];
-    
+    //sets the contents of the cell
     cell.name.text = [NSString stringWithFormat:@"%@%@%@", list[@"firstName"]  , @" ", list[@"lastName"]];
     cell.profilePic.file = list[@"profileImage"];
     [cell.profilePic loadInBackground];
@@ -123,7 +123,6 @@
                 NSLog(@"failed to upload profile picture");
             }
         }];
-    
     // Dismiss UIImagePickerController to go back to your original view controller
     [self dismissViewControllerAnimated:YES completion:nil];
 }
