@@ -175,7 +175,6 @@
             NSLog(@"An error occurred when trying to compose this email");
             break;
     }
-
     [self dismissViewControllerAnimated:YES completion:NULL];
 }
 @end
