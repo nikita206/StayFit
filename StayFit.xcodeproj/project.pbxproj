@@ -11,6 +11,7 @@
 		215CBE2028A5ABE800B393FA /* FriendRequestViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 215CBE1F28A5ABE800B393FA /* FriendRequestViewController.m */; };
 		215CBE2328A5AC3800B393FA /* friendreqTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 215CBE2228A5AC3800B393FA /* friendreqTableViewCell.m */; };
 		215CBE2628A5ED1000B393FA /* ProfileFriendsCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 215CBE2528A5ED1000B393FA /* ProfileFriendsCell.m */; };
+		215CBE2828A610E900B393FA /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 215CBE2728A610E900B393FA /* MessageUI.framework */; };
 		2166A9A42878EC0300359DA4 /* SignupViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2166A9A32878EC0300359DA4 /* SignupViewController.m */; };
 		21A4D6A0287CB390001FC7E9 /* ProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 21A4D69F287CB390001FC7E9 /* ProfileViewController.m */; };
 		21A4D6A3287CBE97001FC7E9 /* CommunityViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 21A4D6A2287CBE97001FC7E9 /* CommunityViewController.m */; };
@@ -65,6 +66,7 @@
 		215CBE2228A5AC3800B393FA /* friendreqTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = friendreqTableViewCell.m; sourceTree = "<group>"; };
 		215CBE2428A5ED1000B393FA /* ProfileFriendsCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ProfileFriendsCell.h; sourceTree = "<group>"; };
 		215CBE2528A5ED1000B393FA /* ProfileFriendsCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ProfileFriendsCell.m; sourceTree = "<group>"; };
+		215CBE2728A610E900B393FA /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
 		2166A9A22878EC0300359DA4 /* SignupViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SignupViewController.h; sourceTree = "<group>"; };
 		2166A9A32878EC0300359DA4 /* SignupViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SignupViewController.m; sourceTree = "<group>"; };
 		21A4D69E287CB390001FC7E9 /* ProfileViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ProfileViewController.h; sourceTree = "<group>"; };
@@ -127,6 +129,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				215CBE2828A610E900B393FA /* MessageUI.framework in Frameworks */,
 				21CC63CD28988D90008269E1 /* CoreData.framework in Frameworks */,
 				21CC63BB28948C40008269E1 /* UserNotifications.framework in Frameworks */,
 				28E1BB506377E109260B6946 /* libPods-StayFit.a in Frameworks */,
@@ -198,8 +201,6 @@
 			children = (
 				21A4D6A1287CBE97001FC7E9 /* CommunityViewController.h */,
 				21A4D6A2287CBE97001FC7E9 /* CommunityViewController.m */,
-				21A4D6B92881EEDF001FC7E9 /* GymBuddyCell.h */,
-				21A4D6BA2881EEDF001FC7E9 /* GymBuddyCell.m */,
 				21A4D6A7287DE1AC001FC7E9 /* NewPostViewController.h */,
 				21A4D6A8287DE1AD001FC7E9 /* NewPostViewController.m */,
 				219DB1662890A46600F1AC47 /* FitnessSegment */,
@@ -234,6 +235,8 @@
 		219DB1682890A4AE00F1AC47 /* GymBuddySegment */ = {
 			isa = PBXGroup;
 			children = (
+				21A4D6B92881EEDF001FC7E9 /* GymBuddyCell.h */,
+				21A4D6BA2881EEDF001FC7E9 /* GymBuddyCell.m */,
 			);
 			path = GymBuddySegment;
 			sourceTree = "<group>";
@@ -317,6 +320,7 @@
 		5BDDF623D6B91C9826F811B8 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				215CBE2728A610E900B393FA /* MessageUI.framework */,
 				21CC63CC28988D8F008269E1 /* CoreData.framework */,
 				21CC63BA28948C3F008269E1 /* UserNotifications.framework */,
 				37E9515A5A750C633A0284A1 /* libPods-StayFit.a */,
@@ -771,7 +775,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 3KB9CYZ548;
+				DEVELOPMENT_TEAM = 5S9DJ28X6T;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = StayFit/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -799,7 +803,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 3KB9CYZ548;
+				DEVELOPMENT_TEAM = 5S9DJ28X6T;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = StayFit/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
