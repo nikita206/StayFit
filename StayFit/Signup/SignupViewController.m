@@ -10,7 +10,7 @@
 @import GooglePlaces;
 #import "AppDelegate.h"
 
-@interface SignupViewController (){
+@interface SignupViewController () {
     AppDelegate *appDelegate;
       NSManagedObjectContext *context;
       NSArray *dictionaries;
