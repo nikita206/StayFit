@@ -305,6 +305,7 @@
     [self fetchGymBuddies];
 }
 - (IBAction)didTapLike:(id)sender {
+    [self ShowAlert:@"Friend request sent"];
     CGPoint hitPoint = [sender convertPoint:CGPointZero toView:self.fitnessTableView];
     NSIndexPath *hitIndex = [self.fitnessTableView indexPathForRowAtPoint:hitPoint];
     NSLog(@"This was the index %ld", (long)hitIndex.row);
@@ -329,4 +330,23 @@
         }
     }];
 }
+- (void) ShowAlert:(NSString *)Message {
+    UIAlertController * alert=[UIAlertController alertControllerWithTitle:nil
+                                                                  message:@""
+                                                           preferredStyle:UIAlertControllerStyleAlert];
+    UIView *firstSubview = alert.view.subviews.firstObject;
+    UIView *alertContentView = firstSubview.subviews.firstObject;
+    for (UIView *subSubView in alertContentView.subviews) {
+        subSubView.backgroundColor = [UIColor colorWithRed: 11.0/255.0 green: 104.0/255.0 blue:164.0/255.0 alpha: 1.0];
+    }
+    NSMutableAttributedString *AS = [[NSMutableAttributedString alloc] initWithString:Message];
+    [AS addAttribute: NSForegroundColorAttributeName value: [UIColor whiteColor] range: NSMakeRange(0,AS.length)];
+    [alert setValue:AS forKey:@"attributedTitle"];
+    [self presentViewController:alert animated:YES completion:nil];
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        [alert dismissViewControllerAnimated:YES completion:^{
+        }];
+    });
+}
+
 @end

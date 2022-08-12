@@ -39,7 +39,7 @@
     else {
         NSLog(@"friendRequestCount = %d", objects.count);
         for (PFObject *object in objects) {
-             NSLog(@"%@", object[@"fromUser"]);
+             NSLog(@"object is %@", object);
             [self.friendreqArray addObject:object[@"fromUser"]];
             [self.friendObjectId addObject:object.objectId];
         }
@@ -59,7 +59,7 @@
     [query whereKey:@"objectId" equalTo:friendId];
     [query includeKey:@"firstName"];
     PFObject* list = [query getFirstObject];
-    NSLog(@"%@", list[@"firstName"]);
+    NSLog(@"list is %@", list);
     [query findObjectsInBackgroundWithBlock:^(NSArray *posts, NSError *error) {
         if(!error){
             if (posts.count) {
@@ -72,7 +72,13 @@
         }
     }];
     
-    cell.name.text = list[@"firstName"];
+    cell.name.text = [NSString stringWithFormat:@"%@%@%@", list[@"firstName"]  , @" ", list[@"lastName"]];
+    cell.profilePic.file = list[@"profileImage"];
+    [cell.profilePic loadInBackground];
+    //sets the radius for porfile pic
+    cell.profilePic.layer.cornerRadius = cell.profilePic.frame.size.width/2;
+    cell.profilePic.clipsToBounds = YES;
+    cell.level.text = list[@"fitnessLevel"];
     return cell;
 }
 
@@ -82,6 +88,7 @@
 
 
 - (IBAction)decline:(id)sender {
+    [self ShowAlert:@"Friend request declined"];
     CGPoint hitPoint = [sender convertPoint:CGPointZero toView:self.tableView];
     NSIndexPath *hitIndex = [self.tableView indexPathForRowAtPoint:hitPoint];
     NSLog(@"This was the index %ld", (long)hitIndex.row);
@@ -101,6 +108,7 @@
 }
 
 - (IBAction)accept:(id)sender {
+    [self ShowAlert:@"Friend request accepted"];
     CGPoint hitPoint = [sender convertPoint:CGPointZero toView:self.tableView];
     NSIndexPath *hitIndex = [self.tableView indexPathForRowAtPoint:hitPoint];
     NSLog(@"This was the index %ld", (long)hitIndex.row);
@@ -117,5 +125,24 @@
     [self.friendObjectId removeObject:objectId];
     [self.friendreqArray removeObject:self.friendreqArray[(long)hitIndex.row]];
     [self.tableView reloadData];
+}
+
+- (void) ShowAlert:(NSString *)Message {
+    UIAlertController * alert=[UIAlertController alertControllerWithTitle:nil
+                                                                  message:@""
+                                                           preferredStyle:UIAlertControllerStyleAlert];
+    UIView *firstSubview = alert.view.subviews.firstObject;
+    UIView *alertContentView = firstSubview.subviews.firstObject;
+    for (UIView *subSubView in alertContentView.subviews) {
+        subSubView.backgroundColor = [UIColor colorWithRed: 11.0/255.0 green: 104.0/255.0 blue:164.0/255.0 alpha: 1.0];
+    }
+    NSMutableAttributedString *AS = [[NSMutableAttributedString alloc] initWithString:Message];
+    [AS addAttribute: NSForegroundColorAttributeName value: [UIColor whiteColor] range: NSMakeRange(0,AS.length)];
+    [alert setValue:AS forKey:@"attributedTitle"];
+    [self presentViewController:alert animated:YES completion:nil];
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        [alert dismissViewControllerAnimated:YES completion:^{
+        }];
+    });
 }
 @end

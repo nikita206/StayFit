@@ -85,7 +85,13 @@
         }
     }];
     
-    cell.name.text = list[@"firstName"];
+    cell.name.text = [NSString stringWithFormat:@"%@%@%@", list[@"firstName"]  , @" ", list[@"lastName"]];
+    cell.profilePic.file = list[@"profileImage"];
+    [cell.profilePic loadInBackground];
+    //sets the radius for porfile pic
+    cell.profilePic.layer.cornerRadius = cell.profilePic.frame.size.width/2;
+    cell.profilePic.clipsToBounds = YES;
+    cell.level.text = list[@"fitnessLevel"];
     return cell;
 }
 
