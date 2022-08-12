@@ -469,6 +469,15 @@
                                                             <color key="textColor" red="0.0" green="0.3139717588" blue="0.75605666039999997" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
+                                                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Dve-Mq-tUQ">
+                                                            <rect key="frame" x="287" y="256" width="87" height="73"/>
+                                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                            <state key="normal" title="Button"/>
+                                                            <buttonConfiguration key="configuration" style="plain" image="suit.heart.fill" catalog="system"/>
+                                                            <connections>
+                                                                <action selector="didTapLike:" destination="KbG-20-cIs" eventType="touchUpInside" id="x6t-ih-pFI"/>
+                                                            </connections>
+                                                        </button>
                                                     </subviews>
                                                 </tableViewCellContentView>
                                                 <connections>
@@ -891,6 +900,17 @@
                                 </connections>
                             </button>
                         </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" image="person.2.circle.fill" catalog="system" style="plain" id="zbf-nq-Js1">
+                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" id="mJk-iz-Scl">
+                                <rect key="frame" x="302" y="5" width="92" height="34"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" image="person.2.fill" catalog="system"/>
+                                <connections>
+                                    <segue destination="Gv7-wI-u0p" kind="show" id="EAV-Fj-5Vl"/>
+                                </connections>
+                            </button>
+                        </barButtonItem>
                     </navigationItem>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
@@ -903,6 +923,79 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="NR0-XM-V5m" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="6540.579710144928" y="1618.5267857142856"/>
+        </scene>
+        <!--Friend Request View Controller-->
+        <scene sceneID="HnZ-sd-jpb">
+            <objects>
+                <viewController id="Gv7-wI-u0p" customClass="FriendRequestViewController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="dYP-qc-6Tm">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Friend req" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tPI-WT-yly">
+                                <rect key="frame" x="104" y="98" width="194" height="36"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="143" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="3HA-dv-bcU">
+                                <rect key="frame" x="0.0" y="159" width="425" height="737"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="friend" rowHeight="143" id="Mj8-G2-VCy" customClass="friendreqTableViewCell">
+                                        <rect key="frame" x="0.0" y="44.5" width="425" height="143"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Mj8-G2-VCy" id="jMx-Rm-ylM">
+                                            <rect key="frame" x="0.0" y="0.0" width="425" height="143"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hkI-0d-mcJ">
+                                                    <rect key="frame" x="25" y="44" width="278" height="79"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8e3-ly-bQI">
+                                                    <rect key="frame" x="264" y="69" width="44" height="31"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <state key="normal" title="Button"/>
+                                                    <buttonConfiguration key="configuration" style="plain" image="plus" catalog="system"/>
+                                                    <connections>
+                                                        <action selector="accept:" destination="Gv7-wI-u0p" eventType="touchUpInside" id="bzL-nJ-D8u"/>
+                                                    </connections>
+                                                </button>
+                                                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oPJ-jC-GW7">
+                                                    <rect key="frame" x="339" y="69" width="44" height="31"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <state key="normal" title="Button"/>
+                                                    <buttonConfiguration key="configuration" style="plain" image="minus" catalog="system"/>
+                                                    <connections>
+                                                        <action selector="decline:" destination="Gv7-wI-u0p" eventType="touchUpInside" id="fxH-tS-PPW"/>
+                                                    </connections>
+                                                </button>
+                                            </subviews>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="name" destination="hkI-0d-mcJ" id="RdY-Y1-298"/>
+                                        </connections>
+                                    </tableViewCell>
+                                </prototypes>
+                            </tableView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="pJn-qf-BbL"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="Wbk-o9-oLX"/>
+                    <connections>
+                        <outlet property="tableView" destination="3HA-dv-bcU" id="MZK-2k-0MJ"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="aTr-O1-I40" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="7356.521739130435" y="1619.8660714285713"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="TLS-Wm-HKX">
@@ -1048,11 +1141,15 @@
     <resources>
         <image name="Fitness-goal" width="1200" height="782"/>
         <image name="house.fill" catalog="system" width="128" height="106"/>
+        <image name="minus" catalog="system" width="128" height="24"/>
+        <image name="person.2.circle.fill" catalog="system" width="128" height="121"/>
+        <image name="person.2.fill" catalog="system" width="128" height="80"/>
         <image name="person.3.fill" catalog="system" width="128" height="61"/>
         <image name="person.crop.circle.fill" catalog="system" width="128" height="121"/>
         <image name="person.fill" catalog="system" width="128" height="120"/>
         <image name="photo" catalog="system" width="128" height="93"/>
         <image name="plus" catalog="system" width="128" height="113"/>
+        <image name="suit.heart.fill" catalog="system" width="128" height="109"/>
         <systemColor name="labelColor">
             <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

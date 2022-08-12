@@ -18,12 +18,14 @@
 @property (strong, nonatomic) NSArray *arrayofRecipesPosts;
 @property (strong, nonatomic) NSArray *arrayOfGymBuddies;
 @property (strong, nonatomic) UIRefreshControl *refreshControl;
+@property (strong, nonatomic) NSMutableArray *liked;
 @end
 
 @implementation CommunityViewController
 @synthesize segout;
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.liked = [[NSMutableArray alloc]init];
     //refreshes the page each time a post is added
     self.refreshControl = [[UIRefreshControl alloc] init];
     [self.refreshControl addTarget:self action:@selector(fetchPosts) forControlEvents:UIControlEventValueChanged];
@@ -152,10 +154,15 @@
     [query whereKey:@"location" nearGeoPoint:userGeoPoint withinMiles:[self.value.text doubleValue]];
     [query whereKey:@"username" notEqualTo:[PFUser currentUser].username];
     query.limit = 10;
-    
     [query findObjectsInBackgroundWithBlock:^(NSArray *posts, NSError *error) {
         if(!error){
             if (posts.count) {
+                [self.liked removeAllObjects];
+                for (PFObject *object in posts) {
+                     NSLog(@"%@", object.objectId);
+                    [self.liked addObject:object.objectId];
+                }
+                NSLog(@"array is %@", self.liked);
                 //loads the gym buddies posts onto the view if found
                 self.arrayOfGymBuddies = posts;
                 self.blankText.hidden = true;
@@ -296,5 +303,37 @@
     NSString *newValue = [NSString stringWithFormat:@"%0.2f", slider.value];
     self.value.text = [NSString stringWithFormat:@"%@ %@", newValue, @"miles"];
     [self fetchGymBuddies];
+}
+- (IBAction)didTapLike:(id)sender {
+    CGPoint hitPoint = [sender convertPoint:CGPointZero toView:self.fitnessTableView];
+    NSIndexPath *hitIndex = [self.fitnessTableView indexPathForRowAtPoint:hitPoint];
+    NSLog(@"This was the index %ld", (long)hitIndex.row);
+    PFObject *currentUserObject = [[PFUser currentUser]objectId];
+    NSLog(@"current user id is %@", currentUserObject);
+    
+    PFQuery *query = [PFUser query];
+    [query whereKey:@"objectId" equalTo:currentUserObject];
+    //request them
+    PFObject *friend = [PFObject objectWithClassName:@"friends"];
+    friend[@"fromUser"] = currentUserObject;
+    //selected user is the user at the cell that was selected
+    friend[@"toUser"] = self.liked[(long)hitIndex.row];
+    // set the initial status to pending
+    friend[@"status"] = @"pending";
+    [friend saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+        if (succeeded) {
+            NSLog(@"friend req sent");
+        }
+        else {
+            NSLog(@"Error");
+        }
+    }];
+    
+    
+//
+//    PFObject *friend= [PFObject objectWithClassName:@"friends"];
+//    [friend setObject:currentUserObject forKey:@"fromUser"];
+//    [friend setObject:self.liked[(long)hitIndex.row] forKey:@"toUser"];
+//    [friend setObject:@"Pending" forKey:@"status"];
 }
 @end

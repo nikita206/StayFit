@@ -11,6 +11,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface CommunityViewController : UIViewController <UITableViewDataSource, UITableViewDelegate>
 @property (weak, nonatomic) IBOutlet UIButton *addButton;
+- (IBAction)didTapLike:(id)sender;
 @property (weak, nonatomic) IBOutlet UISegmentedControl *segout;
 - (IBAction)segact:(id)sender;;
 @property (weak, nonatomic) IBOutlet UIView *fitnessView;
