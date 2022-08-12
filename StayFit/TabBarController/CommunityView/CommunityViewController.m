@@ -328,12 +328,5 @@
             NSLog(@"Error");
         }
     }];
-    
-    
-//
-//    PFObject *friend= [PFObject objectWithClassName:@"friends"];
-//    [friend setObject:currentUserObject forKey:@"fromUser"];
-//    [friend setObject:self.liked[(long)hitIndex.row] forKey:@"toUser"];
-//    [friend setObject:@"Pending" forKey:@"status"];
 }
 @end

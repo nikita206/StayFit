@@ -7,14 +7,43 @@
 
 #import "ProfileViewController.h"
 #import "Post.h"
+#import "ProfileFriendsCell.h"
 
-@interface ProfileViewController () <UIImagePickerControllerDelegate, UINavigationControllerDelegate>
-
+@interface ProfileViewController () <UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITableViewDelegate, UITableViewDataSource>
+@property (nonatomic, strong) NSMutableArray *addedFriendArray;
 @end
 
 @implementation ProfileViewController
 
 - (void)viewDidLoad {
+    self.tableView.dataSource = self;
+    self.tableView.delegate = self;
+    self.addedFriendArray = [[NSMutableArray alloc]init];
+    //creates a new query for fitness posts in the descending order of post created time
+    PFQuery *friendQuery = [PFQuery queryWithClassName:@"friends"];
+    PFObject *currentUserObject = [[PFUser currentUser]objectId];
+    NSLog(@"current user ID %@",currentUserObject);
+    [friendQuery whereKey:@"toUser" equalTo:currentUserObject];
+    [friendQuery whereKey:@"status" equalTo:@"accepted"];
+    [friendQuery orderByDescending:@"createdAt"];
+    
+    [friendQuery includeKey:@"toUser"];
+    [friendQuery findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+    if (error)
+    {
+        NSLog(@"could not find friends");
+    }
+    else {
+        NSLog(@"friendRequestCount = %d", objects.count);
+        for (PFObject *object in objects) {
+             NSLog(@"%@", object[@"fromUser"]);
+            [self.addedFriendArray addObject:object[@"fromUser"]];
+        }
+        NSLog(@"array is %@", self.addedFriendArray);
+        [self.tableView reloadData];
+    }
+    }];
+    
     //sets the current user as the user logged in
     PFUser *user = [PFUser currentUser];
     [super viewDidLoad];
@@ -31,6 +60,37 @@
     UITapGestureRecognizer *profileTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(didTapPhoto)];
     [self.profilePic addGestureRecognizer:profileTap];
     [self.profilePic setUserInteractionEnabled:YES];
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
+    ProfileFriendsCell *cell = [self.tableView dequeueReusableCellWithIdentifier:@"addedFriends" forIndexPath:indexPath];
+    //sets the contents for each cell
+    NSString *friendId = self.addedFriendArray[indexPath.row];
+    NSLog(@"%@",friendId);
+    
+    PFQuery *query = [PFQuery queryWithClassName:@"_User"];
+    [query whereKey:@"objectId" equalTo:friendId];
+    [query includeKey:@"firstName"];
+    PFObject* list = [query getFirstObject];
+    NSLog(@"%@", list[@"firstName"]);
+    [query findObjectsInBackgroundWithBlock:^(NSArray *posts, NSError *error) {
+        if(!error){
+            if (posts.count) {
+                NSLog(@"User Found");
+            }
+        }
+        else
+        {
+            NSLog(@"%@", error);
+        }
+    }];
+    
+    cell.name.text = list[@"firstName"];
+    return cell;
+}
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
+    return self.addedFriendArray.count;
 }
 
 - (IBAction)didTapLogout:(id)sender {

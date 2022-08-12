@@ -45,17 +45,6 @@
         }
         NSLog(@"array is %@",self.friendObjectId);
         [self.tableView reloadData];
-//        PFObject *object=[objects objectAtIndex:0];
-//        NSLog(@"%@", object);
-//
-//        self.friendreqArray= objects;
-//        [self.tableView reloadData];
-//        NSLog(@"%@",object[@"toUser"]);
-//
-//        PFUser *user1= object[@"toUser"];
-//
-//        NSString *friendName = [NSString stringWithFormat:@"%@ %@",user1[@"FirstName"], user1[@"LastName"] ];
-//        NSLog(@"name= %@",friendName);
 
     }
     }];
@@ -93,6 +82,22 @@
 
 
 - (IBAction)decline:(id)sender {
+    CGPoint hitPoint = [sender convertPoint:CGPointZero toView:self.tableView];
+    NSIndexPath *hitIndex = [self.tableView indexPathForRowAtPoint:hitPoint];
+    NSLog(@"This was the index %ld", (long)hitIndex.row);
+    PFObject *currentUserObject = [[PFUser currentUser]objectId];
+    NSLog(@"current user id is %@", currentUserObject);
+    NSString *objectId = self.friendObjectId[(long)hitIndex.row];
+    PFQuery *query = [PFQuery queryWithClassName:@"friends"];
+    [query getObjectInBackgroundWithId:objectId
+                                 block:^(PFObject *friend, NSError *error) {
+    
+        friend[@"status"] = @"declined";
+        [friend saveInBackground];
+        }];
+    [self.friendObjectId removeObject:objectId];
+    [self.friendreqArray removeObject:self.friendreqArray[(long)hitIndex.row]];
+    [self.tableView reloadData];
 }
 
 - (IBAction)accept:(id)sender {
